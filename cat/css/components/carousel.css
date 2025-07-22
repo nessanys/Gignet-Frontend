@@ -1,0 +1,205 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 2rem 0;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    align-items: center;
+    gap: 0;
+}
+
+.carousel-location-title {
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+    font-family: "Montserrat Light";
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Navigation Buttons - Completely separate layout */
+.carousel-navigation {
+    position: fixed;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    background: transparent;
+    z-index: 1000;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+
+.carousel-navigation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+.carousel-btn {
+    background: rgba(0, 0, 0, 0.49);
+    background: color(display-p3 0 0 0 / 0.49);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
+    position: relative;
+    z-index: 1001;
+}
+
+.carousel-btn:hover {
+    border: 2px solid var(--Green-500, #00C903);
+    border: 2px solid var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
+}
+
+.carousel-btn svg {
+    width: 20px;
+    height: 20px;
+    color: #ffffffff;
+}
+
+/* Mobile Navigation */
+.carousel-navigation-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .carousel-navigation {
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-container {
+        margin: 1rem 0;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .carousel-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .carousel-navigation-mobile {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        justify-content: start;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 0 1.25rem 1rem;
+        z-index: 1000;
+        pointer-events: auto;
+    }
+    .carousel-navigation-mobile .carousel-btn {
+        width: 38px;
+        height: 38px;
+    }
+    .carousel-navigation-mobile .carousel-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 375px) {
+    /* Navigation Buttons - Completely separate layout */
+    .carousel-navigation {
+        position: fixed;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        background: transparent;
+        z-index: 1000;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+    }
+
+    .carousel-navigation::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        pointer-events: none;
+    }
+
+    .carousel-btn {
+        width: 30px;
+        height: 30px;
+        margin-top: -1rem;
+    }
+
+    .carousel-btn:hover {
+        border: 2px solid var(--Green-500, #00C903);
+        border: 2px solid var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
+    }
+
+    .carousel-btn svg {
+        width: 20px;
+        height: 20px;
+        color: #ffffffff;
+    }
+    
+    .carousel-navigation-mobile {
+        gap: 0.5rem;
+        padding-bottom: 1.1rem;
+    }
+    .carousel-navigation-mobile .carousel-btn {
+        width: 32px;
+        height: 32px;
+    }
+    .carousel-navigation-mobile .carousel-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+}

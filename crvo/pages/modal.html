@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/components/components.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../css/landing-page.css">
+    <title>CANCUN RESORT VACATION OFFERS</title>
+</head>
+
+<body>
+    <video class="video-background" autoplay muted loop>
+        <source src="../../components/media/videos/landing-page-crvo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="gradient-overlay"></div>
+
+    <div class="content-section">
+        <div class="content-text">
+            <h5>See if you Qualify for our</h5>
+            <h1>exclusive Resort</h1>
+        </div>
+    </div>
+
+    <div class="modal-overlay show" id="modalOverlay">
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="../../js/spa-router.js"></script>
+<script src="../js/countries.js"></script>
+<script src="../js/step-navigation.js"></script>
+<script src="../js/modal.js"></script>
+
+    <script>
+
+        document.body.classList.add('modal-open');
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const step = urlParams.get('step') || '1';
+
+        async function loadStep(stepNumber) {
+            try {
+                const response = await fetch(`./step-${stepNumber}.html`);
+                const content = await response.text();
+                document.getElementById('modalContent').innerHTML = content;
+                
+                const scripts = document.getElementById('modalContent').querySelectorAll('script');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    newScript.textContent = script.textContent;
+                    document.body.appendChild(newScript);
+                });
+                
+                addMobileCloseButton();
+                
+            } catch (error) {
+                console.error('Error loading step:', error);
+                document.getElementById('modalContent').innerHTML = '<p>Error loading content</p>';
+            }
+        }
+
+        function addMobileCloseButton() {
+            const stepContainer = document.querySelector('.step-container');
+            if (stepContainer) {
+
+                const existingBtn = stepContainer.querySelector('.mobile-close-btn');
+                if (existingBtn) existingBtn.remove();
+                
+                if (window.innerWidth <= 768) {
+
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'mobile-close-btn';
+                    closeBtn.innerHTML = '&times;';
+                    closeBtn.onclick = closeModal;
+                    
+                    stepContainer.appendChild(closeBtn);
+                }
+            }
+        }
+
+        function closeModal() {
+            window.location.href = './landing-page.html';
+        }
+
+        loadStep(step);
+        
+        window.addEventListener('resize', addMobileCloseButton);
+    </script>
+
+</html>

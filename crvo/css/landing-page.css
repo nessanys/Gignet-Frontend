@@ -1,0 +1,391 @@
+.gradient-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(0deg, rgba(0, 15, 35, 0.60) 36.25%, rgba(0, 15, 35, 0.60) 100%);
+    background: linear-gradient(0deg, color(display-p3 0 0.0558 0.1298 / 0.00) 36.25%, color(display-p3 0 0.0558 0.1298 / 0.60) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.header{
+    display: flex;
+    height: 3rem;
+    padding: 0.5rem 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.625rem;
+    flex-shrink: 0;
+    align-self: stretch;
+    z-index: 1;
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(50vh - 1.5rem);
+    flex-shrink: 0;
+}
+
+.options-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(50vh - 1.5rem);
+    padding: 0.5rem;
+    flex-shrink: 0;
+    padding: 0 0 10rem 0; 
+}
+
+.header img{
+    width: 9.99994rem;
+    height: 1.31794rem;
+    flex-shrink: 0;
+    aspect-ratio: 160.00/21.09;
+}
+
+.content-text{
+    display: flex;
+    width: 49.25rem;
+    max-width: 90%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.content-text h5{
+    color: var(--Teal-500, #00FFEA);
+    color: var(--Teal-500, color(display-p3 0 1 0.9167));
+    text-align: center;
+    font-family: "Montserrat Regular";
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
+.content-text h1{
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+    text-align: center;
+    font-family: "Montserrat Bold";
+    font-size: 3.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%; 
+    margin: 0;
+}
+
+.content-text h1 span{
+    display: flex;
+    height: 5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Montserrat Black";
+    font-size: 5rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 100%;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    background: #FFF;
+    background: linear-gradient(90deg, #FF7D0A 0%, #3DE5B8 50%, #568CFF 100%);
+    color: white;
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    -webkit-text-stroke: 2px transparent;
+    color: transparent; 
+    margin: 0;
+}
+
+.content-text p{
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+    font-family: "Montserrat Bold";
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+}
+
+.container-options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+.options{
+    display: flex;
+    width: 22rem;
+    height: 10rem;
+    padding: 1rem 2.5rem;
+
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    border: 2px solid var(--White, #FFF);
+    border: 2px solid var(--White, color(display-p3 1 1 1));
+    background: rgba(255, 255, 255, 0.10);
+    background: color(display-p3 1 1 1 / 0.10);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease, background-image 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+}
+
+.options:hover {
+    border: 2px solid var(--Teal-500, #00FFEA);
+    border: 2px solid var(--Teal-500, color(display-p3 0 1 0.918));
+    background-image: linear-gradient(180deg, rgba(0, 184, 216, 0.8) 1.83%, rgba(0, 48, 106, 0.8) 100%);
+    transition: border-color 0.3s ease, background-image 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+.options h5{
+    color: var(--Blue-800, #003E87);
+    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+    text-align: center;
+    font-family: "Montserrat Bold";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.options:hover h5{
+    color: var(--Teal-500, #00FFEA);
+    color: var(--Teal-500, color(display-p3 0 1 0.9167));
+}
+
+.options p {
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+    text-align: center;
+    font-family: "Montserrat Regular";
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    margin: 0 1rem;
+}
+
+.options .price{
+    display: flex;
+    padding: 0.5rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    bottom: 0rem;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+    background: var(--White, #FFF);
+    background: var(--White, color(display-p3 1 1 1));
+    backdrop-filter: blur(10px);
+    color: var(--Blue-800, #003E87);
+    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+    text-align: center;
+    font-family: "Montserrat Bold";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.options:hover .price{
+    background: blur(20px);
+    background: rgba(255, 255, 255, 0.30);
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+}
+
+/* Responsive Design */
+
+/* Tablet styles (768px and below) */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 0rem 1.5rem;
+        height: 2.5rem;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .header img {
+        width: 8rem;
+        height: auto;
+    }
+    
+    .options-section {
+        padding: 0 0 1rem 0; 
+    }
+    
+    .content-text {
+        width: 90%;
+        max-width: 40rem;
+        padding: 0 1rem;
+    }
+    
+    .content-text h5 {
+        font-size: 2.5rem;
+    }
+    
+    .content-text h1 {
+        font-size: 3.5rem;
+    }
+    
+    .content-text h1 span {
+        width: 100%;
+        height: auto;
+        font-size: 6rem;
+        letter-spacing: 0.1rem;
+    }
+    
+    .content-text p {
+        font-size: 1.25rem;
+    }
+    
+    .container-options {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+    
+    .options {
+        width: 18rem;
+        height: 9.5rem;
+        padding: 1.5rem;
+    }
+    
+    .options h5 {
+        font-size: 0.9rem;
+    }
+    
+    .options p {
+        font-size: 1.25rem;
+        margin: 0 1rem;
+    }
+    
+    .options .price {
+        font-size: 0.8rem;
+        padding: 0.4rem 1.2rem;
+    }
+}
+
+/* Mobile styles (480px and below) */
+@media screen and (max-width: 480px) {
+    .header {
+        padding: 0rem 1rem;
+        height: 2rem;
+    }
+    
+    .header img {
+        width: 6rem;
+    }
+    
+    .content-text {
+        width: 95%;
+        padding: 0 0.5rem;
+    }
+    
+    .content-text h5 {
+        font-size: 1.7rem;
+    }
+    
+    .content-text h1 {
+        font-size: 2.5rem;
+        line-height: 110%;
+    }
+    
+    .content-text h1 span {
+        font-size: 4.5rem;
+        letter-spacing: 0.05rem;
+        padding: 0.5rem 0;
+    }
+    
+    .content-text p {
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    .container-options {
+        gap: 1rem;
+    }
+    
+    .options {
+        width: 16rem;
+        height: 8rem;
+        padding: 1.2rem;
+    }
+    
+    .options h5 {
+        font-size: 0.8rem;
+        line-height: 110%;
+    }
+    
+    .options p {
+        font-size: 1rem;
+        margin: 0 0.5rem;
+    }
+    
+    .options .price {
+        font-size: 0.75rem;
+        padding: 0.3rem 1rem;
+    }
+}
+
+/* Very small devices (360px and below) */
+@media screen and (max-width: 360px) {
+    .header {
+        height: 1.5rem;
+    }
+    
+    .content-text h5 {
+        font-size: 1.5rem;
+    }
+    
+    .content-text h1 {
+        font-size: 2.2rem;
+    }
+    
+    .content-text h1 span {
+        font-size: 3.8rem;
+    }
+    
+    .content-text p {
+        font-size: 0.9rem;
+    }
+    
+    .options {
+        width: 15rem;
+        height: 8.5rem;
+        padding: 1rem;
+    }
+    
+    .options h5 {
+        font-size: 0.75rem;
+    }
+    
+    .options p {
+        font-size: 0.9rem;
+        margin: 0 0.3rem;
+    }
+    
+    .options .price {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.8rem;
+    }
+}

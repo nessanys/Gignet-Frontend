@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/components/components.css">
+    <link rel="stylesheet" href="../css/landing-page.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <title>CANCUN RESORT VACATION OFFERS</title>
+</head>
+<body>
+
+    <video class="video-background" autoplay muted loop>
+        <source src="../../components/media/videos/landing-page-crvo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="gradient-overlay"></div>
+    
+    <div class="header">
+        <img src="../../components/img/icons/Layer 2.svg" alt="Vacation VIP">
+    </div>
+
+    <div class="content">
+        <div class="content-section">
+            <div class="content-text">
+                <h5>Limited Time Offer</h5>
+                <h1>Come back to <span>CANCUN</span></h1>
+                <p>EXCLUSIVE RETURN TO CANCUN OFFERS</p>
+            </div>
+        </div>
+
+        <div class="options-section">
+            <div class="container-options">
+                <button class="options" onclick="goToModal('accommodations')">
+                        <h5>5-Day / 4-Night Resort Vacation</h5>
+                        <p>ACCOMODATIONS ONLY</p>
+                    <div class="price">
+                        JUST $299
+                    </div>
+                </button>
+                <button class="options" onclick="goToModal('all-inclusive')">
+                        <h5>5-Day / 4-Night Resort Vacation</h5>
+                        <p>ALL-INCLUSIVE PACKAGE</p>
+                    <div class="price">
+                        JUST $599
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+        function goToModal(selectedOption) {
+            localStorage.setItem('preSelectedOption', selectedOption);
+            window.location.href = './modal.html?step=1';
+        }
+    </script>
+</html>

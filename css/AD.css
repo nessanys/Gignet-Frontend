@@ -1,0 +1,342 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border-radius: 3rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0.80) 100%), #FFF;
+    background: linear-gradient(180deg, color(display-p3 1 1 1 / 0.00) 0%, color(display-p3 1 1 1 / 0.80) 100%), color(display-p3 1 1 1);
+    background-blend-mode: luminosity, normal;
+    box-shadow: 0px 10px 50px 0px rgba(0, 61, 130, 0.25);
+    box-shadow: 0px 10px 50px 0px color(display-p3 0.0431 0.2353 0.4902 / 0.25);
+}
+
+.text-header{ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%; 
+    margin-bottom: 2rem;
+}
+
+.text-header h1{
+    text-align: center;
+    font-family: "Montserrat Alternates";
+    font-size: 3.375rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 100%; 
+    letter-spacing: 0.16875rem;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, rgba(0, 190, 208, 0.40) 0%, #003D82 98.17%);
+    background: linear-gradient(180deg, color(display-p3 0.0471 0.7333 0.8039 / 0.40) 0%, color(display-p3 0.0431 0.2353 0.4902) 98.17%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    backdrop-filter: blur(15px);
+}
+
+.text-header h5 {
+    color: var(--Blue-800, #003E87);
+    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+    text-align: right;
+    font-family: "Montserrat Regular";
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.offers{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 3rem;
+    flex: 1; 
+    width: 100%;
+}
+
+.card-offers{
+    display: flex;
+    flex: 1; 
+    gap: 3rem; 
+}
+
+.option-1{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 20rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 4px solid var(--White, #FFF);
+    border: 4px solid var(--White, color(display-p3 1 1 1));
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, rgba(255, 255, 255, 0.40) 50.48%, rgba(0, 0, 0, 0.40) 100%), url('../img/e66b0efa91bc0d737303730f3bc84154e82a27a9.jpg') lightgray 50% / cover no-repeat;
+    background: linear-gradient(180deg, color(display-p3 0 0 0 / 0.40) 0%, color(display-p3 1 1 1 / 0.00) 50.48%, color(display-p3 0 0 0 / 0.40) 100%), url('../img/e66b0efa91bc0d737303730f3bc84154e82a27a9.jpg') lightgray 50% / cover no-repeat;
+    background-blend-mode: multiply, normal;
+    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 20px 40px 0px color(display-p3 0 0 0 / 0.10);
+    position: relative;
+}
+
+.option-2{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 20rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 4px solid var(--White, #FFF);
+    border: 4px solid var(--White, color(display-p3 1 1 1));
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, rgba(255, 255, 255, 0.40) 50.48%, rgba(0, 0, 0, 0.40) 100%), url('../img/5cae21fd560c83c6971dcb543c53600d6c268f9b.jpg') lightgray 50% / cover no-repeat;
+    background: linear-gradient(180deg, color(display-p3 0 0 0 / 0.40) 0%, color(display-p3 1 1 1 / 0.00) 50.48%, color(display-p3 0 0 0 / 0.40) 100%), url('../img/5cae21fd560c83c6971dcb543c53600d6c268f9b.jpg') lightgray 50% / cover no-repeat;
+    background-blend-mode: multiply, normal;
+    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 20px 40px 0px color(display-p3 0 0 0 / 0.10);
+    position: relative;
+}
+
+
+.option-text {
+    color: white;
+    font-size: 1.25rem;
+    font-family: "Montserrat Regular";
+    text-align: center;
+    margin-bottom: auto;
+    z-index: 1;
+}
+
+.option-button {
+    color: #FF9B00;
+    margin-top: auto;
+    z-index: 1;
+}
+
+.option-button:hover {
+    background: #FF9B00;
+    color: #ffffffff;
+    transition: background-color 0.3s ease;
+}
+
+.btn.btn--secondary.btn--large {
+    margin-top: 2rem;
+    align-self: center;
+}
+
+.main-container-2 {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.50) 0%, var(--Blue-Sky, rgba(0, 194, 211, 0.50)) 100%), #FFF;
+    background: linear-gradient(180deg, color(display-p3 1 1 1 / 0.00) 0%, var(--Blue-Sky, color(display-p3 0.0471 0.7333 0.8039 / 0.50)) 100%), color(display-p3 1 1 1);
+}
+
+@media (max-width: 768px) {
+    .main-container-2 {
+        padding: 1rem; 
+        height: 100vh;
+        overflow: hidden; 
+    }
+    
+    .container {
+        height: auto !important; 
+        min-height: calc(100vh - 2rem); 
+        width: 100%;
+        max-width: 100%; 
+        padding: 1rem;
+        border-radius: 1rem; 
+        box-shadow: 0px 5px 25px 0px rgba(0, 61, 130, 0.15);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .text-header {
+        margin-bottom: 1rem;
+        flex-shrink: 0; 
+    }
+    
+    .text-header h1 {
+        font-size: 2rem; 
+        padding: 0 1rem;
+        letter-spacing: 0.1rem;
+    }
+    
+    .text-header h5 {
+        font-size: 0.875rem;
+        padding: 0 2rem;
+        text-align: center; 
+    }
+    
+    .offers {
+        flex-direction: column;
+        gap: 1rem; 
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .card-offers {
+        flex-direction: column;
+        gap: 1rem;
+        height: 100%;
+    }
+    
+    .option-1, .option-2 {
+        height: 12rem; 
+        padding: 1rem;
+        width: 100%; 
+    }
+    
+    .option-text {
+        font-size: 1rem;
+    }
+    
+    .option-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .btn.btn--secondary.btn--large {
+        margin-top: 1rem;
+        padding: 0.75rem 2rem;
+        font-size: 0.875rem;
+        flex-shrink: 0; 
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container-2 {
+        padding: 0.75rem;
+    }
+    
+    .container {
+        height: auto !important; 
+        min-height: calc(100vh - 1.5rem); 
+        padding: 0.75rem;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .text-header h1 {
+        font-size: 1.75rem;
+        padding: 0 2rem;
+        letter-spacing: 0.075rem;
+    }
+    
+    .text-header h5 {
+        font-size: 0.75rem;
+        padding: 0 4rem;
+    }
+    
+    .option-1, .option-2 {
+        height: 10rem;
+        padding: 0.75rem;
+    }
+    
+    .option-text {
+        font-size: 0.875rem;
+    }
+    
+    .option-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .btn.btn--secondary.btn--large {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-container-2 {
+        padding: 0.5rem;
+    }
+    
+    .container {
+        height: auto !important; 
+        min-height: calc(100vh - 1rem); 
+        padding: 0.5rem;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .text-header h1 {
+        font-size: 1.5rem;
+        letter-spacing: 0.05rem;
+    }
+    
+    .text-header h5 {
+        font-size: 0.625rem;
+    }
+    
+    .option-1, .option-2 {
+        height: 8rem;
+        padding: 0.5rem;
+    }
+    
+    .option-text {
+        font-size: 0.75rem;
+    }
+    
+    .option-button {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.625rem;
+    }
+    
+    .btn.btn--secondary.btn--large {
+        padding: 0.375rem 1rem;
+        font-size: 0.625rem;
+    }
+}
+
+@media (max-height: 600px) and (max-width: 768px) {
+    .text-header {
+        margin-bottom: 0.5rem;
+    }
+    
+    .text-header h1 {
+        font-size: 1.25rem;
+    }
+    
+    .text-header h5 {
+        font-size: 0.625rem;
+    }
+    
+    .offers {
+        gap: 0.5rem;
+    }
+    
+    .option-1, .option-2 {
+        height: 6rem;
+        padding: 0.5rem;
+    }
+    
+    .option-text {
+        font-size: 0.625rem;
+    }
+    
+    .option-button {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.5rem;
+    }
+    
+    .btn.btn--secondary.btn--large {
+        margin-top: 0.5rem;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.5rem;
+    }
+}

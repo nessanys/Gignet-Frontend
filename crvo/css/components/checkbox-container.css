@@ -1,0 +1,133 @@
+/* Checkbox Container Component */
+.checkbox-container {
+    display: flex;
+    align-items: top;
+    gap: 0.5rem;
+    width: 100%;
+    flex-wrap: wrap;
+    min-height: 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    accent-color: var(--primary-orange);
+    cursor: pointer;
+}
+
+.checkbox-container span {
+    color: var(--Grey-60, #7C8A97);
+    color: var(--Grey-60, color(display-p3 0.506 0.5394 0.5838));
+    font-family: "Montserrat Regular";
+    font-size: 0.55rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    flex: 1;
+    word-wrap: break-word;
+    cursor: pointer;
+    user-select: none;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .checkbox-container {
+        gap: 0.4rem;
+    }
+    
+    .checkbox-container input[type="checkbox"] {
+        width: 0.9rem;
+        height: 0.9rem;
+    }
+    
+    .checkbox-container span {
+        font-size: 0.9rem;
+        line-height: 1.15;
+    }
+}
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .checkbox-container {
+        gap: 0.4rem;
+    }
+    
+    .checkbox-container input[type="checkbox"] {
+        width: 0.9rem;
+        height: 0.9rem;
+    }
+    
+    .checkbox-container span {
+        font-size: 0.8rem;
+        line-height: 1.15;
+    }
+}
+
+@media (max-width: 540px){
+    .checkbox-container {
+        gap: 0.3rem;
+    }
+    
+    .checkbox-container input[type="checkbox"] {
+        width: 0.85rem;
+        height: 0.85rem;
+    }
+    
+    .checkbox-container span {
+        font-size: 0.5rem;
+        line-height: 1.1;
+    }
+}
+
+/* Extra small devices (phones) */
+@media (max-width: 480px) {
+    .checkbox-container {
+        gap: 0.3rem;
+    }
+    
+    .checkbox-container input[type="checkbox"] {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+    
+    .checkbox-container span {
+        font-size: 0.7rem;
+        line-height: 1.1;
+    }
+}
+
+/* Very small devices */
+@media (max-width: 375px) {
+    .checkbox-container {
+        gap: 0.25rem;
+    }
+    
+    .checkbox-container input[type="checkbox"] {
+        width: 0.75rem;
+        height: 0.75rem;
+    }
+    
+    .checkbox-container span {
+        font-size: 0.5rem;
+        line-height: 1.1;
+    }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+    .checkbox-container {
+        gap: 0.25rem;
+    }
+    
+    .checkbox-container input[type="checkbox"] {
+        width: 0.75rem;
+        height: 0.75rem;
+    }
+    
+    .checkbox-container span {
+        font-size: 0.6rem;
+        line-height: 1.1;
+    }
+}

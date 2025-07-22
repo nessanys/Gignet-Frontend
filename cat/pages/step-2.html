@@ -1,0 +1,59 @@
+<div class="step-container">
+    <div class="step-container-left">
+         <img id="stepCardImage" src="" alt="Step Image">
+        <div class="step-container-left-content">
+            <div class="step-container-left-text">
+                <p>Travel Partner</p>
+                <h1>Who are you traveling with?</h1>
+            </div>
+        </div>
+    </div>
+    <div class="step-container-right">
+        <div class="logo">
+            <img src="../../components/img/icons/cancun-logo.png" alt="Cancun Logo">
+        </div>
+        <div class="progress-line-section">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-unselected">
+            <hr class="progress-line-unselected">
+        </div>
+
+        <div class="step-form">
+            <button class="btn btn--sixthtary btn--large" >My spouse or partner</button>
+            <button class="btn btn--sixthtary btn--large" >My spouse and/or my children</button>
+            <button class="btn btn--sixthtary btn--large" >I vacation with my friends</button>
+            <button class="btn btn--sixthtary btn--large" >I travel alone</button>
+        </div>
+
+        <button type="button" class="step-button" onclick="goToNextStep()">Next</button>
+
+        <div class="terms-container">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a>
+                <p> All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const travelOptions = [
+        "My spouse or partner",
+        "My spouse and/or my children",
+        "I vacation with my friends",
+        "I travel alone"
+    ];
+
+    document.querySelectorAll('.btn--sixthtary').forEach((btn, idx) => {
+        btn.addEventListener('click', function () {
+
+            document.querySelectorAll('.btn--sixthtary').forEach(b => b.classList.remove('selected-travel-btn'));
+            this.classList.add('selected-travel-btn');
+            localStorage.setItem('step2Data', JSON.stringify({
+                travelWith: travelOptions[idx]
+            }));
+        });
+    });
+</script>

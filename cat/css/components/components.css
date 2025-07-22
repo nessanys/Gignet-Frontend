@@ -1,0 +1,111 @@
+@import url('carousel.css');
+@import url('cards.css');
+@import url('step-button.css');
+@import url('terms.css');
+@import url('country-select.css');
+
+@font-face {
+    font-family: "Montserrat Light";
+    src: url("../../../components/fonts/Montserrat-Light.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat Regular";
+    src: url("../../../components/fonts/Montserrat-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat Black";
+    src: url("../../../components/fonts/Montserrat-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat Bold";
+    src: url("../../../components/fonts/Montserrat-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat Alternates";
+    src: url("../../../components/fonts/MontserratAlternates-Black.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --primary-orange: #FF9B00;
+    --primary-orange-dark: #FF7A00;
+    --content-primary: #000;
+    --content-invert: #FFF;
+    --grey-30: #ABB5BE;
+    --background-blur: rgba(255, 255, 255, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    font-family: 'Montserrat Regular', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    max-height: 100vh;
+    width: 100vw;
+    min-height: 100vh;
+    flex-direction: column;
+    position: relative;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    z-index: -2;
+}
+
+.no-scroll {
+    overflow: hidden;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}

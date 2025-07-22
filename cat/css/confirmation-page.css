@@ -1,0 +1,365 @@
+@import url('components/components.css');
+
+.overlay{
+    background: linear-gradient(270deg, rgba(0, 15, 35, 0.40) 48.16%, rgba(0, 15, 35, 0.40) 73.95%);
+    background: linear-gradient(270deg, color(display-p3 0 0.0558 0.1298 / 0.00) 48.16%, color(display-p3 0 0.0558 0.1298 / 0.40) 73.95%);
+    background-blend-mode: multiply;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.header{
+    background: #FFF;
+    display: flex;
+    padding: clamp(0.5rem, 2vw, 1rem) clamp(2rem, 5vw, 4rem);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(0.4rem, 1vw, 0.8rem);
+    flex-shrink: 0;
+    align-self: stretch;
+    z-index: 1;
+}
+
+.header img {
+    width: 12.5rem;
+    height: 2.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 100/17;
+}
+
+.content{
+    display: flex;
+    padding: clamp(2rem, 4vw, 4rem) clamp(2rem, 5vw, 4rem);
+    width: 100%;
+    flex-direction: row;
+    gap: clamp(1rem, 3vw, 3rem);
+    align-self: stretch;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.content-section{
+    width: 50%;
+    display: flex;
+    text-align: start;
+    justify-content: center;
+    
+}
+
+.content-thankyou {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(0.8rem, 2vw, 1.5rem);
+}
+
+.content-thankyou h5 {
+    color: var(--Orange-500, color(display-p3 1 0.651 0.1569));
+    font-family: "Montserrat Regular";
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.content-thankyou h1 {
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+    font-family: "Montserrat Bold";
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-style: normal;
+    font-weight: 800;
+    line-height: 100%;
+}
+
+.content-information{
+    width: 50%;
+}
+
+.content-information-container {
+    display: flex;
+    width: 100%;
+    padding: clamp(2rem, 4vw, 3rem);
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: clamp(2rem, 4vw, 3rem);
+    background: rgba(0, 0, 0, 0.40);
+    background: color(display-p3 0 0 0 / 0.40);
+    backdrop-filter: blur(15px);
+}
+
+.content-information-container h5 {
+    color: var(--Orange-500, color(display-p3 1 0.651 0.1569));
+    font-family: "Montserrat Regular";
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.content-information-container h4 {
+    align-items: stretch;
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+    font-family: "Montserrat Bold";
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+.content-information-container p {
+    align-items: stretch;
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+    font-family: "Montserrat Regular";
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+.action-required-container {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.8rem, 1.5vw, 1.2rem);
+}
+
+.action-required-container img {
+    width: clamp(1.2rem, 2vw, 1.8rem);
+    height: clamp(1.2rem, 2vw, 1.8rem);
+    flex-shrink: 0;
+}
+
+.action-required-container h4 {
+    color: var(--White, #FFF);
+    color: var(--White, color(display-p3 1 1 1));
+    font-family: "Montserrat Bold";
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.btn--fourthary img {
+    width: clamp(1.5rem, 2.5vw, 2.2rem);
+    height: clamp(1.5rem, 2.5vw, 2.2rem);
+    flex-shrink: 0;
+}
+
+.terms-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    max-width: clamp(25rem, 40vw, 35rem);
+    margin: 0 auto;
+    justify-content: center;
+}
+
+/* Desktop - show desktop terms, hide mobile terms */
+@media (min-width: 769px) {
+    .terms-mobile {
+        display: none;
+    }
+    
+    .terms-desktop {
+        display: flex;
+    }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    /* Hide desktop terms, show mobile terms */
+    .terms-desktop {
+        display: none;
+    }
+    
+    .terms-mobile {
+        display: flex;
+        width: 100%;
+        margin: 0;
+        padding: 1rem 0;
+        position: static;
+        border-radius: 1.25rem 1.25rem 0rem 0rem;
+        opacity: 0.8;
+        background: var(--Grey-20, #E6EFF6);
+        background: var(--Grey-20, color(display-p3 0.9153 0.9358 0.9591));
+    }
+    .content {
+        flex-direction: column;
+        padding: 0;
+        gap: 3rem;
+        height: 100vh;
+    }
+    
+    .content-section {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 2rem 1rem 0 1rem;
+        flex-shrink: 0;
+    }
+    
+    .content-thankyou {
+        width: 100%;
+        text-align: start;
+    }
+    
+    .content-thankyou h5 {
+        font-size: 2rem;
+    }
+    
+    .content-thankyou h1 {
+        font-size: 2.5rem;
+    }
+    
+    .content-information {
+        background: #FFF;
+        background: color(display-p3 1 1 1);
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .content-information-container {
+        background: none;
+        width: 100%;
+        padding:  1rem 1rem 0 1rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    
+    .content-information-container h5 {
+        text-align:justify; 
+        color: var(--Blue-500, #00C2D3);
+        color: var(--Blue-500, color(display-p3 0.0471 0.7333 0.8039));
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+
+    .content-information-container h4 {
+        color: var(--Blue-800, #003E87);
+        color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+        
+    }
+
+    .content-information-container p {
+        color: #000;
+    }
+    
+    .action-required-container img {
+        content: url('../../components/img/icons/brightness_alert_blue.svg');
+    }
+    
+    .header {
+        padding: 2rem;
+        align-items: center;
+    }
+
+    .btn--fifthtary {
+        background: var(--Blue-500, #00C2D3) !important;
+        background: var(--Blue-500, color(display-p3 0.0471 0.7333 0.8039)) !important;
+        color: var(--White, #FFF) !important;
+        color: var(--White, color(display-p3 1 1 1)) !important;
+        border-radius: 3.125rem;
+    }
+
+    .btn--fourthary {
+        background: var(--Grey-20, #E6EFF6) !important;
+        background: var(--Grey-20, color(display-p3 0.9153 0.9358 0.9591)) !important;
+        color: var(--Blue-800, #003E87) !important;
+        color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902)) !important;
+        border-radius: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        gap: 2rem;
+    }
+    
+    .content-thankyou h5 {
+        font-size: 1.2rem;
+    }
+    
+    .content-thankyou h1 {
+        font-size: 2rem;
+    }
+    
+    .content-information-container {
+        gap: 1.5rem;
+    }
+    
+    .content-information-container h5 {
+        font-size: 1.5rem;
+    }
+    
+    .content-information-container h4 {
+        font-size: 0.9rem;
+    }
+    
+    .content-information-container p {
+        font-size: 0.8rem;
+    }
+    
+    .header {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .content {
+        padding: 0;
+        gap: 0.7rem;
+    }
+    
+    .content-thankyou h5 {
+        font-size: 1.2rem;
+    }
+    
+    .content-thankyou h1 {
+        font-size: 2.5rem;
+    }
+    
+    .content-information-container {
+        gap: 1rem;
+    }
+    
+    .content-information-container h5 {
+        font-size: 0.9rem;
+    }
+    
+    .content-information-container h4 {
+        font-size: 0.8rem;
+    }
+    
+    .content-information-container p {
+        font-size: 0.75rem;
+    }
+    
+    .action-required-container img {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+    
+    .btn--fourthary img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}

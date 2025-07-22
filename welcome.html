@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/welcome.css">
+    <link rel="stylesheet" href="./css/components/components.css">
+    <title>Welcome</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="container">
+            <div class="container-logo">
+            <img src="./img/Layer_1.svg" alt="GigNet Logo">
+            </div>
+            <div class="container-information">
+                <div class="header-text">
+                    <h5>Connect for the internet</h5>
+                    <h1>FOR FREE</h1>
+                </div>
+
+                <div class="message-center">Powered By <span>GIGNET</span></div>
+
+                <button 
+                    class="btn btn--secondary" 
+                    onclick="navigateTo('info.html')">CONNECT
+                </button>
+            </div>
+        </div>
+        
+        <div class="terms-container">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a> 
+            </div> 
+        </div>
+    </div>
+
+    <script src="./js/spa-router.js"></script>
+    <script>
+
+        function applyLanguage() {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+            if (typeof changeLanguage === 'function') {
+                changeLanguage(savedLanguage);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', applyLanguage);
+        } else {
+            applyLanguage();
+        }
+    </script>
+</body>
+</html>

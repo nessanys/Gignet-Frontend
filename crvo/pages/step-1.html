@@ -1,0 +1,93 @@
+<div class="step-container">
+    <div class="step-container-left">
+        <img src="../../components/img/cards/step-1-crvo.jpg" alt="Cancun Resort">
+        <div class="step-container-left-content">
+            <div class="step-container-left-img">
+                <img src="../../components/img/icons/Layer 2.svg" alt="Logo">
+            </div>
+            <div class="step-container-left-text">
+                <p>Contact Information</p>
+                <h1>Experience Cancun Again</h1>
+            </div>
+        </div>
+    </div>
+    <div class="step-container-right">
+        <div class="progress-line-section">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-unselected">
+            <hr class="progress-line-unselected">
+            <hr class="progress-line-unselected">
+        </div>
+
+        <div class="step-options">
+                <div class="step-option-1" onclick="selectOption(1)">Accommodations only</div>
+                <div class="step-option-2" onclick="selectOption(2)">All inclusive</div>
+        </div>
+
+        <form class="step-form" id="step1Form">
+            
+            <input type="text" name="firstName" placeholder="First Name">
+            <input type="text" name="lastName" placeholder="Last Name">
+            <input type="email" name="email" placeholder="Email">
+            <input type="tel" name="phone" placeholder="Phone">
+        </form>
+
+        <div class="checkbox-container">
+                <input type="checkbox" id="termsCheckbox">
+                <span>Ocean Blue Cancún S.A. de C.V. (Ocean Blue), with address at Blvr. Kukulcán, Km 7,
+                    Mz. 42 Lt. 13, Local 25-A, Benito Juárez, C.P. 77500, Cancún Q. Roo, Mexico, is
+                    responsible for the treatment of general personal data: full name, email, age,
+                    country of origin and telephone, collected in this form, which will be treated for
+                    the essential purposes of: integrate it into our customer database, provide
+                    information about the offer and/or vacation package selected, as well as to contact
+                    you. If you wish to limit the use and disclosure of your personal data; or wish to
+                    know the Ocean Blue's Integral Privacy Notice you can send an email to:
+                    protecciondatos@mxrru.com</span>
+            </div>
+
+        <button type="button" class="step-button" onclick="goToNextStep()">Next</button>
+
+        <div class="terms-container">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a>
+                <p> All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // Check for pre-selected option from landing page
+    function checkPreSelected() {
+        let selectedOption = null;
+        
+        const preSelected = localStorage.getItem('preSelectedOption');
+        if (preSelected) {
+            const optionMap = {
+                'accommodations': 1,
+                'all-inclusive': 2
+            };
+            if (optionMap[preSelected]) {
+                selectOption(optionMap[preSelected]);
+            }
+            localStorage.removeItem('preSelectedOption');
+        }
+    }
+
+    function selectOption(optionNumber) {
+        console.log('Option selected:', optionNumber);
+        const options = document.querySelectorAll('.step-option-1, .step-option-2');
+        options.forEach(option => option.classList.remove('selected'));
+
+        const selectedOptionElement = document.querySelector(`.step-option-${optionNumber}`);
+        if (selectedOptionElement) {
+            selectedOptionElement.classList.add('selected');
+            selectedOption = optionNumber;
+        }
+    }
+
+    // Initialize when content loads
+    setTimeout(checkPreSelected, 100);
+</script>

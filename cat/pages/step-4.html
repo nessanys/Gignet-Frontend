@@ -1,0 +1,61 @@
+<div class="step-container">
+    <div class="step-container-left">
+         <img id="stepCardImage" src="" alt="Step Image">
+        <div class="step-container-left-content">
+            <div class="step-container-left-text">
+                <p>Your Age</p>
+                <h1>Select your age range</h1>
+            </div>
+        </div>
+    </div>
+    <div class="step-container-right">
+        <div class="logo">
+            <img src="../../components/img/icons/cancun-logo.png" alt="Cancun Logo">
+        </div>
+        <div class="progress-line-section">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-selected">
+        </div>
+
+        <div class="step-form">
+            <button class="btn btn--sixthtary btn--large" >Under 28</button>
+            <button class="btn btn--sixthtary btn--large" >28 - 34</button>
+            <button class="btn btn--sixthtary btn--large" >35-44</button>
+            <button class="btn btn--sixthtary btn--large" >45-54</button>
+            <button class="btn btn--sixthtary btn--large" >55+</button>
+        </div>
+
+        <button type="button" class="step-button" onclick="goToConfirmationPage()">Next</button>
+
+        <div class="terms-container">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a>
+                <p> All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const travelOptions = [
+        "Under 28",
+        "28 - 34",
+        "35-44",
+        "45-54",
+        "55+"
+    ];
+
+    document.querySelectorAll('.btn--sixthtary').forEach((btn, idx) => {
+        btn.addEventListener('click', function () {
+
+            document.querySelectorAll('.btn--sixthtary').forEach(b => b.classList.remove('selected-travel-btn'));
+            this.classList.add('selected-travel-btn');
+            localStorage.setItem('step4Data', JSON.stringify({
+                ageRange: travelOptions[idx]
+            }));
+        });
+    });
+</script>

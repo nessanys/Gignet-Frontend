@@ -1,0 +1,78 @@
+<div class="step-container">
+    <div class="step-container-left">
+        <img src="../../components/img/cards/step-3-crvo.jpg" alt="Cancun Resort">
+        <div class="step-container-left-content">
+            <div class="step-container-left-img">
+                <img src="../../components/img/icons/Layer 2.svg" alt="Logo">
+            </div>
+            <div class="step-container-left-text">
+                <p>Your Country
+                <h1>Where are you from?</h1>
+            </div>
+        </div>
+    </div>
+    <div class="step-container-right">
+        <div class="progress-line-section">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-active">
+            <hr class="progress-line-unselected">
+        </div>
+
+        <form class="step-form" id="step3Form">
+            <h5>Select your Country</h5>
+            <div id="searchableCountryContainer">
+                <!-- This will be populated by createSearchableCountrySelect() -->
+            </div>
+
+        </form>
+
+        <div class="button-container">
+            <button type="submit" class="step-button" onclick="goToNextStep()">Next</button>
+        </div>
+
+        <div class="terms-container">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a>
+                <p> All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function loadPreviousStepsData() {
+        const step1Data = localStorage.getItem('step1Data');
+        const step2Data = localStorage.getItem('step2Data');
+        
+        if (step1Data) {
+            const data = JSON.parse(step1Data);
+            const optionDisplay = document.getElementById('selectedOptionDisplay');
+            if (optionDisplay && data.optionText) {
+                optionDisplay.innerHTML = `
+                    <div class="selected-option">
+                        <strong>Selected Package:</strong> ${data.optionText}
+                    </div>
+                `;
+            }
+            
+            console.log('Step 1 data loaded:', data);
+        }
+        
+        if (step2Data) {
+            const data = JSON.parse(step2Data);
+            console.log('Step 2 data loaded:', data);
+        }
+    }
+    
+    function initializeCountrySelect() {
+        if (typeof createSearchableCountrySelect === 'function') {
+            createSearchableCountrySelect('searchableCountryContainer');
+        }
+        loadPreviousStepsData();
+    }
+    
+    setTimeout(initializeCountrySelect, 100);
+</script>

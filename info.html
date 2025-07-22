@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/components/components.css">
+    <link rel="stylesheet" href="./css/info.css">
+    <title>Info</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="container">
+            <div class="container-logo">
+            <img src="./img/Layer_1.svg" alt="GigNet Logo">
+            <a href="https://www.bookit.com">bookin.com (“bookit”) <br>Powered by BSE Ventures, LLC</a>
+            </div>
+
+            <div class="container-information">
+                <form action="">
+                    <div class="inputs-container">
+                        <input class="input-text" type="text" placeholder="First Name">
+                        <input class="input-text" type="text" placeholder="Last Name">
+                        <input class="input-text" type="text" placeholder="Email">
+                        <input class="input-text" type="text" placeholder="Phone">
+                    </div>
+                </form>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="termsCheckbox">
+                    <label for="termsCheckbox">By clicking the checkbox, you agree and consent to receive promotional
+                        emails, SMS texts and calls, including pre-recorded messages and/or calls or texts made from an
+                        Auto-dial telephone dialing system from bookit.com (“bookit”) powered by BSE Ventures, LLC, and its
+                        affiliates, parents and subsidiaries (text/data and other charges may apply) at the address/numbers
+                        provided regardless of that number being on any Do not Call Registry. Your consent is not a
+                        condition of any purchase. As an alternative to the consent above you may enter the Promotion here.
+
+                </div>
+                <button 
+                class="btn btn--secondary"
+                onclick="handleNextClick(event)">Next</button>
+            </div>
+        </div>
+
+        <div class="terms-container">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a> 
+            </div> 
+        </div>
+        
+    </div>
+
+
+    <script src="./js/spa-router.js"></script>
+    <script src="./js/info.js"></script>
+    
+    <script>
+        function handleNextClick(event) {
+            const button = event.target;
+            if (!button.disabled) {
+                navigateTo('ad.html');
+            }
+        }
+    </script>
+</body>
+
+</html>

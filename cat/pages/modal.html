@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/components/components.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../css/components/country-select.css">
+    <link rel="stylesheet" href="../css/landing-page.css">
+    <title>CANCUN RESORT VACATION OFFERS</title>
+</head>
+
+<body>
+    <video class="video-background" autoplay muted loop>
+        <source src="../../components/media/videos/landing-page.cat.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="gradient-overlay"></div>
+
+    <div class="modal-overlay show" id="modalOverlay">
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+
+            <div class="modal-carousel-navigation">
+                <button class="carousel-btn modal-btn-prev" id="modalPrevBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                </button>
+                <button class="carousel-btn modal-btn-next" id="modalNextBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/modal.js"></script>
+    <script src="../js/carousel.js"></script>
+    <script src="../js/step-navigation.js"></script>
+    <script src="../js/countries.js"></script>
+
+    <script>
+    document.body.classList.add('modal-open');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const popup = urlParams.get('popup');
+    const step = urlParams.get('step');
+
+    function updateModalCardImage() {
+        const cardData = JSON.parse(localStorage.getItem('selectedCardData'));
+        const stepCardImage = document.getElementById('stepCardImage');
+
+        if (!cardData || !stepCardImage) {
+            if (stepCardImage) stepCardImage.style.display = 'none';
+            return;
+        }
+
+        let imageUrl = null;
+        if (popup !== null && window.carousel) {
+
+            const currentCardId = cardData.id;
+            const currentCarouselCard = window.carousel.cardsData.find(c => c.id === currentCardId);
+            if (currentCarouselCard && currentCarouselCard.image) {
+                 imageUrl = currentCarouselCard.image; 
+            }
+        } else if (step) {
+            imageUrl = cardData.stepImages ? cardData.stepImages[`step${step}`] : null;
+        }
+
+        if (imageUrl) {
+            stepCardImage.src = imageUrl;
+            stepCardImage.style.display = '';
+        } else {
+            stepCardImage.style.display = 'none';
+            console.warn(`No image found for ${cardData.id || 'current card'} at step ${step || 'popup'}. Image hidden.`);
+        }
+    }
+
+    async function loadModalContent() {
+        try {
+            let response, content;
+            if (popup !== null) {
+                response = await fetch('./popup.html');
+            } else if (step) {
+                response = await fetch(`./step-${step}.html`);
+            } else {
+                response = await fetch('./step-1.html');
+            }
+            content = await response.text();
+            document.getElementById('modalContent').innerHTML = content;
+
+            const scripts = document.getElementById('modalContent').querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+                document.getElementById('modalContent').appendChild(newScript);
+            });
+            updateModalCardImage(); 
+
+            if (popup !== null) {
+                if (typeof window.updatePopupContent === 'function') {
+                    window.updatePopupContent();
+                }
+                setupModalCarouselNavigation();
+            } else {
+                toggleModalCarouselNavigation(false);
+            }
+            addMobileCloseButton();
+            
+        } catch (error) {
+            console.error('Error loading modal content:', error);
+            document.getElementById('modalContent').innerHTML = '<p>Error loading content</p>';
+        }
+    }
+
+    function setupModalCarouselNavigation() {
+        const modalPrevBtn = document.getElementById('modalPrevBtn');
+        const modalNextBtn = document.getElementById('modalNextBtn');
+        const cardData = JSON.parse(localStorage.getItem('selectedCardData'));
+
+        if (modalPrevBtn && modalNextBtn && window.carousel && cardData && cardData.id) {
+            toggleModalCarouselNavigation(true);
+
+            let currentCardIndex = window.carousel.cardsData.findIndex(c => c.id === cardData.id);
+            if (currentCardIndex === -1) {
+                currentCardIndex = window.carousel.currentSlide || 0;
+            }
+
+            window.carousel.currentSlide = currentCardIndex;
+            window.carousel.actualPosition = currentCardIndex + window.carousel.totalSlides;
+            window.carousel.updateCarousel();
+
+            modalPrevBtn.onclick = () => {
+                if (window.carousel.isTransitioning) return;
+                window.carousel.previousSlide();
+                updatePopupContentFromCarousel();
+            };
+
+            modalNextBtn.onclick = () => {
+                if (window.carousel.isTransitioning) return;
+                window.carousel.nextSlide();
+                updatePopupContentFromCarousel();
+            };
+
+        } else {
+            toggleModalCarouselNavigation(false);
+        }
+    }
+
+    function toggleModalCarouselNavigation(show) {
+        const navContainer = document.querySelector('.modal-carousel-navigation');
+        if (navContainer) {
+            navContainer.style.display = show ? 'flex' : 'none';
+        }
+    }
+
+    function updatePopupContentFromCarousel() {
+        if (window.carousel && window.carousel.cardsData) {
+            setTimeout(() => {
+                const currentCardIndex = window.carousel.currentSlide;
+                const selectedCard = window.carousel.cardsData[currentCardIndex];
+                localStorage.setItem('selectedCardData', JSON.stringify(selectedCard));
+                
+                if (popup !== null && typeof window.updatePopupContent === 'function') {
+                    window.updatePopupContent();
+                    updateModalCardImage();
+                } 
+            }, 550);
+        }
+    }
+
+    function addMobileCloseButton() {
+        const stepContainer = document.querySelector('.step-container');
+        if (stepContainer) {
+            const existingBtn = stepContainer.querySelector('.mobile-close-btn');
+            if (existingBtn) existingBtn.remove();
+
+            if (window.innerWidth <= 768) {
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'mobile-close-btn';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.onclick = closeModal;
+                
+                stepContainer.appendChild(closeBtn);
+            }
+        }
+    }
+
+    function closeModal() {
+        window.location.href = './landing-page.html';
+    }
+    loadModalContent();
+
+    window.addEventListener('resize', addMobileCloseButton);
+
+</script>
+</body>
+
+</html>

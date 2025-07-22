@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/components/components.css">
+    <link rel="stylesheet" href="../css/confirmation-page.css">
+    <title>CANCUN RESORT VACATION OFFERS</title>
+</head>
+<body>
+
+    <video class="video-background" autoplay muted loop>
+        <source src="../../components/media/videos/confirmation-page-cat.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay"></div>
+    
+    <div class="header">
+        <img src="../../components/img/icons/cancun-logo.png" alt="Vacation VIP">
+    </div>
+
+    <div class="content">
+        <div class="content-section">
+            <div class="content-thankyou">
+                <h5>Thank you {userName}</h5>
+                <h1>We have received your information.</h1>
+            </div>
+        </div>
+
+        <div class="content-information">
+            <div class="content-information-container">
+                <h5>Important information before picking up your tickets</h5>
+                <div class="action-required-container">
+                    <img src="../../components/img/icons/brightness_alert.svg" alt="brightness_alert">
+                    <h4>ACTION REQUIRED</h4>
+                </div>
+                <p>Our ticket agents will be calling you at the number you provided <br> <br> 
+                    Alternatively, you can call us directly at: 1 (866) 898-4919  or  +52-998-980 0782 <br> <br>
+                    You'll receive your exclusive tickets after a 90-minute presentation on the benefits of our vacation ownership program.</p>
+                <button class="btn--fourthary">
+                    We also have agents standing by to chat!
+                    <img src="../../components/img/icons/Whatsapp.svg" alt="Whatsapp">
+                    <img src="../../components/img/icons/fb_messenger.svg" alt="Facebook Messenger">
+                </button>
+                
+
+                <button class="btn btn--secondary">call 866-878-0629</button>
+                
+                <div class="terms-container terms-mobile">
+                    <div class="terms-text">
+                        <a href="./terms.html">Terms and Conditions</a> |
+                        <a href="./privacy.html">Privacy Policy</a>
+                        <p> All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="terms-container terms-desktop">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a>
+                <p> All rights reserved.</p>
+            </div>
+    </div>
+
+    <script>
+
+        function goToModal(selectedOption) {
+            localStorage.setItem('preSelectedOption', selectedOption);
+            window.location.href = './modal.html?step=1';
+        }
+    </script>
+</body>
+</html>

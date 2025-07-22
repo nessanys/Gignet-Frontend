@@ -1,0 +1,104 @@
+<div class="step-container">
+    <div class="step-container-left">
+        <img src="../../components/img/cards/step-2-crvo.jpg" alt="Cancun Resort">
+        <div class="step-container-left-content">
+            <div class="step-container-left-img">
+                <img src="../../components/img/icons/Layer 2.svg" alt="Logo">
+            </div>
+            <div class="step-container-left-text">
+                <p>Travel Partner</p>
+                <h1>Who are you traveling with?</h1>
+            </div>
+        </div>
+    </div>
+    <div class="step-container-right">
+        <div class="progress-line-section">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-active">
+            <hr class="progress-line-unselected">
+            <hr class="progress-line-unselected">
+        </div>
+
+        <div class="step-form">
+            <button class="btn btn--tertiary btn--large" >My spouse or partner</button>
+            <button class="btn btn--tertiary btn--large" >My spouse and/or my children</button>
+            <button class="btn btn--tertiary btn--large" >I vacation with my friends</button>
+            <button class="btn btn--tertiary btn--large" >I travel alone</button>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="step-button" onclick="goToNextStep()">Next</button>
+        </div>
+
+        <div class="terms-container">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a>
+                <p> All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const travelOptions = [
+        "My spouse or partner",
+        "My spouse and/or my children",
+        "I vacation with my friends",
+        "I travel alone"
+    ];
+
+    document.querySelectorAll('.btn--tertiary').forEach((btn, idx) => {
+        btn.addEventListener('click', function () {
+
+            document.querySelectorAll('.btn--tertiary').forEach(b => b.classList.remove('selected-travel-btn'));
+            this.classList.add('selected-travel-btn');
+            localStorage.setItem('step2Data', JSON.stringify({
+                travelWith: travelOptions[idx]
+            }));
+        });
+    });
+
+    function loadStep1Data() {
+        const step1Data = localStorage.getItem('step1Data');
+        if (step1Data) {
+            const data = JSON.parse(step1Data);
+            
+            const optionDisplay = document.getElementById('selectedOptionDisplay');
+            if (optionDisplay && data.optionText) {
+                optionDisplay.innerHTML = `
+                    <div class="selected-option">
+                        <strong>Selected Package:</strong> ${data.optionText}
+                    </div>
+                `;
+            }
+            return data;
+        }
+        return null;
+    }
+    
+    function handleStep2Submit(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const step2Data = Object.fromEntries(formData.entries());
+
+        const step1Data = JSON.parse(localStorage.getItem('step1Data') || '{}');
+
+        const allData = {
+            ...step1Data,
+            ...step2Data,
+            completedStep: 2
+        };
+
+        localStorage.setItem('allStepData', JSON.stringify(allData));
+        localStorage.setItem('step2Data', JSON.stringify(step2Data));
+
+        alert('Step 2 completed! Data saved.');
+        console.log('All collected data:', allData);
+
+    }
+    
+    setTimeout(loadStep1Data, 100);
+</script>

@@ -1,0 +1,90 @@
+.terms-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.terms-text {
+    color: var(--Blue-900, #003D82);
+    font-family: "Montserrat Regular";
+    font-size: 0.875rem;
+    font-weight: 400;
+    border-radius: 1.25rem;
+    opacity: 0.8;
+    display: flex;
+    padding: 0.375rem 0.75rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem;
+    background: var(--White, #FFF);
+    background: var(--White, color(display-p3 1 1 1));
+}
+
+.terms-text a {
+    color: var(--Link, #0076FF);
+    color: var(--Link, color(display-p3 0.0272 0.4454 1));
+    text-align: center;
+    font-family: "Montserrat Regular";
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
+.terms-text a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .terms-container {
+        height: 5%; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+    }
+    
+    .terms-text {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .terms-container {
+        height: 5%;
+    }
+    
+    .terms-text {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 360px) {
+     .terms-container {
+        height: 5%;
+    }
+    
+    .terms-text {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-height: 600px) and (max-width: 768px) {
+    .terms-container {
+        width: 5%;
+        height: 100%;
+        writing-mode: vertical-lr;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .terms-text {
+        font-size: 0.6rem;
+    }
+}

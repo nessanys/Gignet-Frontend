@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/components/components.css">
+    <link rel="stylesheet" href="../css/landing-page.css">
+    <title>CANCUN ATTRACTION TICKETS</title>
+</head>
+
+<body>
+
+    <video class="video-background" autoplay muted loop>
+        <source src="../../components/media/videos/landing-page.cat.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="header">
+        <img src="../../components/img/icons/cancun-logo.png" alt="Vacation VIP">
+    </div>
+
+    <div class="content">
+        <div class="content-section">
+            <div class="content-thankyou">
+                <h5>Discover Cancun your way!</h5>
+                <h1>Choose from Exclusive Experiences</h1>
+                <h5>IN OUR TOUR GUIDE PROGRAM.</h5>
+                <p>We invite you to experience exclusive tours in Mexico, including complimentary tickets to select
+                    events and attractions! You'll receive these exclusive tickets after attending a 90-minute
+                    presentation about the benefits of our vacation ownership program.</p>
+            </div>
+        </div>
+
+        <div class="content-information">
+            <div class="content-information-container">
+                
+                <div class="carousel-container" id="carousel-container">
+                    <!-- Carousel will be generated dynamically by JavaScript -->
+                </div>
+
+                <div class="location-text">
+                    <!-- Text will be generated dynamically by JavaScript -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/carousel.js"></script>
+    <script src="../../js/spa-router.js"></script>
+    <script>
+
+        function goToModal() {
+            window.location.href = './modal.html?popup';
+        }
+    </script>
+</body>
+
+</html>

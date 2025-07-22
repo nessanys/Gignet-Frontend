@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/components/components.css">
+    <link rel="stylesheet" href="../css/thank-you.css">
+    <title>CANCUN RESORT VACATION OFFERS</title>
+</head>
+<body>
+
+    <video class="video-background" autoplay muted loop>
+        <source src="../../components/media/videos/thank-you.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay"></div>
+    
+    <div class="header">
+        <img src="../../components/img/icons/Layer 2.svg" alt="Vacation VIP">
+    </div>
+
+    <div class="content">
+        <div class="content-section">
+            <div class="content-text">
+                <h1>THANK YOU!  </h1>
+            </div>
+        </div>
+
+        <div class="options-section">
+            <div class="container-options">
+                <div class="options" onclick="goToModal('accommodations')">
+                        <p>We appreciate you checking us out! This offer is not for residents of Quintana Roo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="terms-container terms-mobile">
+        <div class="terms-text">
+            <a href="./terms.html">Terms and Conditions</a> |
+            <a href="./privacy.html">Privacy Policy</a>
+            <p> All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Función para navegar al modal independiente
+        function goToModal(selectedOption) {
+            // Guardar la opción seleccionada
+            localStorage.setItem('preSelectedOption', selectedOption);
+            // Navegar al modal
+            window.location.href = './modal.html?step=1';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<div class="step-container">
+    <div class="step-container-left">
+        <img src="../../components/img/cards/step-4-crvo.jpg" alt="Cancun Resort">
+        <div class="step-container-left-content">
+            <div class="step-container-left-img">
+                <img src="../../components/img/icons/Layer 2.svg" alt="Logo">
+            </div>
+            <div class="step-container-left-text">
+                <p>Your Age</p>
+                <h1>Select your age range</h1>
+            </div>
+        </div>
+    </div>
+    <div class="step-container-right">
+        <div class="progress-line-section">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-selected">
+            <hr class="progress-line-active">
+        </div>
+
+        <div class="step-form">
+            <button class="btn btn--tertiary btn--large" >Under 28</button>
+            <button class="btn btn--tertiary btn--large" >28 - 34</button>
+            <button class="btn btn--tertiary btn--large" >35-44</button>
+            <button class="btn btn--tertiary btn--large" >45-54</button>
+            <button class="btn btn--tertiary btn--large" >55+</button>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="step-button" onclick="goToConfirmationPage()">Reserve my spot</button>
+        </div>
+
+        <div class="terms-container">
+            <div class="terms-text">
+                <a href="./terms.html">Terms and Conditions</a> |
+                <a href="./privacy.html">Privacy Policy</a>
+                <p> All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const travelOptions = [
+        "Under 28",
+        "28 - 34",
+        "35-44",
+        "45-54",
+        "55+"
+    ];
+
+    document.querySelectorAll('.btn--tertiary').forEach((btn, idx) => {
+        btn.addEventListener('click', function () {
+
+            document.querySelectorAll('.btn--tertiary').forEach(b => b.classList.remove('selected-travel-btn'));
+            this.classList.add('selected-travel-btn');
+            localStorage.setItem('step4Data', JSON.stringify({
+                ageRange: travelOptions[idx]
+            }));
+        });
+    });
+
+    function loadStep1Data() {
+        const step1Data = localStorage.getItem('step1Data');
+        if (step1Data) {
+            const data = JSON.parse(step1Data);
+            
+            const optionDisplay = document.getElementById('selectedOptionDisplay');
+            if (optionDisplay && data.optionText) {
+                optionDisplay.innerHTML = `
+                    <div class="selected-option">
+                        <strong>Selected Package:</strong> ${data.optionText}
+                    </div>
+                `;
+            }
+            
+            console.log('Step 1 data loaded:', data);
+            return data;
+        }
+        return null;
+    }
+    
+    function handleStep2Submit(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const step2Data = Object.fromEntries(formData.entries());
+
+        const step1Data = JSON.parse(localStorage.getItem('step1Data') || '{}');
+
+        const allData = {
+            ...step1Data,
+            ...step2Data,
+            completedStep: 2
+        };
+
+        localStorage.setItem('allStepData', JSON.stringify(allData));
+        localStorage.setItem('step2Data', JSON.stringify(step2Data));
+
+        alert('Step 2 completed! Data saved.');
+        console.log('All collected data:', allData);
+    }
+    setTimeout(loadStep1Data, 100);
+</script>
