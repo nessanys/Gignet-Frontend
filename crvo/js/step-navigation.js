@@ -24,17 +24,28 @@ function goToNextStep() {
             }
         }
     }
+
     saveCurrentStepData(currentStep);
 
     const step3Data = getStepData(3); 
 
     if (currentStep === 3 && step3Data && step3Data.quintanaRooResident === 'no') {
-        window.navigateTo('thank-you.html');
+        window.navigateTo('thank-you.html'); 
         return; 
     }
 
     const nextStep = currentStep + 1;
-    window.navigateTo(`./modal.html?step=${nextStep}`);
+
+    if (nextStep <= 4) {
+        if (typeof window.loadStep === 'function') { 
+            window.loadStep(nextStep);
+        } else {
+            console.error("loadStep function not found in window object.");
+            window.location.href = `./modal.html?step=${nextStep}`; 
+        }
+    } else {
+        window.navigateTo('confirmation-page.html');
+    }
 }
 
 function goToConfirmationPage() {
@@ -43,9 +54,14 @@ function goToConfirmationPage() {
 
 function goToStep(targetStep) {
     const currentStep = getCurrentStep();
-
     saveCurrentStepData(currentStep);
-    window.navigateTo(`./modal.html?step=${targetStep}`);
+
+    if (typeof window.loadStep === 'function') {
+        window.loadStep(targetStep);
+    } else {
+        console.error("loadStep function not found in window object for goToStep.");
+        window.location.href = `./modal.html?step=${targetStep}`;
+    }
 }
 
 function getCurrentStep() {
@@ -54,36 +70,12 @@ function getCurrentStep() {
     if (stepFromUrl) {
         return parseInt(stepFromUrl);
     }
-    
-    const forms = document.querySelectorAll('form[id*="step"]');
-    for (let form of forms) {
-        const match = form.id.match(/step(\d+)Form/);
-        if (match) {
-            return parseInt(match[1]);
-        }
-    }
 
-    const stepText = document.querySelector('.step-container-left-text p');
-    if (stepText) {
-        const text = stepText.textContent.toLowerCase();
-        if (text.includes('contact') || text.includes('information')) {
-            return 1;
-        } else if (text.includes('travel') || text.includes('partner')) {
-            return 2;
-        } else if (text.includes('step 3') || text.includes('final')) {
-            return 3;
-        }
-    }
-    
-    const progressLines = document.querySelectorAll('.progress-line-selected, .progress-line-active');
-    if (progressLines.length > 0) {
-        return progressLines.length;
-    }
-        return 1;
+    return 1; 
 }
 
 function saveCurrentStepData(currentStep) {
-    const form = document.getElementById(`step${currentStep}Form`);
+    const form = document.getElementById(`step${currentStep}Form`); 
     if (!form) {
         console.warn(`No se encontró formulario para step ${currentStep}`);
         return;
@@ -92,28 +84,16 @@ function saveCurrentStepData(currentStep) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    switch(currentStep) {
-        case 1:
-            if (typeof selectedOption !== 'undefined' && selectedOption) {
-                data.selectedOption = selectedOption;
-                data.optionText = selectedOption === 1 ? 'Accommodations only' : 'All inclusive';
-            }
-            break;
-        case 2:
-            if (typeof selectedTravelOption !== 'undefined' && selectedTravelOption) {
-                data.selectedTravelOption = selectedTravelOption;
-            }
-            break;
-        case 3:
-            if (typeof selectedCountryOption !== 'undefined' && selectedCountryOption) {
-                data.selectedCountryOption = selectedCountryOption;
-            }
+    if (currentStep === 1 && window.modal) {
+        data.selectedOption = window.modal.selectedOption;
+        data.optionText = window.modal.selectedOption === 'accommodations' ? 'Accommodations only' : 'All inclusive';
+    }
 
-            const quintanaRooRadio = document.querySelector('input[name="quintanaRooResident"]:checked');
-            if (quintanaRooRadio) {
-                data.quintanaRooResident = quintanaRooRadio.value;
-            }
-            break;
+    if (currentStep === 3) {
+        const quintanaRooRadio = document.querySelector('input[name="quintanaRooResident"]:checked');
+        if (quintanaRooRadio) {
+            data.quintanaRooResident = quintanaRooRadio.value;
+        }
     }
 
     localStorage.setItem(`step${currentStep}Data`, JSON.stringify(data));
@@ -147,9 +127,14 @@ function goToPreviousStep() {
     const previousStep = currentStep - 1;
     
     if (previousStep >= 1) {
-        window.navigateTo(`./modal.html?step=${previousStep}`);
+        if (typeof window.loadStep === 'function') {
+            window.loadStep(previousStep);
+        } else {
+            console.error("loadStep function not found in window object for goToPreviousStep.");
+            window.location.href = `./modal.html?step=${previousStep}`;
+        }
     } else {
-        window.navigateTo('info.html');
+        window.location.href = 'landing-page.html'; 
     }
 }
 

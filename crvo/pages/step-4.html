@@ -42,6 +42,11 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // This will run when step-1.html content is loaded into modalContent
+        window.checkPreSelected(); // Re-run pre-selected check for each step if needed
+    });
+    
     const travelOptions = [
         "Under 28",
         "28 - 34",

@@ -1,37 +1,73 @@
-const modal = {
+
+window.modal = { 
     overlay: null,
     isOpen: false,
     selectedOption: 'accommodations',
     option1: null,
     option2: null,
+    currentStepElement: null,
 
     init() {
-        this.overlay = document.getElementById('modal-overlay');
-        if (!this.overlay) return;
+        this.overlay = document.getElementById('modalOverlay'); 
+        if (!this.overlay) {
+            console.warn("Modal overlay not found. Modal will not function.");
+            return;
+        }
 
-        this.initStepOptions();
+        this.initStepOptions(); 
+        this.setupEventListeners(); 
+        this.renderStepContent(); 
 
-        this.overlay.addEventListener('click', (e) => {
+    },
+
+    setupEventListeners() {
+ 
+        if (this._overlayClickListener) {
+            this.overlay.removeEventListener('click', this._overlayClickListener);
+        }
+        if (this._keydownListener) {
+            document.removeEventListener('keydown', this._keydownListener);
+        }
+        
+        this._overlayClickListener = (e) => {
             if (e.target === this.overlay || e.target.classList.contains('modal-close')) {
                 this.close();
             }
-        });
+        };
+        this.overlay.addEventListener('click', this._overlayClickListener);
 
-        document.addEventListener('keydown', (e) => {
+        this._keydownListener = (e) => {
             if (e.key === 'Escape' && this.isOpen) {
                 this.close();
             }
-        });
+        };
+        document.addEventListener('keydown', this._keydownListener);
     },
 
     initStepOptions() {
         this.option1 = this.overlay.querySelector('.step-option-1');
         this.option2 = this.overlay.querySelector('.step-option-2');
 
-        if (!this.option1 || !this.option2) return;
+        if (this._option1Listener) { 
+            if (this.option1) this.option1.removeEventListener('click', this._option1Listener);
+        }
+        if (this._option2Listener) { 
+            if (this.option2) this.option2.removeEventListener('click', this._option2Listener);
+        }
 
-        this.option1.addEventListener('click', () => this.selectOption('accommodations'));
-        this.option2.addEventListener('click', () => this.selectOption('all-inclusive'));
+        if (this.option1 && this.option2) {
+            this._option1Listener = () => {
+                this.selectOption('accommodations');
+                localStorage.setItem('preSelectedOption', 'accommodations'); 
+            };
+            this._option2Listener = () => {
+                this.selectOption('all-inclusive');
+                localStorage.setItem('preSelectedOption', 'all-inclusive'); 
+            };
+
+            this.option1.addEventListener('click', this._option1Listener);
+            this.option2.addEventListener('click', this._option2Listener);
+        }
     },
 
     selectOption(optionType) {
@@ -60,6 +96,7 @@ const modal = {
         document.body.classList.add('modal-open');
 
         this.selectOption(selectedOption);
+        this.renderStepContent(); 
 
         this.overlay.classList.add('show');
     },
@@ -78,38 +115,53 @@ const modal = {
         }, 300);
     },
 
-    submitForm() {
-        const form = this.overlay.querySelector('form');
-        const inputs = form.querySelectorAll('input[required]');
-        const checkbox = this.overlay.querySelector('#terms');
+    renderStepContent() {
 
+        const currentStep = window.getCurrentStep(); 
+        console.log("Modal.js - Rendering step:", currentStep);
+
+        const stepIndicator = document.querySelector('.step-container-left-text p');
+        if (stepIndicator) {
+            stepIndicator.textContent = `Step ${currentStep} of 4`; 
+        }
+    },
+
+    submitForm() {
+
+        const currentStep = window.getCurrentStep();
+        const form = document.getElementById(`step${currentStep}Form`); 
+        if (!form) {
+            alert('No form found for the current step.');
+            return;
+        }
+
+        const inputs = form.querySelectorAll('input[required]');
+        let allFieldsFilled = true;
         for (let input of inputs) {
             if (!input.value.trim()) {
                 input.focus();
                 alert('Please fill in all required fields');
-                return;
+                allFieldsFilled = false;
+                break;
             }
         }
+        if (!allFieldsFilled) return;
 
-        if (!checkbox.checked) {
+        const checkbox = form.querySelector('#terms'); 
+        if (checkbox && !checkbox.checked) {
             alert('Please accept the terms and conditions');
             return;
         }
 
+        window.saveCurrentStepData(currentStep);
+
         alert('Form submitted successfully!');
-        setTimeout(() => this.close(), 1000);
+        window.goToNextStep(); 
     }
 };
 
-function openModal(selectedOption = 'accommodations') {
-    modal.open(selectedOption);
-}
-
-function handleNextClick(event) {
-    console.log('Next clicked with option:', modal.selectedOption);
-    window.location.href = './step-2.html';
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    modal.init();
+    if (document.getElementById('modalOverlay')) { 
+        window.modal.init();
+    }
 });
