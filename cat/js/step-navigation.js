@@ -2,15 +2,43 @@
 function goToNextStep() {
     const currentStep = getCurrentStep();
 
+    if (currentStep === 1) {
+        const form = document.getElementById('step1Form');
+        let valid = true;
+        Array.from(form.elements).forEach(input => {
+            if (input.type !== 'submit' && input.type !== 'button' && !input.value.trim()) {
+                showInputError(input, 'This field is required');
+                valid = false;
+            }
+        });
+        if (!document.getElementById('termsCheckbox').checked) {
+            if (typeof showToast === 'function') showToast('You must accept the terms and conditions.');
+            valid = false;
+        }
+        if (!valid) return;
+    }
+
     if (currentStep === 3) {
         const selectedCountryInput = document.getElementById('selectedCountry');
         const quintanaRooQuestionDiv = document.getElementById('quintanaRooQuestion');
         const quintanaRooRadios = document.querySelectorAll('input[name="quintanaRooResident"]');
         
-        if (!selectedCountryInput || !selectedCountryInput.value) {
-            alert('Please select your country.');
-            return; 
+        function showCountryError(message) {
+        if (typeof showToast === 'function') {
+            showToast(message);
         }
+        }
+
+        if (!selectedCountryInput || !selectedCountryInput.value) {
+            showCountryError('Please select your country.');
+            return;
+        }
+
+        function showCountryError(message) {
+        if (typeof showToast === 'function') {
+            showToast(message);
+        }
+    }
 
         if (selectedCountryInput.value === 'MX') {
             let quintanaRooAnswered = false;
@@ -21,7 +49,7 @@ function goToNextStep() {
             });
 
             if (!quintanaRooAnswered) {
-                alert('Please answer the Quintana Roo resident question.');
+                showCountryError('Please answer the Quintana Roo resident question.');
                 return;
             }
         }
@@ -30,7 +58,7 @@ function goToNextStep() {
 
     const step3Data = getStepData(3); 
 
-    if (currentStep === 3 && step3Data && step3Data.quintanaRooResident === 'no') {
+    if (currentStep === 3 && step3Data && step3Data.quintanaRooResident === 'yes') {
         window.location.href = 'thank-you.html';
         return; 
     }

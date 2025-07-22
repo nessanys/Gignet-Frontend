@@ -34,21 +34,35 @@ hr {
     width: 100%;
 }
 
-.itinerary-container h1 {
+.itinerary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.itinerary-table th,
+.itinerary-table td {
+    padding: 0.5rem;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.itinerary-table th {
+    font-family: "Montserrat Bold";
+    text-transform: uppercase;
     color: #003E87;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
 }
 
-.itinerary-container ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.itinerary-container li {
-    font-size: 0.8rem;
+.itinerary-activity {
+    font-weight: 500;
+    font-family: "Montserrat Regular";
     color: #333;
-    margin-bottom: 0.5rem;
+}
+
+.itinerary-departure {
+    font-family: "Montserrat Regular";
+    color: #272727;
+    text-align: center;
 }
 
 .itinerary-departure-row {
@@ -58,42 +72,6 @@ hr {
     align-items: flex-start;
     gap: 2rem;
     width: 100%;
-}
-
-.itinerary-departure-row .itinerary-container {
-    flex: 2;
-    margin-top: 0;
-}
-
-.itinerary-departure-row .departure-times {
-    flex: 1;
-    justify-content: flex-end;
-    align-items: flex-start;
-    margin-top: 0.5rem;
-}
-
-.departure-times {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    margin: 1rem 0;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.departure-times div {
-    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
-    font-family: "Montserrat Bold";
-    font-size: 0.8rem;
-    gap: 0.5rem;
-}
-
-.departure-times span {
-    color: var(--Text-100, color(display-p3 0.1538 0.1538 0.1538));
-    font-family: "Montserrat Regular";
-    font-size: 0.8rem;
-    text-align: left;
-    margin: 1rem 0 ;
 }
 
 .includes-container{

@@ -28,24 +28,36 @@
         </div>
 
         <div class="button-container">
-            <button type="submit" class="step-button" onclick="goToConfirmationPage()">Reserve my spot</button>
+            <button type="button" class="step-button">Reserve my spot</button>
         </div>
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a>
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                 <p> All rights reserved.</p>
             </div>
         </div>
     </div>
 </div>
 
+<div id="toast" class="custom-toast"></div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // This will run when step-1.html content is loaded into modalContent
-        window.checkPreSelected(); // Re-run pre-selected check for each step if needed
-    });
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        if (!toast) {
+            return;
+        }
+
+        toast.textContent = message;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
     
     const travelOptions = [
         "Under 28",
@@ -57,7 +69,6 @@
 
     document.querySelectorAll('.btn--tertiary').forEach((btn, idx) => {
         btn.addEventListener('click', function () {
-
             document.querySelectorAll('.btn--tertiary').forEach(b => b.classList.remove('selected-travel-btn'));
             this.classList.add('selected-travel-btn');
             localStorage.setItem('step4Data', JSON.stringify({
@@ -66,45 +77,16 @@
         });
     });
 
-    function loadStep1Data() {
-        const step1Data = localStorage.getItem('step1Data');
-        if (step1Data) {
-            const data = JSON.parse(step1Data);
-            
-            const optionDisplay = document.getElementById('selectedOptionDisplay');
-            if (optionDisplay && data.optionText) {
-                optionDisplay.innerHTML = `
-                    <div class="selected-option">
-                        <strong>Selected Package:</strong> ${data.optionText}
-                    </div>
-                `;
+    const nextBtn = document.querySelector('.step-button');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+            const selected = document.querySelector('.btn--tertiary.selected-travel-btn');
+            if (!selected) {
+                showToast('Please select an option before continuing.');
+                return;
             }
-            
-            console.log('Step 1 data loaded:', data);
-            return data;
-        }
-        return null;
+            window.goToConfirmationPage(); 
+        });
     }
-    
-    function handleStep2Submit(event) {
-        event.preventDefault();
 
-        const formData = new FormData(event.target);
-        const step2Data = Object.fromEntries(formData.entries());
-
-        const step1Data = JSON.parse(localStorage.getItem('step1Data') || '{}');
-
-        const allData = {
-            ...step1Data,
-            ...step2Data,
-            completedStep: 2
-        };
-
-        localStorage.setItem('allStepData', JSON.stringify(allData));
-        localStorage.setItem('step2Data', JSON.stringify(step2Data));
-
-        alert('Step 2 completed! Data saved.');
-        console.log('All collected data:', allData);
-    }
-    setTimeout(loadStep1Data, 100);
 </script>

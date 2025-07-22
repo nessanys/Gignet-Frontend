@@ -20,7 +20,6 @@
         </div>
 
         <form class="step-form" id="step1Form">
-            
             <input type="text" name="firstName" placeholder="First Name">
             <input type="text" name="lastName" placeholder="Last Name">
             <input type="email" name="email" placeholder="Email">
@@ -45,10 +44,48 @@
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a>
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                 <p> All rights reserved.</p>
             </div>
         </div>
     </div>
 </div>
+
+<div id="toast" class="custom-toast"></div>
+
+<script>
+    document.querySelectorAll('#step1Form input').forEach(input => {
+        input.addEventListener('input', function () {
+            if (input.value.trim()) {
+                removeInputError(input);
+            } else {
+                showInputError(input, 'This field is required');
+            }
+        });
+    });
+
+    function showInputError(input, message) {
+        let error = input.nextElementSibling;
+        if (!error || !error.classList.contains('input-error')) {
+            error = document.createElement('div');
+            error.className = 'input-error';
+            input.parentNode.insertBefore(error, input.nextSibling);
+        }
+        error.textContent = message;
+    }
+
+    function removeInputError(input) {
+        let error = input.nextElementSibling;
+        if (error && error.classList.contains('input-error')) {
+            error.remove();
+        }
+    }
+
+    function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+}
+</script>

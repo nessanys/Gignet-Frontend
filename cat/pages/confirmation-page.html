@@ -23,7 +23,7 @@
     <div class="content">
         <div class="content-section">
             <div class="content-thankyou">
-                <h5>Thank you {userName}</h5>
+                <h5 id="thankyouMessage"></h5>
                 <h1>We have received your information.</h1>
             </div>
         </div>
@@ -39,9 +39,11 @@
                     Alternatively, you can call us directly at: 1 (866) 898-4919  or  +52-998-980 0782 <br> <br>
                     You'll receive your exclusive tickets after a 90-minute presentation on the benefits of our vacation ownership program.</p>
                 <button class="btn--fourthary">
-                    We also have agents standing by to chat!
-                    <img src="/components/img/icons/Whatsapp.svg" alt="Whatsapp">
-                    <img src="/components/img/icons/fb_messenger.svg" alt="Facebook Messenger">
+                    <span class="btn-chat-text">We also have agents standing by to chat!</span>
+                    <span class="btn-chat-icons">
+                        <img src="/components/img/icons/Whatsapp.svg" alt="Whatsapp">
+                        <img src="/components/img/icons/fb_messenger.svg" alt="Facebook Messenger">
+                    </span>
                 </button>
                 
 
@@ -49,8 +51,8 @@
                 
                 <div class="terms-container terms-mobile">
                     <div class="terms-text">
-                        <a href="./terms.html">Terms and Conditions</a> |
-                        <a href="./privacy.html">Privacy Policy</a>
+                        <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                        <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                         <p> All rights reserved.</p>
                     </div>
                 </div>
@@ -67,6 +69,11 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const step1Data = JSON.parse(localStorage.getItem('step1Data')) || {};
+            const userName = step1Data.firstName || '';
+            document.getElementById('thankyouMessage').textContent = `Thank you, ${userName}`;
+        });
 
         function goToModal(selectedOption) {
             localStorage.setItem('preSelectedOption', selectedOption);

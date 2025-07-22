@@ -95,22 +95,20 @@
             content = await response.text();
             document.getElementById('modalContent').innerHTML = content;
 
-            // Re-append scripts from the fetched content to ensure they execute
             const scripts = document.getElementById('modalContent').querySelectorAll('script');
             scripts.forEach(script => {
                 const newScript = document.createElement('script');
                 if (script.src) {
                     newScript.src = script.src;
-                    newScript.async = false; // Ensure scripts execute in order
+                    newScript.async = false;
                 } else {
                     newScript.textContent = script.textContent;
                 }
                 document.getElementById('modalContent').appendChild(newScript);
             });
-            
-            // *** IMPORTANTE: Inicializar el carrusel si popup.html (que lo contiene) es cargado ***
+
             if (popup !== null && typeof window.initializeCarousel === 'function') {
-                window.initializeCarousel(); // Llamar al inicializador global del carrusel
+                window.initializeCarousel();
             }
 
             updateModalCardImage(); 
@@ -144,10 +142,9 @@
                 currentCardIndex = window.carousel.currentSlide || 0;
             }
 
-            // Asegurarse de que el estado del carrusel se actualice antes de adjuntar listeners
             window.carousel.currentSlide = currentCardIndex;
             window.carousel.actualPosition = currentCardIndex + window.carousel.totalSlides;
-            window.carousel.updateCarousel(); // Forzar la actualización a la posición correcta
+            window.carousel.updateCarousel();
 
             modalPrevBtn.onclick = () => {
                 if (window.carousel.isTransitioning) return;
@@ -175,7 +172,7 @@
 
     function updatePopupContentFromCarousel() {
         if (window.carousel && window.carousel.cardsData) {
-            // Dar un pequeño retraso para que la transición del carrusel se complete y currentSlide se actualice
+
             setTimeout(() => {
                 const currentCardIndex = window.carousel.currentSlide;
                 const selectedCard = window.carousel.cardsData[currentCardIndex];
@@ -185,7 +182,7 @@
                     window.updatePopupContent();
                     updateModalCardImage();
                 } 
-            }, 550); // Ligeramente más largo que el tiempo de transición del carrusel (0.5s)
+            }, 550); 
         }
     }
 
@@ -207,11 +204,9 @@
     }
 
     function closeModal() {
-        // Navegando a landing-page.html (ruta absoluta desde la raíz)
         window.location.href = '/cat/pages/landing-page.html'; 
     }
 
-    // Carga inicial del contenido del modal cuando el propio modal.html se carga
     loadModalContent();
 
     window.addEventListener('resize', addMobileCloseButton);

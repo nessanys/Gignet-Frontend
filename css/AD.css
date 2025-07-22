@@ -130,17 +130,24 @@ html, body {
     color: #FF9B00;
     margin-top: auto;
     z-index: 1;
+    transition: background-color 0.5s ease, transform 0.3s ease;
 }
 
 .option-button:hover {
     background: #FF9B00;
     color: #ffffffff;
-    transition: background-color 0.3s ease;
+    transform: scale(1.05);
 }
 
 .btn.btn--secondary.btn--large {
     margin-top: 2rem;
     align-self: center;
+}
+
+.text-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -206,13 +213,6 @@ html, body {
     .option-button {
         padding: 0.75rem 1.5rem;
         font-size: 0.875rem;
-    }
-    
-    .btn.btn--secondary.btn--large {
-        margin-top: 1rem;
-        padding: 0.75rem 2rem;
-        font-size: 0.875rem;
-        flex-shrink: 0; 
     }
 }
 

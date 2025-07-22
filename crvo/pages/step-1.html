@@ -49,21 +49,51 @@
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a>
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                 <p> All rights reserved.</p>
             </div>
         </div>
     </div>
 </div>
 
+<div id="toast" class="custom-toast"></div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // This will run when step-1.html content is loaded into modalContent
-        window.checkPreSelected(); // Re-run pre-selected check for each step if needed
+    document.querySelectorAll('#step1Form input').forEach(input => {
+        input.addEventListener('input', function () {
+            if (input.value.trim()) {
+                removeInputError(input);
+            } else {
+                showInputError(input, 'This field is required');
+            }
+        });
     });
 
-    // Check for pre-selected option from landing page
+    function showInputError(input, message) {
+        let error = input.nextElementSibling;
+        if (!error || !error.classList.contains('input-error')) {
+            error = document.createElement('div');
+            error.className = 'input-error';
+            input.parentNode.insertBefore(error, input.nextSibling);
+        }
+        error.textContent = message;
+    }
+
+    function removeInputError(input) {
+        let error = input.nextElementSibling;
+        if (error && error.classList.contains('input-error')) {
+            error.remove();
+        }
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
     function checkPreSelected() {
         let selectedOption = null;
         
@@ -91,7 +121,6 @@
             selectedOption = optionNumber;
         }
     }
-
-    // Initialize when content loads
     setTimeout(checkPreSelected, 100);
+
 </script>

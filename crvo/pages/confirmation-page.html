@@ -23,7 +23,7 @@
     <div class="content">
         <div class="content-section">
             <div class="content-thankyou">
-                <h5>Thank you {userName}</h5>
+                <h5 id="thankyouMessage"></h5>
                 <h1>We have received your information.</h1>
             </div>
         </div>
@@ -49,8 +49,8 @@
                 
                 <div class="terms-container terms-mobile">
                     <div class="terms-text">
-                        <a href="./terms.html">Terms and Conditions</a> |
-                        <a href="./privacy.html">Privacy Policy</a>
+                        <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                        <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                         <p> All rights reserved.</p>
                     </div>
                 </div>
@@ -67,6 +67,12 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const step1Data = JSON.parse(localStorage.getItem('step1Data')) || {};
+            const userName = step1Data.firstName || '';
+            document.getElementById('thankyouMessage').textContent = `Thank you, ${userName}`;
+        });
+        
         function goToModal(selectedOption) {
             localStorage.setItem('preSelectedOption', selectedOption);
             window.location.href = './modal.html?step=1';

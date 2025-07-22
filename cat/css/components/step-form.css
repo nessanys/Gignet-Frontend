@@ -36,6 +36,13 @@
     font-weight: 400;
 }
 
+.input-error {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+
 .step-form h5 {
     color: var(--Blue-700, #05A);
     color: var(--Blue-700, color(display-p3 0 0.3204 0.6202));

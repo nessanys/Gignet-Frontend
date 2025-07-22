@@ -33,18 +33,32 @@
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a>
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                 <p> All rights reserved.</p>
             </div>
         </div>
     </div>
 </div>
 
+<div id="toast" class="custom-toast"></div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // This will run when step-1.html content is loaded into modalContent
-        window.checkPreSelected(); // Re-run pre-selected check for each step if needed
+    function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    document.querySelector('.step-button').addEventListener('click', function () {
+        clearCountryError();
+        const selectedCountry = document.getElementById('selectedCountry');
+        if (!selectedCountry || !selectedCountry.value) {
+            showCountryError('Please select your country.');
+            return;
+        }
+        window.goToNextStep();
     });
 
     function loadPreviousStepsData() {
@@ -61,7 +75,6 @@
                     </div>
                 `;
             }
-            
             console.log('Step 1 data loaded:', data);
         }
         

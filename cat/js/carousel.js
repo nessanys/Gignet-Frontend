@@ -363,6 +363,7 @@ function initializeCarousel() {
             description: "Visit the ancient Mayan city of Chichen Itza, a UNESCO World Heritage Site and one of the New 7 Wonders of the World. Explore the pyramids, temples, and cenotes.",
             information: "Visit the ancient Mayan city of Chichen Itza, a UNESCO World Heritage Site and one of the New 7 Wonders of the World. Explore the pyramids, temples, and cenotes.",
             itinerary: ["Pick up at your hotel", "Visit to Chichen Itza", "Swim in a cenote", "Lunch at a local restaurant", "Return to your hotel"],
+            firstDeparture: ["07:00", "10:00", "10:05", "10:50", "12:00"],
             includes: ["Round trip Transportation in an air-conditioned vehicles", "Bilingual Tour Guide", "Admission to Xcaret", "One buffet meal with unlimited drinks and 1 beer", "Snorkel equipment*", "Locker rental in the exclusive facilities of the “Plus area", "More than 20 activities to do and see : Underground rivers, Maya river, Paradise river, Beach, cove and ponds, Coral reef aquarium, Sea turtles, Manatee lagoon, Bee farm, Butterfly pavilion, etc", "10% off some optional activities", "Entrance to the night show “Xcaret México Espectacular” *Deposit required"],
             duration: "Full day",
             recommendations: "Bring comfortable shoes, hat, sunscreen, and water.",
