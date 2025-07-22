@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/components/components.css">
-    <link rel="stylesheet" href="../css/modal.css">
-    <link rel="stylesheet" href="../css/components/country-select.css">
-    <link rel="stylesheet" href="../css/landing-page.css">
+    <link rel="stylesheet" href="/cat/css/components/components.css">
+    <link rel="stylesheet" href="/cat/css/components/country-select.css">
+    <link rel="stylesheet" href="/cat/css/modal.css">
+    <link rel="stylesheet" href="/cat/css/landing-page.css">
     <title>CANCUN RESORT VACATION OFFERS</title>
 </head>
 
 <body>
     <video class="video-background" autoplay muted loop>
-        <source src="../../components/media/videos/landing-page.cat.mp4" type="video/mp4">
+        <source src="/components/media/videos/landing-page.cat.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -41,10 +41,10 @@
         </div>
     </div>
 
-    <script src="../js/modal.js"></script>
-    <script src="../js/carousel.js"></script>
-    <script src="../js/step-navigation.js"></script>
-    <script src="../js/countries.js"></script>
+    <script src="/cat/js/modal.js"></script>
+    <script src="/cat/js/carousel.js"></script>
+    <script src="/cat/js/step-navigation.js"></script>
+    <script src="/cat/js/countries.js"></script>
 
     <script>
     document.body.classList.add('modal-open');
@@ -64,7 +64,6 @@
 
         let imageUrl = null;
         if (popup !== null && window.carousel) {
-
             const currentCardId = cardData.id;
             const currentCarouselCard = window.carousel.cardsData.find(c => c.id === currentCardId);
             if (currentCarouselCard && currentCarouselCard.image) {
@@ -87,25 +86,33 @@
         try {
             let response, content;
             if (popup !== null) {
-                response = await fetch('./popup.html');
+                response = await fetch('/cat/pages/popup.html');
             } else if (step) {
-                response = await fetch(`./step-${step}.html`);
+                response = await fetch(`/cat/pages/step-${step}.html`);
             } else {
-                response = await fetch('./step-1.html');
+                response = await fetch('/cat/pages/step-1.html');
             }
             content = await response.text();
             document.getElementById('modalContent').innerHTML = content;
 
+            // Re-append scripts from the fetched content to ensure they execute
             const scripts = document.getElementById('modalContent').querySelectorAll('script');
             scripts.forEach(script => {
                 const newScript = document.createElement('script');
                 if (script.src) {
                     newScript.src = script.src;
+                    newScript.async = false; // Ensure scripts execute in order
                 } else {
                     newScript.textContent = script.textContent;
                 }
                 document.getElementById('modalContent').appendChild(newScript);
             });
+            
+            // *** IMPORTANTE: Inicializar el carrusel si popup.html (que lo contiene) es cargado ***
+            if (popup !== null && typeof window.initializeCarousel === 'function') {
+                window.initializeCarousel(); // Llamar al inicializador global del carrusel
+            }
+
             updateModalCardImage(); 
 
             if (popup !== null) {
@@ -137,9 +144,10 @@
                 currentCardIndex = window.carousel.currentSlide || 0;
             }
 
+            // Asegurarse de que el estado del carrusel se actualice antes de adjuntar listeners
             window.carousel.currentSlide = currentCardIndex;
             window.carousel.actualPosition = currentCardIndex + window.carousel.totalSlides;
-            window.carousel.updateCarousel();
+            window.carousel.updateCarousel(); // Forzar la actualización a la posición correcta
 
             modalPrevBtn.onclick = () => {
                 if (window.carousel.isTransitioning) return;
@@ -167,6 +175,7 @@
 
     function updatePopupContentFromCarousel() {
         if (window.carousel && window.carousel.cardsData) {
+            // Dar un pequeño retraso para que la transición del carrusel se complete y currentSlide se actualice
             setTimeout(() => {
                 const currentCardIndex = window.carousel.currentSlide;
                 const selectedCard = window.carousel.cardsData[currentCardIndex];
@@ -176,7 +185,7 @@
                     window.updatePopupContent();
                     updateModalCardImage();
                 } 
-            }, 550);
+            }, 550); // Ligeramente más largo que el tiempo de transición del carrusel (0.5s)
         }
     }
 
@@ -198,13 +207,16 @@
     }
 
     function closeModal() {
-        window.location.href = './landing-page.html';
+        // Navegando a landing-page.html (ruta absoluta desde la raíz)
+        window.location.href = '/cat/pages/landing-page.html'; 
     }
+
+    // Carga inicial del contenido del modal cuando el propio modal.html se carga
     loadModalContent();
 
     window.addEventListener('resize', addMobileCloseButton);
 
-</script>
+    </script>
 </body>
 
 </html>

@@ -4,22 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/components/components.css">
-    <link rel="stylesheet" href="../css/landing-page.css">
+    <link rel="stylesheet" href="/cat/css/components/components.css">
+    <link rel="stylesheet" href="/cat/css/landing-page.css">
     <title>CANCUN ATTRACTION TICKETS</title>
 </head>
 
 <body>
 
     <video class="video-background" autoplay muted loop>
-        <source src="../../components/media/videos/landing-page.cat.mp4" type="video/mp4">
+        <source src="/components/media/videos/landing-page.cat.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <div class="overlay"></div>
 
     <div class="header">
-        <img src="../../components/img/icons/cancun-logo.png" alt="Vacation VIP">
+        <img src="/components/img/icons/cancun-logo.png" alt="Vacation VIP">
     </div>
 
     <div class="content">
@@ -48,15 +48,22 @@
             </div>
         </div>
     </div>
-
-    <script src="../js/carousel.js"></script>
-    <script src="../../js/spa-router.js"></script>
-    <script>
-
-        function goToModal() {
-            window.location.href = './modal.html?popup';
-        }
-    </script>
 </body>
 
+    <script src="/js/spa-router.js"></script>
+    <script src="/cat/js/carousel.js"></script>
+    
+    <script>
+
+        document.addEventListener('spaContentLoaded', (e) => {
+            if (e.detail.pageUrl.includes('/cat/pages/landing-page.html')) {
+                console.log('Landing Page cargada por SPA. Asegurando que el carrusel se inicialice.');
+                initializeCarousel();
+            }
+        });
+
+        function goToModal() {
+            window.location.href = '/cat/pages/modal.html?popup';
+        }
+    </script>
 </html>

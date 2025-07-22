@@ -127,7 +127,7 @@ img{
     text-transform: uppercase;
 }
 
-.footer p{
+p{
     color: var(--Blue-800, #003E87);
     color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
     text-align: right;

@@ -15,6 +15,11 @@
     box-sizing: border-box; 
 }
 
+.input-text:focus {
+    outline: none;
+    border-color: #FF9B00;
+}
+
 @media (max-width: 768px) {
     .input-text {
         height: 4rem;

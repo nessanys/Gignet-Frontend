@@ -15,8 +15,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.375rem;
-    background: var(--White, #FFF);
-    background: var(--White, color(display-p3 1 1 1));
+    background: #E8E8E8;
 }
 
 .terms-text a {

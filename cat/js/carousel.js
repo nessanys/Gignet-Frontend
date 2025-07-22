@@ -1,4 +1,3 @@
-
 class DynamicCarousel {
     constructor(containerId, cardsData) {
         this.containerId = containerId;
@@ -8,13 +7,25 @@ class DynamicCarousel {
         this.isTransitioning = false;
         this.actualPosition = 0;
         this.totalExtendedCards = this.totalSlides * 3;
-
-        this.init();
     }
 
     init() {
+        const container = document.getElementById(this.containerId);
+        if (!container) {
+            console.warn(`Contenedor del carrusel '${this.containerId}' no encontrado.`);
+            return;
+        }
         this.generateHTML();
         this.setupEventListeners();
+
+        setTimeout(() => {
+            this.actualPosition = this.totalSlides;
+            this.updateCarousel();
+            this.positionNavigationButtons();
+            this.toggleNavigationForScreen();
+        }, 0);
+
+        this.updateActiveCard();
     }
 
     generateHTML() {
@@ -123,7 +134,7 @@ class DynamicCarousel {
                                 </button>
                                 ${!card.isSpecial && card.secondaryAction ? `
                                 <button class="btn--card-secondary" onclick="handleCardAction('${card.secondaryAction}', ${originalIndex})">
-                                    <img src="../../components/img/icons/add_circle.svg" alt="Add">
+                                    <img src="/components/img/icons/add_circle.svg" alt="Add">
                                     ${card.secondaryButtonText}
                                 </button>` : ''}
                             </div>
@@ -145,10 +156,8 @@ class DynamicCarousel {
         if (prevBtnMobile) prevBtnMobile.addEventListener('click', () => this.previousSlide());
         if (nextBtnMobile) nextBtnMobile.addEventListener('click', () => this.nextSlide());
 
-        // Touch/swipe support
         this.addTouchSupport();
 
-        // Reposition buttons on window resize and scroll
         window.addEventListener('resize', () => {
             this.positionNavigationButtons();
             this.toggleNavigationForScreen();
@@ -166,7 +175,7 @@ class DynamicCarousel {
 
         setTimeout(() => {
             this.isTransitioning = false;
-            // Reposition if needed
+
             if (this.actualPosition >= this.totalExtendedCards - this.totalSlides) {
                 this.actualPosition = this.totalSlides;
                 this.updateCarousel();
@@ -184,7 +193,7 @@ class DynamicCarousel {
 
         setTimeout(() => {
             this.isTransitioning = false;
-            // Reposition if needed
+
             if (this.actualPosition < 0) {
                 this.actualPosition = this.totalSlides - 1;
                 this.updateCarousel();
@@ -297,12 +306,17 @@ function saveSelectedCardAndGoToPopup(cardIndex) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function initializeCarousel() {
+    const carouselContainer = document.getElementById('carousel-container');
+    if (!carouselContainer) {
+        return;
+    }
+
     const cardsData = [
         {
             id: "xcaret",
             location: "1 Xcaret Full Day pass",
-            image: "../../components/img/step-images/xcaret_step1.jpg",
+            image: "/components/img/step-images/xcaret_step1.jpg",
             primaryButtonText: "Select",
             secondaryButtonText: "Select",
             secondaryAction: "add-to-favorites",
@@ -315,16 +329,16 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: "Approximately 14 Hours",
             recommendations: "Towel, Comfortable shoes and clothes, chemical-free sunscreen, cash, camera, and insect repellent.",
             stepImages: {
-                "step1": "../../components/img/step-images/xcaret_step1.jpg",
-                "step2": "../../components/img/step-images/xcaret_step2.jpg",
-                "step3": "../../components/img/step-images/xcaret_step3.jpg",
-                "step4": "../../components/img/step-images/xcaret_step4.jpg"
+                "step1": "/components/img/step-images/xcaret_step1.jpg",
+                "step2": "/components/img/step-images/xcaret_step2.jpg",
+                "step3": "/components/img/step-images/xcaret_step3.jpg",
+                "step4": "/components/img/step-images/xcaret_step4.jpg"
             }
         },
         {
             id: "dolphin",
             location: "2 Dolphin Encounters (swim with dolphins)",
-            image: "../../components/img/step-images/dolphin_step1.jpg",
+            image: "/components/img/step-images/dolphin_step1.jpg",
             primaryButtonText: "Select",
             secondaryButtonText: "Select",
             secondaryAction: "share",
@@ -333,16 +347,16 @@ document.addEventListener('DOMContentLoaded', () => {
             includes: ["Round trip Transportation in an air-conditioned vehicles", "Bilingual Tour Guide, Admission to Xcaret", "One buffet meal with unlimited drinks and 1 beer", "Snorkel equipment*", "Locker rental in the exclusive facilities of the “Plus area", "More than 20 activities to do and see : Underground rivers, Maya river, Paradise river, Beach, cove and ponds, Coral reef aquarium, Sea turtles, Manatee lagoon, Bee farm, Butterfly pavilion, etc", "10% off some optional activities", "Entrance to the night show “Xcaret México Espectacular” *Deposit required"],
             recommendations: "It is important to arrive 30 minutes before your program.If you have any physical or mental limitation, please call us before you purchase your program. Remember to use biodegradable sunscreen to protect your skin, the environment and marine species. Bring towels and cash for taxis, shopping, meals, etc.",
             stepImages: {
-                "step1": "../../components/img/step-images/dolphin_step1.jpg",
-                "step2": "../../components/img/step-images/dolphin_step2.jpg",
-                "step3": "../../components/img/step-images/dolphin_step3.jpg",
-                "step4": "../../components/img/step-images/dolphin_step4.jpg"
+                "step1": "/components/img/step-images/dolphin_step1.jpg",
+                "step2": "/components/img/step-images/dolphin_step2.jpg",
+                "step3": "/components/img/step-images/dolphin_step3.jpg",
+                "step4": "/components/img/step-images/dolphin_step4.jpg"
             }
         },
         {
             id: "chichen",
             location: "3 Chichen Itza Tickets",
-            image: "../../components/img/step-images/chichen_step1.jpg",
+            image: "/components/img/step-images/chichen_step1.jpg",
             primaryButtonText: "Select",
             secondaryButtonText: "Select",
             secondaryAction: "add-to-cart",
@@ -353,16 +367,16 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: "Full day",
             recommendations: "Bring comfortable shoes, hat, sunscreen, and water.",
             stepImages: {
-                "step1": "../../components/img/step-images/chichen_step1.jpg",
-                "step2": "../../components/img/step-images/chichen_step2.jpg",
-                "step3": "../../components/img/step-images/chichen_step3.jpg",
-                "step4": "../../components/img/step-images/chichen_step4.jpg"
+                "step1": "/components/img/step-images/chichen_step1.jpg",
+                "step2": "/components/img/step-images/chichen_step2.jpg",
+                "step3": "/components/img/step-images/chichen_step3.jpg",
+                "step4": "/components/img/step-images/chichen_step4.jpg"
             }
         },
         {
             id: "tour",
             location: "4 Tour",
-            image: "../../components/img/step-images/tour.jpg",
+            image: "/components/img/step-images/tour.jpg",
             primaryButtonText: "Select",
             isSpecial: true,
             specialText: "Looking for a different tour?",
@@ -373,16 +387,24 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: "Approximately 12 hours",
             recommendations: "Comfortable shoes, comfortable clothing, a hat, sunscreen, cash, camera, insect repellent, and water.",
             stepImages: {
-                "step1": "../../components/img/step-images/tour_step1.jpg",
-                "step2": "../../components/img/step-images/tour_step2.jpg",
-                "step3": "../../components/img/step-images/tour_step3.jpg",
-                "step4": "../../components/img/step-images/tour_step4.jpg"
+                "step1": "/components/img/step-images/tour_step1.jpg",
+                "step2": "/components/img/step-images/tour_step2.jpg",
+                "step3": "/components/img/step-images/tour_step3.jpg",
+                "step4": "/components/img/step-images/tour_step4.jpg"
             }
         }
     ];
 
     const carousel = new DynamicCarousel('carousel-container', cardsData);
     window.carousel = carousel;
-
+    carousel.init();
     console.log(JSON.parse(localStorage.getItem('selectedCardData')));
+}
+
+document.addEventListener('DOMContentLoaded', initializeCarousel);
+
+document.addEventListener('spaContentLoaded', (e) => {
+    if (e.detail.pageUrl.includes('crvo/pages/landing-page.html') || e.detail.pageUrl.includes('cat/pages/landing-page.html')) {
+        initializeCarousel();
+    }
 });

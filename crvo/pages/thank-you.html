@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/components/components.css">
-    <link rel="stylesheet" href="../css/thank-you.css">
+    <link rel="stylesheet" href="/crvo/css/components/components.css">
+    <link rel="stylesheet" href="/crvo/css/thank-you.css">
     <title>CANCUN RESORT VACATION OFFERS</title>
 </head>
 <body>
 
     <video class="video-background" autoplay muted loop>
-        <source src="../../components/media/videos/thank-you.mp4" type="video/mp4">
+        <source src="/components/media/videos/thank-you.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <div class="overlay"></div>
     
     <div class="header">
-        <img src="../../components/img/icons/Layer 2.svg" alt="Vacation VIP">
+        <img src="/components/img/icons/Layer 2.svg" alt="Vacation VIP">
     </div>
 
     <div class="content">
@@ -45,11 +45,9 @@
     </div>
 
     <script>
-        // Función para navegar al modal independiente
+
         function goToModal(selectedOption) {
-            // Guardar la opción seleccionada
             localStorage.setItem('preSelectedOption', selectedOption);
-            // Navegar al modal
             window.location.href = './modal.html?step=1';
         }
     </script>

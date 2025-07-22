@@ -1,58 +1,66 @@
 window.navigateTo = function(pageUrl) {
+
     fetch(pageUrl)
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
         .then(html => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
 
-            // 1. Reemplaza el <head> completamente
-            // Mantener la lógica de reemplazar head para estilos, como lo tenías o lo ajustamos.
-            // Para evitar conflictos con head (que también podría tener scripts),
-            // podemos ser más selectivos, o simplemente confiar en tu enfoque actual.
             document.head.innerHTML = doc.head.innerHTML;
 
-            // Espera a que los estilos se carguen
-            const links = Array.from(document.head.querySelectorAll('link[rel="stylesheet"]'));
-            const promises = links.map(link => new Promise(resolve => {
-                link.onload = resolve;
-                link.onerror = resolve;
-            }));
+            const stylePromises = Array.from(document.head.querySelectorAll('link[rel="stylesheet"]'))
+                .map(link => new Promise(resolve => {
+                    link.onload = resolve;
+                    link.onerror = resolve;
+                }));
 
-            Promise.all(promises).then(() => {
-                // 2. Eliminar scripts anteriores del <body> inyectados por este router
-                // (excepto el propio spa-router.js)
-                const currentScripts = Array.from(document.body.querySelectorAll('script'));
+            Promise.all(stylePromises).then(() => {
+                const currentScripts = Array.from(document.body.querySelectorAll('script[data-spa-router-script="true"]'));
                 currentScripts.forEach(script => {
-                    // Evita eliminar el propio script de spa-router.js
-                    if (!script.src.includes('spa-router.js') && !script.getAttribute('data-spa-router-persistent')) {
-                        // Considera si este script fue agregado por el router.
-                        // Podemos añadir un atributo al agregar para identificarlo.
-                        script.remove();
-                    }
+                    script.remove();
                 });
 
                 document.body.innerHTML = doc.body.innerHTML;
 
-                // 3. Recarga los scripts de la nueva página
+                const scriptPromises = [];
                 doc.querySelectorAll('script').forEach(script => {
                     const newScript = document.createElement('script');
                     if (script.src) {
                         newScript.src = script.src;
-                        newScript.async = false; // Mantiene el orden de ejecución
-                        // Añadir un identificador para poder eliminarlo después
-                        newScript.setAttribute('data-spa-router-script', 'true'); 
+                        newScript.async = false;
+                        newScript.setAttribute('data-spa-router-script', 'true');
+                        scriptPromises.push(new Promise(resolve => {
+                            newScript.onload = resolve;
+                            newScript.onerror = resolve; 
+                        }));
                     } else if (script.textContent) {
                         newScript.textContent = script.textContent;
-                        // Añadir un identificador para poder eliminarlo después
                         newScript.setAttribute('data-spa-router-script', 'true');
+
+                        scriptPromises.push(Promise.resolve());
                     }
                     document.body.appendChild(newScript);
                 });
 
-                window.history.pushState(null, '', pageUrl);
+                Promise.all(scriptPromises).then(() => {
+                    window.history.pushState(null, '', pageUrl);
+
+                    const event = new CustomEvent('spaContentLoaded', { detail: { pageUrl: pageUrl } });
+                    document.dispatchEvent(event);
+                });
             });
         })
-        .catch(() => {
+        .catch((error) => {
+            console.error('SPA Router: Error al navegar SPA:', error);
             window.location.href = pageUrl;
         });
 }
+
+window.addEventListener('popstate', () => {
+    window.location.reload();
+});

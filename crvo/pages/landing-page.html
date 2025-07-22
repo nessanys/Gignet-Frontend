@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/components/components.css">
-    <link rel="stylesheet" href="../css/landing-page.css">
-    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="/crvo/css/components/components.css">
+    <link rel="stylesheet" href="/crvo/css/landing-page.css">
+    <link rel="stylesheet" href="/crvo/css/modal.css">
     <title>CANCUN RESORT VACATION OFFERS</title>
 </head>
 <body>
 
     <video class="video-background" autoplay muted loop>
-        <source src="../../components/media/videos/landing-page-crvo.mp4" type="video/mp4">
+        <source src="/components/media/videos/landing-page-crvo.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <div class="gradient-overlay"></div>
     
     <div class="header">
-        <img src="../../components/img/icons/Layer 2.svg" alt="Vacation VIP">
+        <img src="/components/img/icons/Layer 2.svg" alt="Vacation VIP">
     </div>
 
     <div class="content">
@@ -52,7 +52,15 @@
 
 </body>
 
+<script src="/js/spa-router.js"></script>
+
 <script>
+
+        document.addEventListener('spaContentLoaded', (e) => {
+            if (e.detail.pageUrl.includes('/crvo/pages/landing-page.html')) {
+            }
+        });
+
         function goToModal(selectedOption) {
             localStorage.setItem('preSelectedOption', selectedOption);
             window.location.href = './modal.html?step=1';

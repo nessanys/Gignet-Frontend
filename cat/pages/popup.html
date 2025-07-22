@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/popup.css">
+<link rel="stylesheet" href="/cat/css/popup.css">
 
 <div class="step-container">
     <div class="step-container-left">
@@ -127,7 +127,7 @@
             let includesArr = Array.isArray(cardData.includes) ? cardData.includes : String(cardData.includes).split(',');
             includesArr = includesArr.map(item => item.trim()).filter(item => item);
 
-            includesDiv.innerHTML = `<h1>Includes</h1><ul>${includesArr.map(item => `<li><img src="../../components/img/icons/check_circle.svg" alt="Check" class="check-icon">${item}</li>`).join('')}</ul>`;
+            includesDiv.innerHTML = `<h1>Includes</h1><ul>${includesArr.map(item => `<li><img src="/components/img/icons/check_circle.svg" alt="Check" class="check-icon">${item}</li>`).join('')}</ul>`;
         }
 
         // Duración
