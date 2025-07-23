@@ -245,16 +245,13 @@
     
     .content-information-container h5 {
         text-align:justify; 
-        color: var(--Blue-500, #00C2D3);
-        color: var(--Blue-500, color(display-p3 0.0471 0.7333 0.8039));
+        color: #00C2D3;
         font-size: 1.5rem;
         font-weight: 500;
     }
 
     .content-information-container h4 {
-        color: var(--Blue-800, #003E87);
-        color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
-        
+        color: #003E87;
     }
 
     .content-information-container p {
@@ -276,10 +273,8 @@
     }
 
     .btn--fifthtary {
-        background: var(--Blue-500, #00C2D3) !important;
-        background: var(--Blue-500, color(display-p3 0.0471 0.7333 0.8039)) !important;
-        color: var(--White, #FFF) !important;
-        color: var(--White, color(display-p3 1 1 1)) !important;
+        background: #00C2D3 !important;
+        color: #FFF !important;
         border-radius: 3.125rem;
     }
 

@@ -27,7 +27,7 @@
             <button class="btn btn--sixthtary btn--large" >55+</button>
         </div>
 
-        <button type="button" class="step-button" onclick="goToConfirmationPage()">Next</button>
+        <button type="button" class="step-button">Next</button>
 
         <div class="terms-container">
             <div class="terms-text">
@@ -42,13 +42,19 @@
 <script>
 
     function showToast(message) {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2500);
+        const toast = document.getElementById('toast');
+        if (!toast) {
+            return;
+        }
+
+        toast.textContent = message;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
     }
    
-
     const travelOptions = [
         "Under 28",
         "28 - 34",
@@ -67,4 +73,17 @@
             }));
         });
     });
+
+    const nextBtn = document.querySelector('.step-button');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+            const selected = document.querySelector('.btn--sixthtary.selected-travel-btn');
+            if (!selected) {
+                showToast('Please select an option before continuing.');
+                return;
+            }
+            window.goToConfirmationPage(); 
+        });
+    }
+
 </script>

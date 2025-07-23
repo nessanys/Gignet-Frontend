@@ -5,31 +5,27 @@
 }
 
 .title{
-    color: var(--Orange-500, #FF9B00);
-    color: var(--Orange-500, color(display-p3 1 0.651 0.1569));
+    color: #FF9B00;
     font-family: "Montserrat Regular";
     font-size: 2rem;
     text-transform: uppercase;
 }
 
 .descrip {
-    color: var(--Blue-800, #003E87);
-    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+    color: #003E87;
     font-family: "Montserrat Bold";
     font-size: 1.25rem;
     text-transform: uppercase;
 }
 
 .info {
-    color: var(--Blue-800, #003E87);
-    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+    color: #003E87;
     font-family: "Montserrat Regular";
     font-size: 0.875rem;
 }
 
 hr {
-    border: 1px solid var(--Grey-20, #E6EFF6);
-    border: 1px solid var(--Grey-20, color(display-p3 0.9153 0.9358 0.9591));
+    border: 1px solid #E6EFF6;
     width: 100%;
 }
 
@@ -102,10 +98,8 @@ hr {
     padding: 0.5rem;
     width: 100%;
     border-radius: 0.5rem;
-    background: var(--Grey-20, #E6EFF6);
-    background: var(--Grey-20, color(display-p3 0.9153 0.9358 0.9591));
-    color: var(--Text-500, #000915);
-    color: var(--Text-500, color(display-p3 0 0.032 0.0745));
+    background: #E6EFF6;
+    color: #000915;
     text-align: center;
     font-family: "Montserrat Bold";
     font-size: 1rem;
@@ -128,8 +122,7 @@ hr {
 }
 
 .recommendations {
-    color: var(--Text-100, #272727);
-    color: var(--Text-100, color(display-p3 0.1538 0.1538 0.1538));
+    color: #272727;
     font-family: "Montserrat Regular";
     font-size: 0.875rem;
 }
@@ -152,13 +145,15 @@ hr {
 .modal-carousel-navigation .carousel-btn {
     position: absolute;
     top: 50%;
+    left: 0;
+    right: 0;
     transform: translateY(-50%);
     width: 2.5rem;
     height: 2.5rem;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 5005;
     font-size: 1.2rem;
     font-weight: bold;
     color: #FFF;

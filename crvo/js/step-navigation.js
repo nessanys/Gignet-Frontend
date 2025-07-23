@@ -7,8 +7,11 @@ function goToNextStep() {
         const lastName = form.elements['lastName'] ? form.elements['lastName'].value.trim() : '';
         const email = form.elements['email'] ? form.elements['email'].value.trim() : '';
         const phone = form.elements['phone'] ? form.elements['phone'].value.trim() : '';
-        const zipCode = form.elements['zip'] ? form.elements['zip'].value.trim() : '';
 
+        if (!firstName || !lastName || !email || !phone) {
+            showToast('Fields cannot be left empty.');
+            return;
+        }
         if (!/^[A-Za-z]{2,}$/.test(firstName)) {
             showToast('First name must contain only letters (no spaces, numbers or special characters).');
             return;
@@ -23,10 +26,6 @@ function goToNextStep() {
         }
         if (!/^\d{7,}$/.test(phone)) {
             showToast('Enter a valid phone number (numbers only, at least 7 digits).');
-            return;
-        }
-        if (!/^\d{4,}$/.test(zipCode)) {
-            showToast('Enter a valid ZIP code (numbers only, at least 4 digits).');
             return;
         }
         if (!document.getElementById('termsCheckbox').checked) {

@@ -46,6 +46,7 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const initialStep = urlParams.get('step') || '1'; 
+        
 
         async function loadStep(stepNumber) {
             try {
@@ -81,7 +82,6 @@
 
                 if (window.modal && typeof window.modal.init === 'function') {
                     console.log(`Step ${stepNumber} loaded. Re-initializing modal elements.`);
-                    window.modal.init(); 
                     window.modal.renderStepContent(); 
                 } else {
                     console.warn("window.modal.init is not defined. Ensure modal.js is loaded and properly exports 'modal'.");
@@ -114,26 +114,10 @@
         function closeModal() {
             window.location.href = '/crvo/pages/landing-page.html'; 
         }
+
         loadStep(initialStep);
         
         window.addEventListener('resize', addMobileCloseButton);
-        window.selectOption = function(optionNumber) {
-            console.log('Option selected:', optionNumber);
-            const options = document.querySelectorAll('.step-option-1, .step-option-2');
-            options.forEach(option => option.classList.remove('selected', 'unselected')); 
-
-            const selectedOptionElement = document.querySelector(`.step-option-${optionNumber}`);
-            if (selectedOptionElement) {
-                selectedOptionElement.classList.add('selected');
-                if (window.modal) {
-                    window.modal.selectedOption = (optionNumber === 1) ? 'accommodations' : 'all-inclusive';
-                }
-            }
-            const otherOptionElement = document.querySelector(`.step-option-${optionNumber === 1 ? 2 : 1}`);
-            if (otherOptionElement) {
-                otherOptionElement.classList.add('unselected');
-            }
-        };
 
         window.checkPreSelected = function() {
             let preSelected = localStorage.getItem('preSelectedOption');

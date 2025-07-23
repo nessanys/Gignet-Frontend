@@ -60,7 +60,6 @@
 <script src="/js/phones.js"></script>
     
 <script>
-
     window.addEventListener('DOMContentLoaded', function () {
         const select = document.getElementById('countryCode');
         if (window.phoneCodes && select) {
@@ -89,6 +88,10 @@
         const email = form.elements[2].value.trim();
         const phone = document.getElementById('phoneNumber').value.trim();
 
+        if (!firstName || !lastName || !email || !phone) {
+            showToast('Fields cannot be left empty.');
+            return;
+        }
         if (!/^[A-Za-z]{2,}$/.test(firstName)) {
             showToast('First name must contain only letters (no spaces, numbers or special characters).');
             return;
@@ -126,6 +129,27 @@
     document.getElementById('phoneNumber').addEventListener('input', function () {
         this.value = this.value.replace(/\D/g, '');
     });
+
+    function populatePhoneCodes() {
+            const countryCodeSelect = document.getElementById('countryCode');
+            if (countryCodeSelect && window.phoneCodes) {
+                countryCodeSelect.innerHTML = ''; 
+
+                window.phoneCodes.forEach(function(phone) {
+                    const option = document.createElement('option');
+                    option.value = phone.code;
+                    option.textContent = `${phone.flag} ${phone.country} (${phone.code})`;
+                    countryCodeSelect.appendChild(option);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', populatePhoneCodes);
+        document.addEventListener('spaContentLoaded', (e) => {
+            if (e.detail.pageUrl.includes('info.html')) {
+                populatePhoneCodes();
+            }
+        });
 </script>
 
 </html>

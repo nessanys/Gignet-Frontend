@@ -300,7 +300,11 @@ function saveSelectedCardAndGoToPopup(cardIndex) {
         const cardsData = window.carousel.cardsData;
         const selectedCard = cardsData[cardIndex];
         localStorage.setItem('selectedCardData', JSON.stringify(selectedCard));
-        window.location.href = 'modal.html?popup=1';
+        if (selectedCard.isSpecial) {
+            window.location.href = 'modal.html?step=1'; 
+        } else {
+            window.location.href = 'modal.html?popup=1';
+        }
     } catch (e) {
         alert('Error selecting card');
     }
@@ -382,11 +386,6 @@ function initializeCarousel() {
             isSpecial: true,
             specialText: "Looking for a different tour?",
             specialText2: "No worries! Contact us and we'll be in touch.",
-            description: "CHICHEN ITZÁ CON CENOTE",
-            information: "This The Itza conquered the city toward the end of the Classic Period and introduced the cult of Kukulkan, militarism, and a series of new cultural elements associated with earlier traditions, giving rise to a unique style called Maya-Yucatecan. During this excursion, you will enjoy and learn about Mayan culture, visit a regional handicraft shop, enjoy the flavors of Yucatan dishes, and dive into a local cenote. Prepare for an unforgettable adventure. Wonderful place is considered a World Heritage Site by UNESCO and on July 7, 2007, it was named one of the New 7 Wonders of the World during the Official Declaration in Lisbon, Portugal.",
-            includes: ["Customizable options."],
-            duration: "Approximately 12 hours",
-            recommendations: "Comfortable shoes, comfortable clothing, a hat, sunscreen, cash, camera, insect repellent, and water.",
             stepImages: {
                 "step1": "/components/img/step-images/tour_step1.jpg",
                 "step2": "/components/img/step-images/tour_step2.jpg",

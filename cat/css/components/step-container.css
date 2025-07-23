@@ -61,8 +61,7 @@
 }
 
 .step-container-left-content h1 {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Bold";
     font-size: clamp(1.5rem, 3vw, 3rem); 
     line-height: 1.1; 
@@ -72,8 +71,7 @@
 }
 
 .step-container-left-content p {
-    color: var(--Orange-500, #FF9B00);
-    color: var(--Orange-500, color(display-p3 1 0.6078 0));
+    color: #FF9B00;
     text-align: start;
     font-family: "Montserrat Regular";
     font-size: clamp(0.5rem, 1.5vw, 1.4rem); 
@@ -89,7 +87,7 @@
     justify-content: space-between; 
     align-items: center;
     flex: 1 0 0;
-    background: var(--White, #FFF);
+    background: #FFF;
     border-radius: 0 2rem 2rem 0;
     overflow: hidden;
     min-height: 0;

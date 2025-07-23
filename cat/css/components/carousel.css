@@ -19,19 +19,15 @@
 }
 
 .carousel-location-title {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Light";
     font-size: 1.5rem;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
     text-align: center;
 }
 
-/* Navigation Buttons - Completely separate layout */
 .carousel-navigation {
     position: fixed;
     display: flex;
@@ -76,8 +72,7 @@
 }
 
 .carousel-btn:hover {
-    border: 2px solid var(--Green-500, #00C903);
-    border: 2px solid var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
+    border: 2px solid #00C903;
 }
 
 .carousel-btn svg {
@@ -86,7 +81,6 @@
     color: #ffffffff;
 }
 
-/* Mobile Navigation */
 .carousel-navigation-mobile {
     display: none;
 }
@@ -147,7 +141,7 @@
 }
 
 @media (max-width: 375px) {
-    /* Navigation Buttons - Completely separate layout */
+
     .carousel-navigation {
         position: fixed;
         display: flex;
@@ -180,8 +174,7 @@
     }
 
     .carousel-btn:hover {
-        border: 2px solid var(--Green-500, #00C903);
-        border: 2px solid var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
+        border: 2px solid #00C903;
     }
 
     .carousel-btn svg {

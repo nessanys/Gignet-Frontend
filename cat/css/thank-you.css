@@ -149,7 +149,6 @@
 }
 
 @media (max-width: 768px) {
-    /* Hide desktop terms, show mobile terms */
     .terms-desktop {
         display: none;
     }

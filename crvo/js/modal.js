@@ -13,11 +13,7 @@ window.modal = {
             console.warn("Modal overlay not found. Modal will not function.");
             return;
         }
-
-        this.initStepOptions(); 
         this.setupEventListeners(); 
-        this.renderStepContent(); 
-
     },
 
     setupEventListeners() {
@@ -31,38 +27,43 @@ window.modal = {
         
         this._overlayClickListener = (e) => {
             if (e.target === this.overlay || e.target.classList.contains('modal-close')) {
-                this.close();
+                window.location.href = '/crvo/pages/landing-page.html'; 
             }
         };
         this.overlay.addEventListener('click', this._overlayClickListener);
 
         this._keydownListener = (e) => {
             if (e.key === 'Escape' && this.isOpen) {
-                this.close();
+                window.location.href = '/crvo/pages/landing-page.html'; 
             }
         };
         document.addEventListener('keydown', this._keydownListener);
     },
 
     initStepOptions() {
-        this.option1 = this.overlay.querySelector('.step-option-1');
-        this.option2 = this.overlay.querySelector('.step-option-2');
-
-        if (this._option1Listener) { 
-            if (this.option1) this.option1.removeEventListener('click', this._option1Listener);
+        const modalContent = document.getElementById('modalContent');
+        if (!modalContent) {
+            console.warn("modalContent not found for step options initialization.");
+            return;
         }
-        if (this._option2Listener) { 
-            if (this.option2) this.option2.removeEventListener('click', this._option2Listener);
+        this.option1 = modalContent.querySelector('.step-option-1');
+        this.option2 = modalContent.querySelector('.step-option-2');
+
+        if (this._option1Listener && this.option1) {
+            this.option1.removeEventListener('click', this._option1Listener);
+        }
+        if (this._option2Listener && this.option2) {
+            this.option2.removeEventListener('click', this._option2Listener);
         }
 
         if (this.option1 && this.option2) {
             this._option1Listener = () => {
                 this.selectOption('accommodations');
-                localStorage.setItem('preSelectedOption', 'accommodations'); 
+                localStorage.setItem('preSelectedOption', 'accommodations');
             };
             this._option2Listener = () => {
                 this.selectOption('all-inclusive');
-                localStorage.setItem('preSelectedOption', 'all-inclusive'); 
+                localStorage.setItem('preSelectedOption', 'all-inclusive');
             };
 
             this.option1.addEventListener('click', this._option1Listener);
@@ -71,7 +72,10 @@ window.modal = {
     },
 
     selectOption(optionType) {
-        if (!this.option1 || !this.option2) return;
+        if (!this.option1 || !this.option2) {
+            this.initStepOptions();
+            if (!this.option1 || !this.option2) return; 
+        }
 
         this.selectedOption = optionType;
 
@@ -96,7 +100,6 @@ window.modal = {
         document.body.classList.add('modal-open');
 
         this.selectOption(selectedOption);
-        this.renderStepContent(); 
 
         this.overlay.classList.add('show');
     },
@@ -116,12 +119,12 @@ window.modal = {
     },
 
     renderStepContent() {
-
-        const currentStep = window.getCurrentStep(); 
+        console.log("modal.renderStepContent called. Initializing step-specific elements.");
+        this.initStepOptions(); 
+        window.checkPreSelected();
     },
 
     submitForm() {
-
         const currentStep = window.getCurrentStep();
         const form = document.getElementById(`step${currentStep}Form`); 
         if (!form) {

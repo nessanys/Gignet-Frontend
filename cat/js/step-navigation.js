@@ -1,4 +1,3 @@
-
 function goToNextStep() {
     const currentStep = getCurrentStep();
 
@@ -10,6 +9,10 @@ function goToNextStep() {
         const phone = form.elements['phone'] ? form.elements['phone'].value.trim() : '';
         const zipCode = form.elements['zip'] ? form.elements['zip'].value.trim() : '';
 
+        if (!firstName || !lastName || !email || !phone || !zipCode) {
+            showToast('Fields cannot be left empty.');
+            return;
+        }
         if (!/^[A-Za-z]{2,}$/.test(firstName)) {
             showToast('First name must contain only letters (no spaces, numbers or special characters).');
             return;
@@ -82,15 +85,24 @@ function goToNextStep() {
     }
 
     const nextStep = currentStep + 1;
-    window.location.href = `/cat/pages/modal.html?step=${nextStep}`;
+    
+    if (nextStep <= 4) {
+        if (typeof window.loadStep === 'function') { 
+            window.loadStep(nextStep);
+        } else {
+            window.location.href = `./modal.html?step=${nextStep}`; 
+        }
+    } else {
+        window.navigateTo('confirmation-page.html');
+    }
 }
 
 function goToConfirmationPage() {
-    window.location.href = '/cat/pages/confirmation-page.html';
+    window.location.href = 'confirmation-page.html';
 }
 
 /**
- * Función para ir a un step específico
+ * Funtion for navigating to a specific step
  * @param {number} targetStep 
  */
 function goToStep(targetStep) {
@@ -101,7 +113,7 @@ function goToStep(targetStep) {
 }
 
 /**
- * Detecta el step actual desde múltiples fuentes
+ * Detects the current step from multiple sources
  * @returns {number} 
  */
 function getCurrentStep() {
@@ -144,7 +156,6 @@ function getCurrentStep() {
 function saveCurrentStepData(currentStep) {
     const form = document.getElementById(`step${currentStep}Form`);
     if (!form) {
-        console.warn(`No se encontró formulario para step ${currentStep}`);
         return;
     }
     
@@ -152,12 +163,6 @@ function saveCurrentStepData(currentStep) {
     const data = Object.fromEntries(formData.entries());
 
     switch(currentStep) {
-        case 1:
-            if (typeof selectedOption !== 'undefined' && selectedOption) {
-                data.selectedOption = selectedOption;
-                data.optionText = selectedOption === 1 ? 'Accommodations only' : 'All inclusive';
-            }
-            break;
         case 2:
             if (typeof selectedTravelOption !== 'undefined' && selectedTravelOption) {
                 data.selectedTravelOption = selectedTravelOption;

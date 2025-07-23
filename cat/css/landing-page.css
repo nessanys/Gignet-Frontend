@@ -1,5 +1,4 @@
 
-
 .overlay{
     background: linear-gradient(0deg, rgba(0, 15, 35, 0.60) 0%, rgba(0, 15, 35, 0.60) 100%);
     background: linear-gradient(0deg, color(display-p3 0 0.0558 0.1298 / 0.60) 0%, color(display-p3 0 0.0558 0.1298 / 0.60) 100%);
@@ -72,8 +71,7 @@
 }
 
 .content-thankyou h1 {
-    color: var(--Green-100, #00EF1F);
-    color: var(--Green-100, color(display-p3 0.1456 0.9038 0.3857));
+    color: #00EF1F;
     font-family: "Montserrat Bold";
     font-size: 4.375rem;
     font-style: normal;
@@ -82,8 +80,7 @@
 }
 
 .content-thankyou p {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color:  #FFF;
     font-family: "Montserrat Regular";
     font-size: clamp(1.2rem, 2vw, 1.5rem);
     font-style: normal;
@@ -96,9 +93,7 @@
 }
 
 .location-text {
-    -webkit-text-stroke-color: rgba(255, 255, 255, 0.30);
-    -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: color(display-p3 1 1 1 / 0.30);
+    color: rgba(255, 255, 255, 0.20);
     font-family: "Montserrat Black";
     font-size: 14.5rem;
     font-style: normal;
@@ -108,8 +103,6 @@
     z-index: -1;
 }
 
-
-/* Desktop - show desktop terms, hide mobile terms */
 @media (min-width: 769px) {
     .terms-mobile {
         display: none;
@@ -120,9 +113,8 @@
     }
 }
 
-/* Mobile Responsive Design */
 @media (max-width: 768px) {
-    /* Hide desktop terms, show mobile terms */
+
     .content {
         flex-direction: column;
         padding: 0;
