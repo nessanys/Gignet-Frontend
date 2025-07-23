@@ -17,8 +17,7 @@
 }
 
 .checkbox-container span {
-    color: var(--Grey-60, #7C8A97);
-    color: var(--Grey-60, color(display-p3 0.506 0.5394 0.5838));
+    color: #7C8A97;
     font-family: "Montserrat Regular";
     font-size: 0.55rem;
     font-style: normal;

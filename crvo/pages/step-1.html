@@ -57,57 +57,24 @@
     </div>
 </div>
 
-<div id="toast" class="custom-toast"></div>
-
 <script>
-    document.querySelectorAll('#step1Form input').forEach(input => {
-        input.addEventListener('input', function () {
-            if (input.value.trim()) {
-                removeInputError(input);
-            } else {
-                showInputError(input, 'This field is required');
-            }
+    window.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('input[name="firstName"], input[name="lastName"]').forEach(input => {
+            input.addEventListener('input', function () {
+                this.value = this.value.replace(/[^A-Za-z]/g, '');
+            });
+        });
+
+        document.querySelector('input[name="phone"]').addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '');
         });
     });
-
-    function showInputError(input, message) {
-        let error = input.nextElementSibling;
-        if (!error || !error.classList.contains('input-error')) {
-            error = document.createElement('div');
-            error.className = 'input-error';
-            input.parentNode.insertBefore(error, input.nextSibling);
-        }
-        error.textContent = message;
-    }
-
-    function removeInputError(input) {
-        let error = input.nextElementSibling;
-        if (error && error.classList.contains('input-error')) {
-            error.remove();
-        }
-    }
 
     function showToast(message) {
         const toast = document.getElementById('toast');
         toast.textContent = message;
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2500);
-        }
-
-    function checkPreSelected() {
-        let selectedOption = null;
-        
-        const preSelected = localStorage.getItem('preSelectedOption');
-        if (preSelected) {
-            const optionMap = {
-                'accommodations': 1,
-                'all-inclusive': 2
-            };
-            if (optionMap[preSelected]) {
-                selectOption(optionMap[preSelected]);
-            }
-            localStorage.removeItem('preSelectedOption');
-        }
     }
 
     function selectOption(optionNumber) {

@@ -3,18 +3,36 @@ function goToNextStep() {
 
     if (currentStep === 1) {
         const form = document.getElementById('step1Form');
-        let valid = true;
-        Array.from(form.elements).forEach(input => {
-            if (input.type !== 'submit' && input.type !== 'button' && !input.value.trim()) {
-                showInputError(input, 'This field is required');
-                valid = false;
-            }
-        });
-        if (!document.getElementById('termsCheckbox').checked) {
-            if (typeof showToast === 'function') showToast('You must accept the terms and conditions.');
-            valid = false;
+        const firstName = form.elements['firstName'] ? form.elements['firstName'].value.trim() : '';
+        const lastName = form.elements['lastName'] ? form.elements['lastName'].value.trim() : '';
+        const email = form.elements['email'] ? form.elements['email'].value.trim() : '';
+        const phone = form.elements['phone'] ? form.elements['phone'].value.trim() : '';
+        const zipCode = form.elements['zip'] ? form.elements['zip'].value.trim() : '';
+
+        if (!/^[A-Za-z]{2,}$/.test(firstName)) {
+            showToast('First name must contain only letters (no spaces, numbers or special characters).');
+            return;
         }
-        if (!valid) return;
+        if (!/^[A-Za-z]{2,}$/.test(lastName)) {
+            showToast('Last name must contain only letters (no spaces, numbers or special characters).');
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showToast('Enter a valid email address.');
+            return;
+        }
+        if (!/^\d{7,}$/.test(phone)) {
+            showToast('Enter a valid phone number (numbers only, at least 7 digits).');
+            return;
+        }
+        if (!/^\d{4,}$/.test(zipCode)) {
+            showToast('Enter a valid ZIP code (numbers only, at least 4 digits).');
+            return;
+        }
+        if (!document.getElementById('termsCheckbox').checked) {
+            showToast('You must accept the terms and conditions.');
+            return;
+        }
     }
 
     if (currentStep === 3) {

@@ -118,12 +118,6 @@ window.modal = {
     renderStepContent() {
 
         const currentStep = window.getCurrentStep(); 
-        console.log("Modal.js - Rendering step:", currentStep);
-
-        const stepIndicator = document.querySelector('.step-container-left-text p');
-        if (stepIndicator) {
-            stepIndicator.textContent = `Step ${currentStep} of 4`; 
-        }
     },
 
     submitForm() {

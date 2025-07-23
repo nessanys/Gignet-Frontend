@@ -5,8 +5,7 @@
     gap: 0.75rem;
     border-radius: 1.25rem 1.25rem 0rem 0rem;
     opacity: 0.8;
-    background: var(--Grey-20, #E6EFF6);
-    background: var(--Grey-20, color(display-p3 0.9153 0.9358 0.9591));
+    background: #E6EFF6;
 }
 
 .terms-text {
@@ -18,8 +17,7 @@
 }
 
 .terms-text a {
-    color: var(--Link, #0076FF);
-    color: var(--Link, color(display-p3 0.0272 0.4454 1));
+    color: #0076FF;
     text-align: center;
     font-family: "Montserrat Regular";
     font-size: 0.8rem;
@@ -35,8 +33,7 @@
 }
 
 .terms-text p {
-    color: var(--Grey-80, #808080);
-    color: var(--Grey-80, color(display-p3 0.5012 0.5012 0.5012));
+    color: #808080;
     text-align: center;
     font-family: "Montserrat Regular";
     font-size: 0.8rem;
@@ -45,7 +42,6 @@
     line-height: normal;
 }
 
-/* Mobile optimizations */
 @media (max-width: 768px) {
     .terms-container {
         padding: 0.9rem;
@@ -61,7 +57,6 @@
     }
 }
 
-/* Extra small devices (phones) */
 @media (max-width: 480px) {
     .terms-container {
         padding: 0.6rem;
@@ -77,7 +72,6 @@
     }
 }
 
-/* Very small devices */
 @media (max-width: 360px) {
     .terms-container {
         padding: 0.3rem;

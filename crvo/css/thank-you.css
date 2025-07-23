@@ -93,8 +93,7 @@
 }
 
 .options p {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     text-align: center;
     font-family: "Montserrat Regular";
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);
@@ -117,8 +116,6 @@
     backdrop-filter: blur(15px);
 }
 
-
-/* Mobile Responsive Design */
 @media (max-width: 1024px) {
     .content-section {
         height: calc(50vh - 1.5rem);
@@ -151,7 +148,6 @@
 }
 
 @media (max-width: 768px) {
-    /* Hide desktop terms, show mobile terms */
     .terms-desktop {
         display: none;
     }

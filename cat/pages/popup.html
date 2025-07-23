@@ -72,13 +72,13 @@
         const titleDiv = document.getElementById('popupCardTitle');
         if (titleDiv && cardData.location) titleDiv.textContent = cardData.location;
 
-        // Information
-        const infoDiv = document.getElementById('popupCardInformation');
-        if (infoDiv && cardData.information) infoDiv.textContent = cardData.information;
-
         // Description
         const descDiv = document.getElementById('popupCardDescription');
         if (descDiv && cardData.description) descDiv.textContent = cardData.description;
+
+        // Information
+        const infoDiv = document.getElementById('popupCardInformation');
+        if (infoDiv && cardData.information) infoDiv.innerHTML = cardData.information;
 
         // Itinerary
         const itineraryDiv = document.getElementById('popupCardItinerary');
@@ -88,7 +88,6 @@
             Array.isArray(cardData.itinerary) &&
             cardData.itinerary.length > 0
         ) {
-            // Verifica si hay datos para cada departure
             const hasFirstDep = Array.isArray(cardData.firstDeparture) ? cardData.firstDeparture.length > 0 : !!cardData.firstDeparture;
             const hasSecondDep = Array.isArray(cardData.secondDeparture) ? cardData.secondDeparture.length > 0 : !!cardData.secondDeparture;
 

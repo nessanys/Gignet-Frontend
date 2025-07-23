@@ -8,7 +8,7 @@
 .country-search-input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid var(--Grey-30, #ABB5BE);
+    border: 1px solid #ABB5BE;
     border-radius: 0.5rem;
     font-size: 1rem;
     font-family: 'Montserrat Regular', sans-serif;
@@ -22,12 +22,12 @@
 
 .country-search-input:focus {
     outline: none;
-    border-color: var(--primary-orange, #FF9B00);
+    border-color: #FF9B00;
     box-shadow: 0 0 0 2px rgba(255, 155, 0, 0.2);
 }
 
 .country-search-input::placeholder {
-    color: var(--Grey-30, #ABB5BE);
+    color:#ABB5BE;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -38,8 +38,7 @@
     right: 0;
     margin-top: 0.5rem;
     border-radius: 0.75rem;
-    background: var(--White, #FFF);
-    background: var(--White, color(display-p3 1 1 1));
+    background: #FFF;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.20);
     box-shadow: 0px 4px 10px 0px color(display-p3 0 0 0 / 0.20);
     max-height: 16rem;
@@ -53,13 +52,12 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    color: var(--Grey-80, #617587);
-    color: var(--Grey-80, color(display-p3 0.406 0.4533 0.516));
+    color: #617587;
     font-family: "Montserrat Regular";
     font-size: 0.8rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 100%; /* 1rem */
+    line-height: 100%; 
     letter-spacing: -0.01rem;
 }
 
@@ -76,7 +74,6 @@
     background: var(--Blue-10, color(display-p3 0.0471 0.7333 0.8039 / 0.10));
 }
 
-/* Estilos para la pregunta de Quintana Roo */
 .quintana-roo-question {
     display: flex;
     flex-direction: column;
@@ -86,8 +83,7 @@
 }
 
 .question-label {
-    color: var(--Blue-800, #003E87);
-    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+    color:  #003E87;
     font-family: "Montserrat Regular";
     font-size: 0.8rem;
     font-style: normal;
@@ -123,8 +119,7 @@
 }
 
 .checkbox-text {
-    color: var(--Grey-80, #617587);
-    color: var(--Grey-80, color(display-p3 0.406 0.4533 0.516));
+    color: #617587;
     font-family: "Montserrat Regular", sans-serif;
     font-size: 0.95rem;
     font-weight: 400;
@@ -133,11 +128,10 @@
     user-select: none;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .country-search-input,
     .enhanced-select select {
-        font-size: 16px; /* Prevenir zoom en iOS */
+        font-size: 16px; 
     }
     
     .country-dropdown {
@@ -212,7 +206,6 @@
     }
 }
 
-/* Scrollbar styling para el dropdown */
 .country-dropdown::-webkit-scrollbar {
     width: 6px;
 }

@@ -38,9 +38,8 @@
 
 .input-error {
     color: #d32f2f;
-    font-size: 0.75rem;
+    font-size: 0.6rem;
     margin-top: 2px;
-    margin-bottom: 8px;
 }
 
 .step-form h5 {

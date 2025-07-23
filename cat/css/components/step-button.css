@@ -109,6 +109,7 @@
 }
 
 .btn-chat-text {
+    font-family: "Montserrat Bold";
     flex: 1;
     text-align: left;
 }
@@ -182,6 +183,20 @@
     }
 }
 @media (max-width: 768px) {
+    .btn--secondary {
+    background: var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
+    color: #FFF;
+    font-size: 0.875rem;
+    width: auto;
+    padding: 0.5rem 2rem;
+    font-family: "Montserrat Bold";
+    text-transform: uppercase;
+    }
+
+    .btn--secondary:hover {
+        transition: background-color 0.3s ease;   
+    }
+    
     .step-button {
         height: 2.8rem;
         padding: 0.7rem 1.4rem;
@@ -198,7 +213,12 @@
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px) {
+    .btn--sixthtary{
+        padding: 0.5rem 1rem;
+        height: 2.2rem;
+        margin-bottom: 0;
+    }
     .step-button {
         height: 2.3rem;
         padding: 0.5rem 1rem;

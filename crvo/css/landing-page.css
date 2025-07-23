@@ -1,3 +1,4 @@
+
 .gradient-overlay {
     position: fixed;
     top: 0;
@@ -60,11 +61,10 @@
 }
 
 .content-text h5{
-    color: var(--Teal-500, #00FFEA);
-    color: var(--Teal-500, color(display-p3 0 1 0.9167));
+    color: #00FFEA;
     text-align: center;
     font-family: "Montserrat Regular";
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -72,11 +72,10 @@
 }
 
 .content-text h1{
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     text-align: center;
     font-family: "Montserrat Bold";
-    font-size: 3.5rem;
+    font-size: 5rem;
     font-style: normal;
     font-weight: 700;
     line-height: 100%; 
@@ -85,12 +84,12 @@
 
 .content-text h1 span{
     display: flex;
-    height: 5rem;
+    height: 7rem;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-family: "Montserrat Black";
-    font-size: 5rem;
+    font-size: 7rem;
     font-style: normal;
     font-weight: 800;
     line-height: 100%;
@@ -107,10 +106,9 @@
 }
 
 .content-text p{
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Bold";
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -135,8 +133,7 @@
     align-items: center;
     gap: 0.5rem;
     border-radius: 1rem;
-    border: 2px solid var(--White, #FFF);
-    border: 2px solid var(--White, color(display-p3 1 1 1));
+    border: 2px solid #FFF;
     background: rgba(255, 255, 255, 0.10);
     background: color(display-p3 1 1 1 / 0.10);
     backdrop-filter: blur(10px);
@@ -145,16 +142,14 @@
 }
 
 .options:hover {
-    border: 2px solid var(--Teal-500, #00FFEA);
-    border: 2px solid var(--Teal-500, color(display-p3 0 1 0.918));
+    border: 2px solid #00FFEA;
     background-image: linear-gradient(180deg, rgba(0, 184, 216, 0.8) 1.83%, rgba(0, 48, 106, 0.8) 100%);
     transition: border-color 0.3s ease, background-image 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
 }
 
 .options h5{
-    color: var(--Blue-800, #003E87);
-    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+    color: #003E87;
     text-align: center;
     font-family: "Montserrat Bold";
     font-size: 1rem;
@@ -166,13 +161,11 @@
 }
 
 .options:hover h5{
-    color: var(--Teal-500, #00FFEA);
-    color: var(--Teal-500, color(display-p3 0 1 0.9167));
+    color: #00FFEA;
 }
 
 .options p {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     text-align: center;
     font-family: "Montserrat Regular";
     font-size: 1.2rem;
@@ -192,11 +185,9 @@
     position: absolute;
     bottom: 0rem;
     border-radius: 0.5rem 0.5rem 0rem 0rem;
-    background: var(--White, #FFF);
-    background: var(--White, color(display-p3 1 1 1));
+    background: #FFF;
     backdrop-filter: blur(10px);
-    color: var(--Blue-800, #003E87);
-    color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
+    color: #003E87;
     text-align: center;
     font-family: "Montserrat Bold";
     font-size: 0.875rem;
@@ -209,13 +200,10 @@
 .options:hover .price{
     background: blur(20px);
     background: rgba(255, 255, 255, 0.30);
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
 }
 
-/* Responsive Design */
 
-/* Tablet styles (768px and below) */
 @media screen and (max-width: 768px) {
     .header {
         padding: 0rem 1.5rem;
@@ -285,7 +273,6 @@
     }
 }
 
-/* Mobile styles (480px and below) */
 @media screen and (max-width: 480px) {
     .header {
         padding: 0rem 1rem;
@@ -347,7 +334,6 @@
     }
 }
 
-/* Very small devices (360px and below) */
 @media screen and (max-width: 360px) {
     .header {
         height: 1.5rem;
