@@ -41,97 +41,126 @@
 <script src="/crvo/js/step-navigation.js"></script>
 <script src="/crvo/js/modal.js"></script>
 
-    <script>
-        document.body.classList.add('modal-open');
+<script>
+    document.body.classList.add('modal-open');
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const initialStep = urlParams.get('step') || '1'; 
-        
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialStep = urlParams.get('step') || '1';
 
-        async function loadStep(stepNumber) {
-            try {
-                const response = await fetch(`./step-${stepNumber}.html`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const content = await response.text();
-                
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(content, 'text/html');
-                const newBodyContent = doc.body.innerHTML;
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        if (toast) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        } else {
+            console.warn("Toast element not found. Message: " + message);
+        }
+    }
+    window.showToast = showToast;
 
-                document.getElementById('modalContent').innerHTML = newBodyContent;
+    async function loadStep(stepNumber) {
+        try {
+            const response = await fetch(`./step-${stepNumber}.html`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const content = await response.text();
 
-                document.querySelectorAll('[data-dynamic-script]').forEach(script => script.remove());
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
 
-                doc.querySelectorAll('script').forEach(oldScript => {
-                    const newScript = document.createElement('script');
-                    if (oldScript.src) {
-                        newScript.src = oldScript.src;
-                        newScript.async = false;
-                    } else if (oldScript.textContent) {
-                        newScript.textContent = oldScript.textContent;
-                    }
-                    newScript.setAttribute('data-dynamic-script', 'true'); 
-                    document.body.appendChild(newScript);
+            const stepContainerContent = tempDiv.querySelector('.step-container');
+            document.getElementById('modalContent').innerHTML = ''; 
+            if (stepContainerContent) {
+                document.getElementById('modalContent').appendChild(stepContainerContent);
+            } else {
+                document.getElementById('modalContent').innerHTML = content;
+            }
+
+            const scripts = tempDiv.querySelectorAll('script');
+            document.querySelectorAll('script[data-dynamic-script="true"]').forEach(s => s.remove());
+
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                Array.from(oldScript.attributes).forEach(attr => {
+                    newScript.setAttribute(attr.name, attr.value);
                 });
 
-                addMobileCloseButton(); 
-
-                window.history.pushState(null, '', `?step=${stepNumber}`);
-
-                if (window.modal && typeof window.modal.init === 'function') {
-                    console.log(`Step ${stepNumber} loaded. Re-initializing modal elements.`);
-                    window.modal.renderStepContent(); 
-                } else {
-                    console.warn("window.modal.init is not defined. Ensure modal.js is loaded and properly exports 'modal'.");
+                if (oldScript.textContent) {
+                    newScript.textContent = oldScript.textContent;
                 }
-                
+                newScript.setAttribute('data-dynamic-script', 'true'); 
+                document.body.appendChild(newScript);
+            });
+
+            if (window.modal && typeof window.modal.renderStepContent === 'function') {
+                window.modal.renderStepContent();
+            } else {
+                console.warn("window.modal o window.modal.renderStepContent no están definidos. Asegúrate de que modal2.js esté cargado y propiamente exporte 'modal' y sus métodos.");
+            }
+
+            if (typeof window.checkPreSelected === 'function') {
                 window.checkPreSelected();
+            } else {
+                 console.warn("window.checkPreSelected no está definido. Asegúrate de que modal2.js lo define.");
+            }
 
-            } catch (error) {
-                console.error('Error loading step:', error);
-                document.getElementById('modalContent').innerHTML = '<p>Error loading content</p>';
+            addMobileCloseButton();
+            window.history.pushState(null, '', `?step=${stepNumber}`);
+
+        } catch (error) {
+            console.error('Error al cargar el paso:', error);
+            document.getElementById('modalContent').innerHTML = '<p>Error al cargar el contenido</p>';
+        }
+    }
+
+    function addMobileCloseButton() {
+        const stepContainer = document.querySelector('.step-container');
+        if (stepContainer) {
+            const existingBtn = stepContainer.querySelector('.mobile-close-btn');
+            if (existingBtn) existingBtn.remove();
+
+            if (window.innerWidth <= 768) {
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'mobile-close-btn';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.onclick = closeModal;
+                stepContainer.appendChild(closeBtn);
             }
         }
+    }
 
-        function addMobileCloseButton() {
-            const stepContainer = document.querySelector('.step-container'); 
-            if (stepContainer) {
-                const existingBtn = stepContainer.querySelector('.mobile-close-btn');
-                if (existingBtn) existingBtn.remove();
-                
-                if (window.innerWidth <= 768) {
-                    const closeBtn = document.createElement('button');
-                    closeBtn.className = 'mobile-close-btn';
-                    closeBtn.innerHTML = '&times;';
-                    closeBtn.onclick = closeModal;
-                    stepContainer.appendChild(closeBtn);
-                }
-            }
+    function closeModal() {
+        window.location.href = '/crvo/pages/landing-page.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.modal && typeof window.modal.init === 'function') {
+            window.modal.init();
+        } else {
+            console.error("window.modal no está definido. Asegúrate de que modal2.js esté cargado correctamente.");
         }
-
-        function closeModal() {
-            window.location.href = '/crvo/pages/landing-page.html'; 
-        }
-
         loadStep(initialStep);
-        
-        window.addEventListener('resize', addMobileCloseButton);
+    });
+    
+    window.addEventListener('resize', addMobileCloseButton);
 
-        window.checkPreSelected = function() {
-            let preSelected = localStorage.getItem('preSelectedOption');
-            if (preSelected) {
-                const optionMap = {
-                    'accommodations': 1,
-                    'all-inclusive': 2
-                };
-                if (optionMap[preSelected]) {
-                    window.selectOption(optionMap[preSelected]); 
-                }
-                localStorage.removeItem('preSelectedOption');
+    window.checkPreSelected = function () {
+        let preSelected = localStorage.getItem('preSelectedOption');
+        if (preSelected) {
+            const optionMap = {
+                'accommodations': 'accommodations',
+                'all-inclusive': 'all-inclusive'
+            };
+            if (optionMap[preSelected] && window.modal && typeof window.modal.selectOption === 'function') {
+                window.modal.selectOption(optionMap[preSelected]);
             }
-        };
-    </script>
+            localStorage.removeItem('preSelectedOption');
+        }
+    };
+</script>
 
 </html>

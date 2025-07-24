@@ -65,18 +65,38 @@
                 <p> All rights reserved.</p>
             </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const step1Data = JSON.parse(localStorage.getItem('step1Data')) || {};
-            const userName = step1Data.firstName || '';
-            document.getElementById('thankyouMessage').textContent = `Thank you, ${userName}`;
-        });
-        
-        function goToModal(selectedOption) {
-            localStorage.setItem('preSelectedOption', selectedOption);
-            window.location.href = './modal.html?step=1';
-        }
-    </script>
 </body>
+
+<script>
+        function initializeConfirmationPage() {
+
+        const step1DataRaw = localStorage.getItem('step1Data');
+        let step1Data = {};
+        try {
+            step1Data = JSON.parse(step1DataRaw) || {};
+        } catch (e) {
+            step1Data = {};
+        }
+        
+        const userName = step1Data.firstName || 'Guest';
+        const thankyouElement = document.getElementById('thankyouMessage');
+
+        if (thankyouElement) {
+            thankyouElement.textContent = `Thank you, ${userName}`;
+        } else {
+            console.warn("Thank you message element not found. Using default message.");
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeConfirmationPage);
+    } else {
+        initializeConfirmationPage();
+    }
+
+    function goToModal(selectedOption) {
+        localStorage.setItem('preSelectedOption', selectedOption);
+        window.location.href = './modal.html?step=1';
+    }
+    </script>
 </html>

@@ -43,22 +43,20 @@
 <script>
 
     function showToast(message) {
-        const toast = document.getElementById('toast');
-        if (!toast) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    document.querySelector('.step-button').addEventListener('click', function () {
+        const selected = document.querySelector('.btn--tertiary.selected-travel-btn');
+        if (!selected) {
+            showToast('Please select an option before continuing.');
             return;
         }
-
-        toast.textContent = message;
-        toast.classList.add('show');
-
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2500);
-    }
-
-    if (typeof window.checkPreSelected === 'function') {
-        window.checkPreSelected();
-    }
+        window.goToNextStep();
+    });
 
     const travelOptions = [
         "My spouse or partner",
@@ -69,6 +67,7 @@
 
     document.querySelectorAll('.btn--tertiary').forEach((btn, idx) => {
         btn.addEventListener('click', function () {
+            
             document.querySelectorAll('.btn--tertiary').forEach(b => b.classList.remove('selected-travel-btn'));
             this.classList.add('selected-travel-btn');
             localStorage.setItem('step2Data', JSON.stringify({
@@ -77,15 +76,4 @@
         });
     });
 
-    const nextBtn = document.querySelector('.step-button');
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function () {
-            const selected = document.querySelector('.btn--tertiary.selected-travel-btn');
-            if (!selected) {
-                showToast('Please select an option before continuing.');
-                return;
-            }
-            window.goToNextStep();
-        });
-    }
 </script>

@@ -42,49 +42,55 @@
 </div>
 
 <script>
+    (function() {
 
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        if (!toast) {
-            return;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
         }
+        
+        const travelOptions = [ 
+            "Under 28",
+            "28 - 34",
+            "35-44",
+            "45-54",
+            "55+"
+        ];
 
-        toast.textContent = message;
-        toast.classList.add('show');
+        const ageButtons = document.querySelectorAll('.btn--tertiary');
 
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2500);
-    }
-    
-    const travelOptions = [
-        "Under 28",
-        "28 - 34",
-        "35-44",
-        "45-54",
-        "55+"
-    ];
-
-    document.querySelectorAll('.btn--tertiary').forEach((btn, idx) => {
-        btn.addEventListener('click', function () {
-            document.querySelectorAll('.btn--tertiary').forEach(b => b.classList.remove('selected-travel-btn'));
-            this.classList.add('selected-travel-btn');
-            localStorage.setItem('step4Data', JSON.stringify({
-                ageRange: travelOptions[idx]
-            }));
+        ageButtons.forEach((btn, idx) => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.btn--tertiary').forEach(b => b.classList.remove('selected-travel-btn'));
+                this.classList.add('selected-travel-btn');
+                localStorage.setItem('step4Data', JSON.stringify({
+                    ageRange: travelOptions[idx]
+                }));
+            });
         });
-    });
 
-    const nextBtn = document.querySelector('.step-button');
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function () {
-            const selected = document.querySelector('.btn--tertiary.selected-travel-btn');
-            if (!selected) {
-                showToast('Please select an option before continuing.');
-                return;
-            }
-            window.goToConfirmationPage(); 
-        });
-    }
+        const nextBtn = document.querySelector('.step-button');
 
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+                const selected = document.querySelector('.btn--tertiary.selected-travel-btn');
+                if (!selected) {
+                    showToast('Please select an option before continuing.');
+                    return;
+                }
+
+                if (typeof window.goToConfirmationPage === 'function') {
+                    window.goToConfirmationPage();
+                } else {
+                    console.error('ERROR: window.goToConfirmationPage() no está definida o no es una función.');
+                }
+            });
+        }
+    })(); 
 </script>

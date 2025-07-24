@@ -96,18 +96,6 @@
             content = await response.text();
             document.getElementById('modalContent').innerHTML = content;
 
-            const scripts = document.getElementById('modalContent').querySelectorAll('script');
-            scripts.forEach(script => {
-                const newScript = document.createElement('script');
-                if (script.src) {
-                    newScript.src = script.src;
-                    newScript.async = false;
-                } else {
-                    newScript.textContent = script.textContent;
-                }
-                document.getElementById('modalContent').appendChild(newScript);
-            });
-
             if (popup !== null && typeof window.initializeCarousel === 'function') {
                 window.initializeCarousel();
             }
