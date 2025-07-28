@@ -99,21 +99,21 @@
             if (window.modal && typeof window.modal.renderStepContent === 'function') {
                 window.modal.renderStepContent();
             } else {
-                console.warn("window.modal o window.modal.renderStepContent no están definidos. Asegúrate de que modal2.js esté cargado y propiamente exporte 'modal' y sus métodos.");
+                console.warn("window.modal o window.modal.renderStepContent not defined. Are you sure modal.js is loaded?");
             }
 
             if (typeof window.checkPreSelected === 'function') {
                 window.checkPreSelected();
             } else {
-                 console.warn("window.checkPreSelected no está definido. Asegúrate de que modal2.js lo define.");
+                 console.warn("window.checkPreSelected not defined. Ensure that the function is available.");
             }
 
             addMobileCloseButton();
             window.history.pushState(null, '', `?step=${stepNumber}`);
 
         } catch (error) {
-            console.error('Error al cargar el paso:', error);
-            document.getElementById('modalContent').innerHTML = '<p>Error al cargar el contenido</p>';
+            console.error('Error loading step:', error);
+            document.getElementById('modalContent').innerHTML = '<p>Error loading content</p>';
         }
     }
 
@@ -141,7 +141,7 @@
         if (window.modal && typeof window.modal.init === 'function') {
             window.modal.init();
         } else {
-            console.error("window.modal no está definido. Asegúrate de que modal2.js esté cargado correctamente.");
+            console.error("window.modal not defined. Are you sure modal.js is loaded?");
         }
         loadStep(initialStep);
     });

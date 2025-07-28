@@ -100,6 +100,16 @@
                 window.initializeCarousel();
             }
 
+            const scripts = document.getElementById('modalContent').querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+                document.getElementById('modalContent').appendChild(newScript);
+            });
             updateModalCardImage(); 
 
             if (popup !== null) {

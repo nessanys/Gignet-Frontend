@@ -1,4 +1,4 @@
-/* Checkbox Container Component */
+
 .checkbox-container {
     display: flex;
     align-items: top;
@@ -31,7 +31,6 @@
     hyphens: auto;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .checkbox-container {
         gap: 0.4rem;
@@ -47,7 +46,7 @@
         line-height: 1.15;
     }
 }
-/* Mobile optimizations */
+
 @media (max-width: 768px) {
     .checkbox-container {
         gap: 0.4rem;
@@ -80,7 +79,6 @@
     }
 }
 
-/* Extra small devices (phones) */
 @media (max-width: 480px) {
     .checkbox-container {
         gap: 0.3rem;
@@ -97,7 +95,6 @@
     }
 }
 
-/* Very small devices */
 @media (max-width: 375px) {
     .checkbox-container {
         gap: 0.25rem;
@@ -114,7 +111,6 @@
     }
 }
 
-/* Very small devices */
 @media (max-width: 360px) {
     .checkbox-container {
         gap: 0.25rem;
