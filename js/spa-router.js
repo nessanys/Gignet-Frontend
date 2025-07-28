@@ -31,17 +31,23 @@ window.navigateTo = function(pageUrl) {
 
                 document.body.innerHTML = doc.body.innerHTML;
 
+                const scriptPromises = [];
+
                 doc.querySelectorAll('script').forEach(script => {
                     const newScript = document.createElement('script');
                     if (script.src) {
                         newScript.src = script.src;
                         newScript.async = false;
-
                         newScript.setAttribute('data-spa-router-script', 'true'); 
+
+                        scriptPromises.push(new Promise((resolve, reject) => {
+                            newScript.onload = resolve;
+                            newScript.onerror = reject; 
+                        }));
+
                     } else if (script.textContent) {
                         newScript.textContent = script.textContent;
                         newScript.setAttribute('data-spa-router-script', 'true');
-
                         scriptPromises.push(Promise.resolve());
                     }
                     document.body.appendChild(newScript);
