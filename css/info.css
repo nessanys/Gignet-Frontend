@@ -63,13 +63,43 @@ html, body {
 }
 
 label{
-    color: var(--Grey-60, #7C8A97);
-    color: var(--Grey-60, color(display-p3 0.506 0.5394 0.5838));
+    color: #7C8A97;
     font-family: "Montserrat Regular";
     font-size: 0.625rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.phone-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.phone-code {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ABB5BE;
+    background: #FFF;
+    color: #272727ff;
+    min-width: 30px;
+    max-width: 80px;
+    width: auto;
+    font-family: "Montserrat Regular";
+    box-sizing: border-box;
+}
+
+#phoneNumber.input-text {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ABB5BE;
+    background: #FFF;
+    color: #272727ff;
+    font-family: "Montserrat Regular";
 }
 
 @media (max-width: 768px) {
@@ -169,6 +199,11 @@ label{
     }
     label{
         font-size: 0.6rem;
+    }
+    .phone-code,
+    #phoneNumber.input-text {
+        font-size: 0.95rem;
+        min-width: unset;
     }
 }
 

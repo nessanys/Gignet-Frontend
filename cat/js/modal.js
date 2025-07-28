@@ -63,10 +63,6 @@ function openModal() {
     modal.open();
 }
 
-function handleNextClick(event) {
-    window.location.href = './step-2.html';
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     modal.init();
 });

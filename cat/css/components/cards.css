@@ -6,8 +6,7 @@
 }
 
 .card-location-title {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Light";
     font-size: 1.125rem;
     font-style: normal;
@@ -62,8 +61,7 @@
 }
 
 .card-location {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Bold";
     font-size: 1.125rem;
     font-style: normal;
@@ -84,10 +82,8 @@
     padding: 0.75rem 1rem;
     border: none;
     border-radius: 3.125rem;
-    background: var(--White, #FFF);
-    background: var(--White, color(display-p3 1 1 1));
-    color: var(--Green-500, #00C903);
-    color: var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
+    background: #FFF;
+    color: #00C903;
     text-align: center;
     font-family: "Montserrat Regular";
     font-size: 0.875rem;
@@ -100,14 +96,15 @@
 }
 
 .btn--card-primary:hover {
-    background: var(--Green-500, #00C903);
-    background: var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    background: #00C903;
+    color: #FFF;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .btn--card-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 1;
     padding: 0.75rem 1rem;
     border-radius: 3.125rem;
@@ -115,29 +112,21 @@
     background: rgba(255, 255, 255, 0.10);
     background: color(display-p3 1 1 1 / 0.10);
     backdrop-filter: blur(10px);
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     text-align: center;
     font-family: "Montserrat Regular";
     font-size: 0.875rem;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 0.5rem;
 }
 
 .btn--card-secondary:hover {
-    color: var(--Green-500, #00C903);
-    color: var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
-    border: 1px solid var(--Green-500, #00C903);
+    color: #00C903;
+    border: 1px solid #00C903;
     background: rgba(255, 255, 255, 0.20);
-    background: color(display-p3 1 1 1 / 0.20);
 }
 
 .btn--card-secondary img {
@@ -146,8 +135,7 @@
 }
 
 .card.card--active {
-    border: 1px solid var(--White, #FFF);
-    border: 1px solid var(--White, color(display-p3 1 1 1));
+    border: 1px solid #FFF;
     z-index: 10;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     height: 29rem;
@@ -158,8 +146,7 @@
 }
 
 .card--special.card--active {
-    border: 1px solid var(--White, #FFF);
-    border: 1px solid var(--White, color(display-p3 1 1 1));
+    border: 1px solid #FFF;
     z-index: 10;
     height: 29rem;
 }
@@ -169,13 +156,10 @@
 }
 
 .card-special-text {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Bold";
     font-size: 1.25rem;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     text-transform: uppercase;
     text-align: start;
     padding: 0.75rem;
@@ -183,13 +167,10 @@
 }
 
 .card-special-text2{
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Regular";
     font-size: 1rem;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
     text-transform: none;
     text-align: start;
     margin-bottom: 0.5rem;
@@ -198,18 +179,15 @@
 }
 
 .card--special.card--active .btn--card-primary {
-    background: var(--White, #FFF);
-    background: var(--White, color(display-p3 1 1 1));
-    color: var(--Green-500, #00C903);
-    color: var(--Green-500, color(display-p3 0.0931 0.7596 0.3042));
-    border: 2px solid var(--White, #FFF);
+    background: #FFF;
+    color: #00C903;
+    border: 2px solid #FFF;
 }
 
 .card--special.card--active .btn--card-primary:hover {
     background: transparent;
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
-    border: 2px solid var(--White, #FFF);
+    color: #FFF;
+    border: 2px solid #FFF;
 }
 
 @media (max-width: 768px) {

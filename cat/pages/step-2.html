@@ -10,7 +10,7 @@
     </div>
     <div class="step-container-right">
         <div class="logo">
-            <img src="../../components/img/icons/cancun-logo.png" alt="Cancun Logo">
+            <img src="/components/img/icons/cancun-logo.png" alt="Cancun Logo">
         </div>
         <div class="progress-line-section">
             <hr class="progress-line-selected">
@@ -26,12 +26,12 @@
             <button class="btn btn--sixthtary btn--large" >I travel alone</button>
         </div>
 
-        <button type="button" class="step-button" onclick="goToNextStep()">Next</button>
+        <button type="button" class="step-button">Next</button>
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a>
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                 <p> All rights reserved.</p>
             </div>
         </div>
@@ -39,6 +39,23 @@
 </div>
 
 <script>
+
+    function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    document.querySelector('.step-button').addEventListener('click', function () {
+        const selected = document.querySelector('.btn--sixthtary.selected-travel-btn');
+        if (!selected) {
+            showToast('Please select an option before continuing.');
+            return;
+        }
+        window.goToNextStep();
+    });
+
     const travelOptions = [
         "My spouse or partner",
         "My spouse and/or my children",

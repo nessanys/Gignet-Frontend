@@ -9,6 +9,15 @@ html, body {
     overflow-x: hidden;
 }
 
+.main-container-2 {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;;
+    background: linear-gradient(180deg, #0CBBCD 0%, #0B3C7D 100%);
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -121,12 +130,13 @@ html, body {
     color: #FF9B00;
     margin-top: auto;
     z-index: 1;
+    transition: background-color 0.5s ease, transform 0.3s ease;
 }
 
 .option-button:hover {
     background: #FF9B00;
     color: #ffffffff;
-    transition: background-color 0.3s ease;
+    transform: scale(1.05);
 }
 
 .btn.btn--secondary.btn--large {
@@ -134,14 +144,10 @@ html, body {
     align-self: center;
 }
 
-.main-container-2 {
+.text-footer{
     display: flex;
-    width: 100%;
-    height: 100vh;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.50) 0%, var(--Blue-Sky, rgba(0, 194, 211, 0.50)) 100%), #FFF;
-    background: linear-gradient(180deg, color(display-p3 1 1 1 / 0.00) 0%, var(--Blue-Sky, color(display-p3 0.0471 0.7333 0.8039 / 0.50)) 100%), color(display-p3 1 1 1);
 }
 
 @media (max-width: 768px) {
@@ -207,13 +213,6 @@ html, body {
     .option-button {
         padding: 0.75rem 1.5rem;
         font-size: 0.875rem;
-    }
-    
-    .btn.btn--secondary.btn--large {
-        margin-top: 1rem;
-        padding: 0.75rem 2rem;
-        font-size: 0.875rem;
-        flex-shrink: 0; 
     }
 }
 

@@ -109,3 +109,22 @@ body {
 .text-center {
     text-align: center;
 }
+
+.custom-toast {
+    display: none;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #d32f2f;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    z-index: 9999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: opacity 0.3s;
+}
+.custom-toast.show {
+    display: block;
+    opacity: 1;
+}

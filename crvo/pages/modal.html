@@ -4,19 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/components/components.css">
-    <link rel="stylesheet" href="../css/modal.css">
-    <link rel="stylesheet" href="../css/landing-page.css">
+    <link rel="stylesheet" href="/crvo/css/components/components.css">
+    <link rel="stylesheet" href="/crvo/css/modal.css">
+    <link rel="stylesheet" href="/crvo/css/landing-page.css">
     <title>CANCUN RESORT VACATION OFFERS</title>
 </head>
 
 <body>
     <video class="video-background" autoplay muted loop>
-        <source src="../../components/media/videos/landing-page-crvo.mp4" type="video/mp4">
+        <source src="/components/media/videos/landing-page-crvo.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <div class="gradient-overlay"></div>
+    <div id="toast" class="custom-toast"></div>
 
     <div class="content-section">
         <div class="content-text">
@@ -35,66 +36,131 @@
     </div>
 </body>
 
-<script src="../../js/spa-router.js"></script>
-<script src="../js/countries.js"></script>
-<script src="../js/step-navigation.js"></script>
-<script src="../js/modal.js"></script>
+<script src="/js/spa-router.js"></script>
+<script src="/crvo/js/countries.js"></script>
+<script src="/crvo/js/step-navigation.js"></script>
+<script src="/crvo/js/modal.js"></script>
 
-    <script>
+<script>
+    document.body.classList.add('modal-open');
 
-        document.body.classList.add('modal-open');
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialStep = urlParams.get('step') || '1';
 
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        if (toast) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        } else {
+            console.warn("Toast element not found. Message: " + message);
+        }
+    }
+    window.showToast = showToast;
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const step = urlParams.get('step') || '1';
+    async function loadStep(stepNumber) {
+        try {
+            const response = await fetch(`./step-${stepNumber}.html`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const content = await response.text();
 
-        async function loadStep(stepNumber) {
-            try {
-                const response = await fetch(`./step-${stepNumber}.html`);
-                const content = await response.text();
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+
+            const stepContainerContent = tempDiv.querySelector('.step-container');
+            document.getElementById('modalContent').innerHTML = ''; 
+            if (stepContainerContent) {
+                document.getElementById('modalContent').appendChild(stepContainerContent);
+            } else {
                 document.getElementById('modalContent').innerHTML = content;
-                
-                const scripts = document.getElementById('modalContent').querySelectorAll('script');
-                scripts.forEach(script => {
-                    const newScript = document.createElement('script');
-                    newScript.textContent = script.textContent;
-                    document.body.appendChild(newScript);
+            }
+
+            const scripts = tempDiv.querySelectorAll('script');
+            document.querySelectorAll('script[data-dynamic-script="true"]').forEach(s => s.remove());
+
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                Array.from(oldScript.attributes).forEach(attr => {
+                    newScript.setAttribute(attr.name, attr.value);
                 });
-                
-                addMobileCloseButton();
-                
-            } catch (error) {
-                console.error('Error loading step:', error);
-                document.getElementById('modalContent').innerHTML = '<p>Error loading content</p>';
-            }
-        }
 
-        function addMobileCloseButton() {
-            const stepContainer = document.querySelector('.step-container');
-            if (stepContainer) {
-
-                const existingBtn = stepContainer.querySelector('.mobile-close-btn');
-                if (existingBtn) existingBtn.remove();
-                
-                if (window.innerWidth <= 768) {
-
-                    const closeBtn = document.createElement('button');
-                    closeBtn.className = 'mobile-close-btn';
-                    closeBtn.innerHTML = '&times;';
-                    closeBtn.onclick = closeModal;
-                    
-                    stepContainer.appendChild(closeBtn);
+                if (oldScript.textContent) {
+                    newScript.textContent = oldScript.textContent;
                 }
+                newScript.setAttribute('data-dynamic-script', 'true'); 
+                document.body.appendChild(newScript);
+            });
+
+            if (window.modal && typeof window.modal.renderStepContent === 'function') {
+                window.modal.renderStepContent();
+            } else {
+                console.warn("window.modal o window.modal.renderStepContent no están definidos. Asegúrate de que modal2.js esté cargado y propiamente exporte 'modal' y sus métodos.");
+            }
+
+            if (typeof window.checkPreSelected === 'function') {
+                window.checkPreSelected();
+            } else {
+                 console.warn("window.checkPreSelected no está definido. Asegúrate de que modal2.js lo define.");
+            }
+
+            addMobileCloseButton();
+            window.history.pushState(null, '', `?step=${stepNumber}`);
+
+        } catch (error) {
+            console.error('Error al cargar el paso:', error);
+            document.getElementById('modalContent').innerHTML = '<p>Error al cargar el contenido</p>';
+        }
+    }
+
+    function addMobileCloseButton() {
+        const stepContainer = document.querySelector('.step-container');
+        if (stepContainer) {
+            const existingBtn = stepContainer.querySelector('.mobile-close-btn');
+            if (existingBtn) existingBtn.remove();
+
+            if (window.innerWidth <= 768) {
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'mobile-close-btn';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.onclick = closeModal;
+                stepContainer.appendChild(closeBtn);
             }
         }
+    }
 
-        function closeModal() {
-            window.location.href = './landing-page.html';
+    function closeModal() {
+        window.location.href = '/crvo/pages/landing-page.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.modal && typeof window.modal.init === 'function') {
+            window.modal.init();
+        } else {
+            console.error("window.modal no está definido. Asegúrate de que modal2.js esté cargado correctamente.");
         }
+        loadStep(initialStep);
+    });
+    
+    window.addEventListener('resize', addMobileCloseButton);
 
-        loadStep(step);
-        
-        window.addEventListener('resize', addMobileCloseButton);
-    </script>
+    window.checkPreSelected = function () {
+        let preSelected = localStorage.getItem('preSelectedOption');
+        if (preSelected) {
+            const optionMap = {
+                'accommodations': 'accommodations',
+                'all-inclusive': 'all-inclusive'
+            };
+            if (optionMap[preSelected] && window.modal && typeof window.modal.selectOption === 'function') {
+                window.modal.selectOption(optionMap[preSelected]);
+            }
+            localStorage.removeItem('preSelectedOption');
+        }
+    };
+</script>
 
 </html>

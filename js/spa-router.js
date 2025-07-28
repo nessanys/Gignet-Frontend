@@ -1,6 +1,12 @@
 window.navigateTo = function(pageUrl) {
+
     fetch(pageUrl)
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
         .then(html => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
@@ -35,14 +41,26 @@ window.navigateTo = function(pageUrl) {
                     } else if (script.textContent) {
                         newScript.textContent = script.textContent;
                         newScript.setAttribute('data-spa-router-script', 'true');
+
+                        scriptPromises.push(Promise.resolve());
                     }
                     document.body.appendChild(newScript);
                 });
 
-                window.history.pushState(null, '', pageUrl);
+                Promise.all(scriptPromises).then(() => {
+                    window.history.pushState(null, '', pageUrl);
+
+                    const event = new CustomEvent('spaContentLoaded', { detail: { pageUrl: pageUrl } });
+                    document.dispatchEvent(event);
+                });
             });
         })
-        .catch(() => {
+        .catch((error) => {
+            console.error('SPA Router: Error al navegar SPA:', error);
             window.location.href = pageUrl;
         });
 }
+
+window.addEventListener('popstate', () => {
+    window.location.reload();
+});

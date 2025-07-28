@@ -1,10 +1,10 @@
-@import url('../components/step-container.css');
-@import url('../components/progress-line.css');
-@import url('../components/step-options.css');
-@import url('../components/step-form.css');
-@import url('../components/checkbox-container.css');
-@import url('../components/step-button.css');
-@import url('../components/terms.css');
+@import url('components/step-container.css');
+@import url('components/progress-line.css');
+@import url('components/step-options.css');
+@import url('components/step-form.css');
+@import url('components/checkbox-container.css');
+@import url('components/step-button.css');
+@import url('components/terms.css');
 
 .modal-overlay {
     position: fixed;
@@ -71,7 +71,7 @@
 
 @media (max-width: 768px) {
     .modal-overlay {
-        background: #000; /* Fondo negro sólido */
+        background: #000; 
         align-items: flex-start;
         justify-content: flex-start;
         padding: 0;
@@ -92,7 +92,6 @@
         position: relative;
         overflow: hidden;
     }
-    
     .modal-overlay.show .modal-container {
         transform: none;
     }
@@ -110,11 +109,10 @@
         overflow: hidden;
         flex: 1;
     }
-    
     .modal-close {
         display: none; 
+        display: none; 
     }
-    
     .modal-container > .modal-close {
         display: none;
     }
@@ -122,7 +120,6 @@
     .step-container {
         position: relative; 
     }
-    
     .mobile-close-btn {
         position: absolute;
         top: 1rem;
@@ -142,7 +139,6 @@
         cursor: pointer;
         transition: all 0.2s ease;
     }
-    
     .mobile-close-btn:hover {
         background: rgba(0, 0, 0, 0.8);
         transform: scale(1.05);
@@ -193,8 +189,8 @@
 
 .step-option-1.selected,
 .step-option-2.selected {
-    background: var(--Blue-500, #00C2D3);
-    color: var(--White, #FFF);
+    background:  #00C2D3;
+    color:  #FFF;
 }
 
 .step-option-1:hover,

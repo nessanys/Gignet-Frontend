@@ -73,8 +73,7 @@
 }
 
 .step-container-left-content h1 {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Bold";
     font-size: clamp(2rem, 4vw, 4rem); 
     font-style: normal;
@@ -86,8 +85,7 @@
 }
 
 .step-container-left-content p {
-    color: var(--Teal-500, #00FFEA);
-    color: var(--Teal-500, color(display-p3 0 1 0.9167));
+    color: #00FFEA;
     text-align: start;
     font-family: "Montserrat Regular";
     font-size: clamp(1rem, 2vw, 1.75rem); 

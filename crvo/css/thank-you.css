@@ -93,8 +93,7 @@
 }
 
 .options p {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     text-align: center;
     font-family: "Montserrat Regular";
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);

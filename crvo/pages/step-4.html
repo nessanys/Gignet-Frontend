@@ -28,13 +28,13 @@
         </div>
 
         <div class="button-container">
-            <button type="submit" class="step-button" onclick="goToConfirmationPage()">Reserve my spot</button>
+            <button type="button" class="step-button">Reserve my spot</button>
         </div>
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a>
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                 <p> All rights reserved.</p>
             </div>
         </div>
@@ -42,64 +42,55 @@
 </div>
 
 <script>
-    const travelOptions = [
-        "Under 28",
-        "28 - 34",
-        "35-44",
-        "45-54",
-        "55+"
-    ];
+    (function() {
 
-    document.querySelectorAll('.btn--tertiary').forEach((btn, idx) => {
-        btn.addEventListener('click', function () {
+        function showToast(message) {
+            const toast = document.getElementById('toast');
 
-            document.querySelectorAll('.btn--tertiary').forEach(b => b.classList.remove('selected-travel-btn'));
-            this.classList.add('selected-travel-btn');
-            localStorage.setItem('step4Data', JSON.stringify({
-                ageRange: travelOptions[idx]
-            }));
-        });
-    });
+            toast.textContent = message;
+            toast.classList.add('show');
 
-    function loadStep1Data() {
-        const step1Data = localStorage.getItem('step1Data');
-        if (step1Data) {
-            const data = JSON.parse(step1Data);
-            
-            const optionDisplay = document.getElementById('selectedOptionDisplay');
-            if (optionDisplay && data.optionText) {
-                optionDisplay.innerHTML = `
-                    <div class="selected-option">
-                        <strong>Selected Package:</strong> ${data.optionText}
-                    </div>
-                `;
-            }
-            
-            console.log('Step 1 data loaded:', data);
-            return data;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
         }
-        return null;
-    }
-    
-    function handleStep2Submit(event) {
-        event.preventDefault();
+        
+        const travelOptions = [ 
+            "Under 28",
+            "28 - 34",
+            "35-44",
+            "45-54",
+            "55+"
+        ];
 
-        const formData = new FormData(event.target);
-        const step2Data = Object.fromEntries(formData.entries());
+        const ageButtons = document.querySelectorAll('.btn--tertiary');
 
-        const step1Data = JSON.parse(localStorage.getItem('step1Data') || '{}');
+        ageButtons.forEach((btn, idx) => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.btn--tertiary').forEach(b => b.classList.remove('selected-travel-btn'));
+                this.classList.add('selected-travel-btn');
+                localStorage.setItem('step4Data', JSON.stringify({
+                    ageRange: travelOptions[idx]
+                }));
+            });
+        });
 
-        const allData = {
-            ...step1Data,
-            ...step2Data,
-            completedStep: 2
-        };
+        const nextBtn = document.querySelector('.step-button');
 
-        localStorage.setItem('allStepData', JSON.stringify(allData));
-        localStorage.setItem('step2Data', JSON.stringify(step2Data));
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+                const selected = document.querySelector('.btn--tertiary.selected-travel-btn');
+                if (!selected) {
+                    showToast('Please select an option before continuing.');
+                    return;
+                }
 
-        alert('Step 2 completed! Data saved.');
-        console.log('All collected data:', allData);
-    }
-    setTimeout(loadStep1Data, 100);
+                if (typeof window.goToConfirmationPage === 'function') {
+                    window.goToConfirmationPage();
+                } else {
+                    console.error('ERROR: window.goToConfirmationPage() no está definida o no es una función.');
+                }
+            });
+        }
+    })(); 
 </script>

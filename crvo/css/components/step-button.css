@@ -4,13 +4,14 @@
     max-width: 100%;
     min-height: 2rem; 
     padding: 0.5rem 1rem;
+    min-height: 2rem; 
+    padding: 0.5rem 1rem;
     justify-content: center;
     align-items: center;
     gap: 0.4rem;
     border-radius: 3.125rem;
     border: none;
-    background: var(--Blue-500, #00C2D3);
-    background: var(--Blue-500, color(display-p3 0.0471 0.7333 0.8039));
+    background: #00C2D3;
     box-sizing: border-box;
     font-size: 0.75rem;
     color: white;
@@ -52,6 +53,7 @@
     font-weight: 700;
     line-height: normal;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .btn--large {
@@ -77,8 +79,7 @@
 
 .btn--tertiary:hover {
     background: var(--Blue-700, color(display-p3 0 0.3204 0.6202));
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
 }
 
 .btn--fourthary {
@@ -95,8 +96,7 @@
     border-radius: 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.80);
     border: 1px solid color(display-p3 1 1 1 / 0.80);
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
 }
 
 .btn--fifthtary {
@@ -108,10 +108,8 @@
     align-self: stretch;
     border-radius: 3.125rem;
     border: none;
-    background: var(--White, #FFF);
-    background: var(--White, color(display-p3 1 1 1));
-    color: var(--Blue-500, #00C2D3);
-    color: var(--Blue-500, color(display-p3 0.0471 0.7333 0.8039));
+    background: #FFF;
+    color: #00C2D3;
     text-align: center;
     font-family: "Montserrat Bold";
     font-size: 1rem;
@@ -119,6 +117,13 @@
     font-weight: 700;
     line-height: normal;
     text-transform: uppercase;
+}
+
+.btn--fifthtary:hover {
+    background: #00C2D3;
+    color: #FFF;
+    transition: background-color 0.3s ease;
+    cursor: pointer; 
 }
 
 .step-button {

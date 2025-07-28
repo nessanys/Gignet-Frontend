@@ -1,4 +1,3 @@
-
 class DynamicCarousel {
     constructor(containerId, cardsData) {
         this.containerId = containerId;
@@ -8,13 +7,25 @@ class DynamicCarousel {
         this.isTransitioning = false;
         this.actualPosition = 0;
         this.totalExtendedCards = this.totalSlides * 3;
-
-        this.init();
     }
 
     init() {
+        const container = document.getElementById(this.containerId);
+        if (!container) {
+            console.warn(`Contenedor del carrusel '${this.containerId}' no encontrado.`);
+            return;
+        }
         this.generateHTML();
         this.setupEventListeners();
+
+        setTimeout(() => {
+            this.actualPosition = this.totalSlides;
+            this.updateCarousel();
+            this.positionNavigationButtons();
+            this.toggleNavigationForScreen();
+        }, 0);
+
+        this.updateActiveCard();
     }
 
     generateHTML() {
@@ -123,7 +134,7 @@ class DynamicCarousel {
                                 </button>
                                 ${!card.isSpecial && card.secondaryAction ? `
                                 <button class="btn--card-secondary" onclick="handleCardAction('${card.secondaryAction}', ${originalIndex})">
-                                    <img src="../../components/img/icons/add_circle.svg" alt="Add">
+                                    <img src="/components/img/icons/add_circle.svg" alt="Add">
                                     ${card.secondaryButtonText}
                                 </button>` : ''}
                             </div>
@@ -145,10 +156,8 @@ class DynamicCarousel {
         if (prevBtnMobile) prevBtnMobile.addEventListener('click', () => this.previousSlide());
         if (nextBtnMobile) nextBtnMobile.addEventListener('click', () => this.nextSlide());
 
-        // Touch/swipe support
         this.addTouchSupport();
 
-        // Reposition buttons on window resize and scroll
         window.addEventListener('resize', () => {
             this.positionNavigationButtons();
             this.toggleNavigationForScreen();
@@ -166,7 +175,7 @@ class DynamicCarousel {
 
         setTimeout(() => {
             this.isTransitioning = false;
-
+            // Reposition if needed
             if (this.actualPosition >= this.totalExtendedCards - this.totalSlides) {
                 this.actualPosition = this.totalSlides;
                 this.updateCarousel();
@@ -291,18 +300,27 @@ function saveSelectedCardAndGoToPopup(cardIndex) {
         const cardsData = window.carousel.cardsData;
         const selectedCard = cardsData[cardIndex];
         localStorage.setItem('selectedCardData', JSON.stringify(selectedCard));
-        window.location.href = 'modal.html?popup=1';
+        if (selectedCard.isSpecial) {
+            window.location.href = 'modal.html?step=1'; 
+        } else {
+            window.location.href = 'modal.html?popup=1';
+        }
     } catch (e) {
         alert('Error selecting card');
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function initializeCarousel() {
+    const carouselContainer = document.getElementById('carousel-container');
+    if (!carouselContainer) {
+        return;
+    }
+
     const cardsData = [
         {
             id: "xcaret",
             location: "1 Xcaret Full Day pass",
-            image: "../../components/img/step-images/xcaret_step1.jpg",
+            image: "/components/img/step-images/xcaret_step1.jpg",
             primaryButtonText: "Select",
             secondaryButtonText: "Select",
             secondaryAction: "add-to-favorites",
@@ -311,78 +329,82 @@ document.addEventListener('DOMContentLoaded', () => {
             itinerary: ["Departure from Cancun", "Arrival to Xcaret", "Orientation about the park’s layout", "Free time inside the park to enjoy the attractions", "Start Lunch Buffet", "Starts Mexican Show “Xcaret México Espectacular”", "Departure to Cancún", "Arrival in Cancún"],
             firstDeparture: ["07:00", "10:00", "10:05", "10:50", "12:00", "19:00", "21:40", "23:00"],
             secondDeparture: ["09:45", "12:00", "12:05", "11:50", "12:50", "19:00", "21:40", "23:00"],
-            includes: ["Departure from Cancun", "Arrival to Xcaret", "Orientation about the park’s layout", "Free time inside the park to enjoy the attractions", "Start Lunch Buffet", "Starts Mexican Show “Xcaret México Espectacular”", "Departure to Cancún", "Arrival in Cancún"],
+            includes: ["Round trip Transportation in an air-conditioned vehicles", "Bilingual Tour Guide.", "Admission to Xcaret", "One buffet meal with unlimited drinks and 1 beer.", "Snorkel equipment*,  locker rental in the exclusive facilities of the “Plus area”", "More than 20 activities to do and see : Underground rivers, Maya river, Paradise river, Beach, cove and ponds, Coral reef aquarium, Sea turtles, Manatee lagoon, Bee farm, Butterfly pavilion, etc.", "10% off some optional activities.", "Entrance to the night show “Xcaret México Espectacular” *Deposit required"],
             duration: "Approximately 14 Hours",
             recommendations: "Towel, Comfortable shoes and clothes, chemical-free sunscreen, cash, camera, and insect repellent.",
             stepImages: {
-                "step1": "../../components/img/step-images/xcaret_step1.jpg",
-                "step2": "../../components/img/step-images/xcaret_step2.jpg",
-                "step3": "../../components/img/step-images/xcaret_step3.jpg",
-                "step4": "../../components/img/step-images/xcaret_step4.jpg"
+                "step1": "/components/img/step-images/xcaret_step1.jpg",
+                "step2": "/components/img/step-images/xcaret_step2.jpg",
+                "step3": "/components/img/step-images/xcaret_step3.jpg",
+                "step4": "/components/img/step-images/xcaret_step4.jpg"
             }
         },
         {
             id: "dolphin",
             location: "2 Dolphin Encounters (swim with dolphins)",
-            image: "../../components/img/step-images/dolphin_step1.jpg",
+            image: "/components/img/step-images/dolphin_step1.jpg",
             primaryButtonText: "Select",
             secondaryButtonText: "Select",
             secondaryAction: "share",
             description: "DOLPHIN ENCOUNTER AT ISLA MUJERES",
-            information: "The Dolphin Encounter Program is the ideal program for families traveling in Cancun. You and your children will be able to enjoy safe and fun activities that Dolphin Discovery Isla Mujeres has specifically designed for all ages. Whether you’re 1 or 80, you can enjoy the dolphins from a platform even if you’re not comfortable swimming. Our friendly dolphin will offer you a handshake, a kiss, and a hug. In addition, dolphins are known for their playful nature, something that doesn’t get left behind in Dolphin Discovery. Our dolphin will be excited to share with you their tricks, their games, and even their singing. You will also have a chance to pet them and swim with them in the place the dolphins call home, Cancun, Mexico. After your swim, enjoy our beach club, located in a natural environment in the beautiful Isla Mujeres",
-            includes: ["Round trip Transportation in an air-conditioned vehicles", "Bilingual Tour Guide, Admission to Xcaret", "One buffet meal with unlimited drinks and 1 beer", "Snorkel equipment*", "Locker rental in the exclusive facilities of the “Plus area", "More than 20 activities to do and see : Underground rivers, Maya river, Paradise river, Beach, cove and ponds, Coral reef aquarium, Sea turtles, Manatee lagoon, Bee farm, Butterfly pavilion, etc", "10% off some optional activities", "Entrance to the night show “Xcaret México Espectacular” *Deposit required"],
+            information: "The Dolphin Encounter Program is the ideal program for families traveling in Cancun. You and your children will be able to enjoy safe and fun activities that Dolphin Discovery Isla Mujeres has specifically designed for all ages. Whether you’re 1 or 80, you can enjoy the dolphins from a platform even if you’re not comfortable swimming. Our friendly dolphin will offer you a handshake, a kiss, and a hug. &nbsp;&nbsp;<br/> &nbsp;&nbsp;<br/> In addition, dolphins are known for their playful nature, something that doesn’t get left behind in Dolphin Discovery. Our dolphin will be excited to share with you their tricks, their games, and even their singing. You will also have a chance to pet them and swim with them in the place the dolphins call home, Cancun, Mexico. After your swim, enjoy our beach club, located in a natural environment in the beautiful Isla Mujeres",
+            includes: ["15 min briefing and 30 min in the water", "Roundtrip Cancun - Isla Mujeres - Cancun, departing from Marina Aquatours", "Beach Club (lockers, showers, swimming pool, lounge chairs)", "This swim with dolphins program includes handshake, hugs, and kisses", "Free admission for kids (2’11” - 3’2”) (See regulations)", "Food & non-alcoholic Beverages."],
             recommendations: "It is important to arrive 30 minutes before your program.If you have any physical or mental limitation, please call us before you purchase your program. Remember to use biodegradable sunscreen to protect your skin, the environment and marine species. Bring towels and cash for taxis, shopping, meals, etc.",
             stepImages: {
-                "step1": "../../components/img/step-images/dolphin_step1.jpg",
-                "step2": "../../components/img/step-images/dolphin_step2.jpg",
-                "step3": "../../components/img/step-images/dolphin_step3.jpg",
-                "step4": "../../components/img/step-images/dolphin_step4.jpg"
+                "step1": "/components/img/step-images/dolphin_step1.jpg",
+                "step2": "/components/img/step-images/dolphin_step2.jpg",
+                "step3": "/components/img/step-images/dolphin_step3.jpg",
+                "step4": "/components/img/step-images/dolphin_step4.jpg"
             }
         },
         {
             id: "chichen",
             location: "3 Chichen Itza Tickets",
-            image: "../../components/img/step-images/chichen_step1.jpg",
+            image: "/components/img/step-images/chichen_step1.jpg",
             primaryButtonText: "Select",
             secondaryButtonText: "Select",
             secondaryAction: "add-to-cart",
             description: "Visit the ancient Mayan city of Chichen Itza, a UNESCO World Heritage Site and one of the New 7 Wonders of the World. Explore the pyramids, temples, and cenotes.",
-            information: "Visit the ancient Mayan city of Chichen Itza, a UNESCO World Heritage Site and one of the New 7 Wonders of the World. Explore the pyramids, temples, and cenotes.",
-            itinerary: ["Pick up at your hotel", "Visit to Chichen Itza", "Swim in a cenote", "Lunch at a local restaurant", "Return to your hotel"],
-            includes: ["Round trip Transportation in an air-conditioned vehicles", "Bilingual Tour Guide", "Admission to Xcaret", "One buffet meal with unlimited drinks and 1 beer", "Snorkel equipment*", "Locker rental in the exclusive facilities of the “Plus area", "More than 20 activities to do and see : Underground rivers, Maya river, Paradise river, Beach, cove and ponds, Coral reef aquarium, Sea turtles, Manatee lagoon, Bee farm, Butterfly pavilion, etc", "10% off some optional activities", "Entrance to the night show “Xcaret México Espectacular” *Deposit required"],
-            duration: "Full day",
-            recommendations: "Bring comfortable shoes, hat, sunscreen, and water.",
+            information: "This The Itza conquered the city toward the end of the Classic Period and introduced the cult of Kukulkan, militarism, and a series of new cultural elements associated with earlier traditions, giving rise to a unique style called Maya-Yucatecan. &nbsp;&nbsp;<br/> &nbsp;&nbsp;<br/> During this excursion, you will enjoy and learn about Mayan culture, visit a regional handicraft shop, enjoy the flavors of Yucatan dishes, and dive into a local cenote. Prepare for an unforgettable adventure. &nbsp;&nbsp;<br/> &nbsp;&nbsp;<br/> Wonderful place is considered a World Heritage Site by UNESCO and on July 7, 2007, it was named one of the New 7 Wonders of the World during the Official Declaration in Lisbon, Portugal.",
+            itinerary: ["Departure from Cancun", "Panoramic tour of Valladolid", "Arrival at the handicraft shop", "Buffet lunch at the Real Mayab restaurant", "Arrival at the Chichen Itzá archaeological site", "Guided tour of the Chichen Itzá archaeological site", "Free time in Chichen Itzá", "Departure from Chichen Itzá", "Visit to the SELVA MAYA Cenote", "Departure to Cancun", "Arrival in Cancun"],
+            firstDeparture: ["08:00", "10:20", "11:00", "11:30", "12:45", "13:00", "14:00", "15:30", "16:00", "17:30", "20:30"],
+            includes: ["Round trip Transportation in an air-conditioned vehicles", "Certified Federal Guide (English-Spanish) for every 25 people", "Visit to the local craft shop Highway", "Tickets to the Chichén Itzá archaeological site", "Entrance to the cenote", "Buffet lunch at the Real Mayab restaurant (drinks not included)"],
+            duration: "Approximately 12 hours",
+            recommendations: "Comfortable shoes, comfortable clothing, a hat, sunscreen, cash, camera, insect repellent, and water.",
             stepImages: {
-                "step1": "../../components/img/step-images/chichen_step1.jpg",
-                "step2": "../../components/img/step-images/chichen_step2.jpg",
-                "step3": "../../components/img/step-images/chichen_step3.jpg",
-                "step4": "../../components/img/step-images/chichen_step4.jpg"
+                "step1": "/components/img/step-images/chichen_step1.jpg",
+                "step2": "/components/img/step-images/chichen_step2.jpg",
+                "step3": "/components/img/step-images/chichen_step3.jpg",
+                "step4": "/components/img/step-images/chichen_step4.jpg"
             }
         },
         {
             id: "tour",
             location: "4 Tour",
-            image: "../../components/img/step-images/tour.jpg",
+            image: "/components/img/step-images/tour.jpg",
             primaryButtonText: "Select",
             isSpecial: true,
             specialText: "Looking for a different tour?",
             specialText2: "No worries! Contact us and we'll be in touch.",
-            description: "CHICHEN ITZÁ CON CENOTE",
-            information: "This The Itza conquered the city toward the end of the Classic Period and introduced the cult of Kukulkan, militarism, and a series of new cultural elements associated with earlier traditions, giving rise to a unique style called Maya-Yucatecan. During this excursion, you will enjoy and learn about Mayan culture, visit a regional handicraft shop, enjoy the flavors of Yucatan dishes, and dive into a local cenote. Prepare for an unforgettable adventure. Wonderful place is considered a World Heritage Site by UNESCO and on July 7, 2007, it was named one of the New 7 Wonders of the World during the Official Declaration in Lisbon, Portugal.",
-            includes: ["Customizable options."],
-            duration: "Approximately 12 hours",
-            recommendations: "Comfortable shoes, comfortable clothing, a hat, sunscreen, cash, camera, insect repellent, and water.",
             stepImages: {
-                "step1": "../../components/img/step-images/tour_step1.jpg",
-                "step2": "../../components/img/step-images/tour_step2.jpg",
-                "step3": "../../components/img/step-images/tour_step3.jpg",
-                "step4": "../../components/img/step-images/tour_step4.jpg"
+                "step1": "/components/img/step-images/tour_step1.jpg",
+                "step2": "/components/img/step-images/tour_step2.jpg",
+                "step3": "/components/img/step-images/tour_step3.jpg",
+                "step4": "/components/img/step-images/tour_step4.jpg"
             }
         }
     ];
 
     const carousel = new DynamicCarousel('carousel-container', cardsData);
     window.carousel = carousel;
-
+    carousel.init();
     console.log(JSON.parse(localStorage.getItem('selectedCardData')));
+}
+
+document.addEventListener('DOMContentLoaded', initializeCarousel);
+
+document.addEventListener('spaContentLoaded', (e) => {
+    if (e.detail.pageUrl.includes('crvo/pages/landing-page.html') || e.detail.pageUrl.includes('cat/pages/landing-page.html')) {
+        initializeCarousel();
+    }
 });

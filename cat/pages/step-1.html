@@ -10,7 +10,7 @@
     </div>
     <div class="step-container-right">
         <div class="logo">
-            <img src="../../components/img/icons/cancun-logo.png" alt="Cancun Logo">
+            <img src="/components/img/icons/cancun-logo.png" alt="Cancun Logo">
         </div>
         <div class="progress-line-section">
             <hr class="progress-line-selected">
@@ -20,7 +20,6 @@
         </div>
 
         <form class="step-form" id="step1Form">
-            
             <input type="text" name="firstName" placeholder="First Name">
             <input type="text" name="lastName" placeholder="Last Name">
             <input type="email" name="email" placeholder="Email">
@@ -45,10 +44,32 @@
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a>
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                 <p> All rights reserved.</p>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('input[name="firstName"], input[name="lastName"]').forEach(input => {
+            input.addEventListener('input', function () {
+                this.value = this.value.replace(/[^A-Za-z]/g, '');
+            });
+        });
+
+        document.querySelector('input[name="phone"]').addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '');
+        });
+    });
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+</script>

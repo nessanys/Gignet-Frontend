@@ -1,16 +1,65 @@
-
 function goToNextStep() {
     const currentStep = getCurrentStep();
+
+    if (currentStep === 1) {
+        const form = document.getElementById('step1Form');
+        const firstName = form.elements['firstName'] ? form.elements['firstName'].value.trim() : '';
+        const lastName = form.elements['lastName'] ? form.elements['lastName'].value.trim() : '';
+        const email = form.elements['email'] ? form.elements['email'].value.trim() : '';
+        const phone = form.elements['phone'] ? form.elements['phone'].value.trim() : '';
+        const zipCode = form.elements['zip'] ? form.elements['zip'].value.trim() : '';
+
+        if (!firstName || !lastName || !email || !phone || !zipCode) {
+            showToast('Fields cannot be left empty.');
+            return;
+        }
+        if (!/^[A-Za-z]{2,}$/.test(firstName)) {
+            showToast('First name must contain only letters (no spaces, numbers or special characters).');
+            return;
+        }
+        if (!/^[A-Za-z]{2,}$/.test(lastName)) {
+            showToast('Last name must contain only letters (no spaces, numbers or special characters).');
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showToast('Enter a valid email address.');
+            return;
+        }
+        if (!/^\d{7,}$/.test(phone)) {
+            showToast('Enter a valid phone number (numbers only, at least 7 digits).');
+            return;
+        }
+        if (!/^\d{4,}$/.test(zipCode)) {
+            showToast('Enter a valid ZIP code (numbers only, at least 4 digits).');
+            return;
+        }
+        if (!document.getElementById('termsCheckbox').checked) {
+            showToast('You must accept the terms and conditions.');
+            return;
+        }
+    }
 
     if (currentStep === 3) {
         const selectedCountryInput = document.getElementById('selectedCountry');
         const quintanaRooQuestionDiv = document.getElementById('quintanaRooQuestion');
         const quintanaRooRadios = document.querySelectorAll('input[name="quintanaRooResident"]');
         
-        if (!selectedCountryInput || !selectedCountryInput.value) {
-            alert('Please select your country.');
-            return; 
+        function showCountryError(message) {
+        if (typeof showToast === 'function') {
+            showToast(message);
         }
+        }
+
+        if (!selectedCountryInput || !selectedCountryInput.value) {
+            showCountryError('Please select your country.');
+            return;
+        }
+
+        function showCountryError(message) {
+        if (typeof showToast === 'function') {
+            showToast(message);
+        }
+    }
 
         if (selectedCountryInput.value === 'MX') {
             let quintanaRooAnswered = false;
@@ -21,7 +70,7 @@ function goToNextStep() {
             });
 
             if (!quintanaRooAnswered) {
-                alert('Please answer the Quintana Roo resident question.');
+                showCountryError('Please answer the Quintana Roo resident question.');
                 return;
             }
         }
@@ -30,13 +79,22 @@ function goToNextStep() {
 
     const step3Data = getStepData(3); 
 
-    if (currentStep === 3 && step3Data && step3Data.quintanaRooResident === 'no') {
+    if (currentStep === 3 && step3Data && step3Data.quintanaRooResident === 'yes') {
         window.location.href = 'thank-you.html';
         return; 
     }
 
     const nextStep = currentStep + 1;
-    window.location.href = `./modal.html?step=${nextStep}`;
+    
+    if (nextStep <= 4) {
+        if (typeof window.loadStep === 'function') { 
+            window.loadStep(nextStep);
+        } else {
+            window.location.href = `./modal.html?step=${nextStep}`; 
+        }
+    } else {
+        window.navigateTo('confirmation-page.html');
+    }
 }
 
 function goToConfirmationPage() {
@@ -50,7 +108,7 @@ function goToStep(targetStep) {
     const currentStep = getCurrentStep();
 
     saveCurrentStepData(currentStep);
-    window.location.href = `./modal.html?step=${targetStep}`;
+    window.location.href = `/cat/pages/modal.html?step=${targetStep}`;
 }
 
 /**
@@ -96,7 +154,6 @@ function getCurrentStep() {
 function saveCurrentStepData(currentStep) {
     const form = document.getElementById(`step${currentStep}Form`);
     if (!form) {
-        console.warn(`No se encontró formulario para step ${currentStep}`);
         return;
     }
     
@@ -104,12 +161,6 @@ function saveCurrentStepData(currentStep) {
     const data = Object.fromEntries(formData.entries());
 
     switch(currentStep) {
-        case 1:
-            if (typeof selectedOption !== 'undefined' && selectedOption) {
-                data.selectedOption = selectedOption;
-                data.optionText = selectedOption === 1 ? 'Accommodations only' : 'All inclusive';
-            }
-            break;
         case 2:
             if (typeof selectedTravelOption !== 'undefined' && selectedTravelOption) {
                 data.selectedTravelOption = selectedTravelOption;
@@ -166,9 +217,9 @@ function goToPreviousStep() {
     const previousStep = currentStep - 1;
     
     if (previousStep >= 1) {
-        window.location.href = `./modal.html?step=${previousStep}`;
+        window.location.href = `/cat/pages/modal.html?step=${previousStep}`;
     } else {
-        window.location.href = './landing-page.html';
+        window.location.href = '/cat/pages/landing-page.html';
     }
 }
 

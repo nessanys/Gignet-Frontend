@@ -10,7 +10,7 @@
     </div>
     <div class="step-container-right">
         <div class="logo">
-            <img src="../../components/img/icons/cancun-logo.png" alt="Cancun Logo">
+            <img src="/components/img/icons/cancun-logo.png" alt="Cancun Logo">
         </div>
         <div class="progress-line-section">
             <hr class="progress-line-selected">
@@ -31,8 +31,8 @@
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a>
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
                 <p> All rights reserved.</p>
             </div>
         </div>
@@ -40,6 +40,22 @@
 </div>
 
 <script>
+    function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    document.querySelector('.step-button').addEventListener('click', function () {
+        clearCountryError();
+        const selectedCountry = document.getElementById('selectedCountry');
+        if (!selectedCountry || !selectedCountry.value) {
+            showCountryError('Please select your country.');
+            return;
+        }
+        window.goToNextStep();
+    });
 
     function loadPreviousStepsData() {
         const step1Data = localStorage.getItem('step1Data');

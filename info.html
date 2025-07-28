@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/components/components.css">
-    <link rel="stylesheet" href="./css/info.css">
+    <link rel="stylesheet" href="/css/components/components.css">
+    <link rel="stylesheet" href="/css/info.css">
     <title>Info</title>
 </head>
 
 <body>
     <div class="main-container">
+        <div id="toast" class="custom-toast"></div>
         <div class="container">
             <div class="container-logo">
             <img src="./img/Layer_1.svg" alt="GigNet Logo">
@@ -18,12 +19,15 @@
             </div>
 
             <div class="container-information">
-                <form action="">
+                <form id="step1Form">
                     <div class="inputs-container">
                         <input class="input-text" type="text" placeholder="First Name">
                         <input class="input-text" type="text" placeholder="Last Name">
                         <input class="input-text" type="text" placeholder="Email">
-                        <input class="input-text" type="text" placeholder="Phone">
+                        <div class="phone-input-group">
+                            <select id="countryCode" class="input-text phone-code"></select>
+                            <input class="input-text" type="text" id="phoneNumber" placeholder="Phone">
+                        </div>
                     </div>
                 </form>
 
@@ -35,7 +39,6 @@
                         affiliates, parents and subsidiaries (text/data and other charges may apply) at the address/numbers
                         provided regardless of that number being on any Do not Call Registry. Your consent is not a
                         condition of any purchase. As an alternative to the consent above you may enter the Promotion here.
-
                 </div>
                 <button 
                 class="btn btn--secondary"
@@ -45,25 +48,108 @@
 
         <div class="terms-container">
             <div class="terms-text">
-                <a href="./terms.html">Terms and Conditions</a> |
-                <a href="./privacy.html">Privacy Policy</a> 
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Terms and Conditions</a> |
+                <a href="https://gignet.mx/nosotros/aviso-privacidad/">Privacy Policy</a> 
             </div> 
         </div>
         
     </div>
 
-
-    <script src="./js/spa-router.js"></script>
-    <script src="./js/info.js"></script>
+</body>
+<script src="/js/spa-router.js"></script>
+<script src="/js/phones.js"></script>
     
-    <script>
-        function handleNextClick(event) {
-            const button = event.target;
-            if (!button.disabled) {
-                navigateTo('ad.html');
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const select = document.getElementById('countryCode');
+        if (window.phoneCodes && select) {
+            window.phoneCodes.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.code;
+                option.innerHTML = `${item.flag} ${item.code} (${item.country})`;
+                select.appendChild(option);
+            });
+        }
+    });
+
+    function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+    function handleNextClick(event) {
+        event.preventDefault();
+        const form = document.getElementById('step1Form');
+
+        const firstName = form.elements[0].value.trim();
+        const lastName = form.elements[1].value.trim();
+        const email = form.elements[2].value.trim();
+        const phone = document.getElementById('phoneNumber').value.trim();
+
+        if (!firstName || !lastName || !email || !phone) {
+            showToast('Fields cannot be left empty.');
+            return;
+        }
+        if (!/^[A-Za-z]{2,}$/.test(firstName)) {
+            showToast('First name must contain only letters (no spaces, numbers or special characters).');
+            return;
+        }
+
+        if (!/^[A-Za-z]{2,}$/.test(lastName)) {
+            showToast('Last name must contain only letters (no spaces, numbers or special characters).');
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showToast('Enter a valid email address.');
+            return;
+        }
+
+        if (!/^\d{7,}$/.test(phone)) {
+            showToast('Enter a valid phone number (numbers only, at least 7 digits).');
+            return;
+        }
+
+        if (!document.getElementById('termsCheckbox').checked) {
+            showToast('You must accept the terms and conditions.');
+            return;
+        }
+
+        navigateTo('ad.html');
+    }
+
+    document.querySelectorAll('.input-text[placeholder="First Name"], .input-text[placeholder="Last Name"]').forEach(input => {
+        input.addEventListener('input', function () {
+            this.value = this.value.replace(/[^A-Za-z]/g, '');
+        });
+    });
+
+    document.getElementById('phoneNumber').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+    });
+
+    function populatePhoneCodes() {
+            const countryCodeSelect = document.getElementById('countryCode');
+            if (countryCodeSelect && window.phoneCodes) {
+                countryCodeSelect.innerHTML = ''; 
+
+                window.phoneCodes.forEach(function(phone) {
+                    const option = document.createElement('option');
+                    option.value = phone.code;
+                    option.textContent = `${phone.flag} ${phone.country} (${phone.code})`;
+                    countryCodeSelect.appendChild(option);
+                });
             }
         }
-    </script>
-</body>
+
+        document.addEventListener('DOMContentLoaded', populatePhoneCodes);
+        document.addEventListener('spaContentLoaded', (e) => {
+            if (e.detail.pageUrl.includes('info.html')) {
+                populatePhoneCodes();
+            }
+        });
+</script>
 
 </html>

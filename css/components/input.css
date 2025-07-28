@@ -7,16 +7,23 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
+    font-family: "Montserrat Regular";
+    font-size: 1rem;
     align-self: stretch;
     border-radius: 0.5rem;
-    border: 1px solid var(--Grey-30, #ABB5BE);
-    border: 1px solid var(--Grey-30, color(display-p3 0.6851 0.7077 0.7376));
+    border: 1px solid #ABB5BE;
     backdrop-filter: blur(17.5px);
     box-sizing: border-box; 
 }
 
+.input-text:focus {
+    outline: none;
+    border-color: #FF9B00;
+}
+
 @media (max-width: 768px) {
     .input-text {
+        font-size: 0.85rem;
         height: 4rem;
     }
 }

@@ -53,8 +53,7 @@
 }
 
 .content-thankyou h5 {
-    color: var(--Teal-500, #00FFEA);
-    color: var(--Teal-500, color(display-p3 0 1 0.9167));
+    color: #00FFEA;
     font-family: "Montserrat Regular";
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-style: normal;
@@ -63,8 +62,7 @@
 }
 
 .content-thankyou h1 {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Bold";
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-style: normal;
@@ -91,8 +89,7 @@
 }
 
 .content-information-container h5 {
-    color: var(--Teal-500, #00FFEA);
-    color: var(--Teal-500, color(display-p3 0 1 0.9167));
+    color: #00FFEA;
     font-family: "Montserrat Regular";
     font-size: clamp(1.2rem, 2vw, 1.8rem);
     font-style: normal;
@@ -103,8 +100,7 @@
 
 .content-information-container h4 {
     align-items: stretch;
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Bold";
     font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     font-style: normal;
@@ -114,8 +110,7 @@
 }
 .content-information-container p {
     align-items: stretch;
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Regular";
     font-size: clamp(0.8rem, 1.2vw, 1rem);
     font-style: normal;
@@ -136,8 +131,7 @@
 }
 
 .action-required-container h4 {
-    color: var(--White, #FFF);
-    color: var(--White, color(display-p3 1 1 1));
+    color: #FFF;
     font-family: "Montserrat Bold";
     font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     font-style: normal;
@@ -187,8 +181,7 @@
         position: static;
         border-radius: 1.25rem 1.25rem 0rem 0rem;
         opacity: 0.8;
-        background: var(--Grey-20, #E6EFF6);
-        background: var(--Grey-20, color(display-p3 0.9153 0.9358 0.9591));
+        background: #E6EFF6;
     }
     .content {
         flex-direction: column;
@@ -239,24 +232,22 @@
     
     .content-information-container h5 {
         text-align:justify; 
-        color: var(--Blue-500, #00C2D3);
-        color: var(--Blue-500, color(display-p3 0.0471 0.7333 0.8039));
+        color: #00C2D3;
         font-size: 1.5rem;
         font-weight: 500;
     }
 
     .content-information-container h4 {
-        color: var(--Blue-800, #003E87);
-        color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
-        
+        color:  #003E87;   
     }
 
     .content-information-container p {
+        font-size: 1.2rem;
         color: #000;
     }
     
     .action-required-container img {
-        content: url('../../components/img/icons/brightness_alert_blue.svg');
+        content: url('/components/img/icons/brightness_alert_blue.svg');
     }
     
     .header {
@@ -265,18 +256,14 @@
     }
 
     .btn--fifthtary {
-        background: var(--Blue-500, #00C2D3) !important;
-        background: var(--Blue-500, color(display-p3 0.0471 0.7333 0.8039)) !important;
-        color: var(--White, #FFF) !important;
-        color: var(--White, color(display-p3 1 1 1)) !important;
+        background: #00C2D3 !important;
+        color: #FFF !important;
         border-radius: 3.125rem;
     }
 
     .btn--fourthary {
-        background: var(--Grey-20, #E6EFF6) !important;
-        background: var(--Grey-20, color(display-p3 0.9153 0.9358 0.9591)) !important;
-        color: var(--Blue-800, #003E87) !important;
-        color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902)) !important;
+        background: #E6EFF6 !important;
+        color: #003E87 !important;
         border-radius: 0.75rem;
     }
 }

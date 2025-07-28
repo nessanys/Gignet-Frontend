@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/popup.css">
+<link rel="stylesheet" href="/cat/css/popup.css">
 
 <div class="step-container">
     <div class="step-container-left">
@@ -58,12 +58,13 @@
         const cardData = JSON.parse(localStorage.getItem('selectedCardData'));
         if (!cardData) return;
 
-
         const firstDepartureDiv = document.getElementById('popupCardFirstDeparture');
         const secondDepartureDiv = document.getElementById('popupCardSecondDeparture');
+
         if (firstDepartureDiv) firstDepartureDiv.textContent = '';
         if (secondDepartureDiv) secondDepartureDiv.textContent = '';
 
+        // Image
         // Image
         const img = document.getElementById('popupCardImage');
         if (img && cardData.image) img.src = cardData.image;
@@ -80,46 +81,49 @@
         const descDiv = document.getElementById('popupCardDescription');
         if (descDiv && cardData.description) descDiv.textContent = cardData.description;
 
+        // Information
+        const infoDiv = document.getElementById('popupCardInformation');
+        if (infoDiv && cardData.information) infoDiv.innerHTML = cardData.information;
+
+        // Itinerary
         const itineraryDiv = document.getElementById('popupCardItinerary');
-        if (itineraryDiv && cardData.itinerary) {
-            let itineraryArr = Array.isArray(cardData.itinerary) ? cardData.itinerary : String(cardData.itinerary).split(',');
-            itineraryArr = itineraryArr.map(item => item.trim()).filter(item => item);
-            itineraryDiv.innerHTML = `<h1>Itinerary</h1><ul>${itineraryArr.map(item => `<li>${item}</li>`).join('')}</ul>`;
-        }
+        if (
+            itineraryDiv &&
+            cardData.itinerary &&
+            Array.isArray(cardData.itinerary) &&
+            cardData.itinerary.length > 0
+        ) {
+            const hasFirstDep = Array.isArray(cardData.firstDeparture) ? cardData.firstDeparture.length > 0 : !!cardData.firstDeparture;
+            const hasSecondDep = Array.isArray(cardData.secondDeparture) ? cardData.secondDeparture.length > 0 : !!cardData.secondDeparture;
 
+            const firstDep = hasFirstDep ? (Array.isArray(cardData.firstDeparture) ? cardData.firstDeparture : [cardData.firstDeparture]) : [];
+            const secondDep = hasSecondDep ? (Array.isArray(cardData.secondDeparture) ? cardData.secondDeparture : [cardData.secondDeparture]) : [];
 
-        if (firstDepartureDiv && cardData.firstDeparture && 
-            (Array.isArray(cardData.firstDeparture) ? cardData.firstDeparture.length > 0 : String(cardData.firstDeparture).trim() !== '')) {
-            if (Array.isArray(cardData.firstDeparture)) {
-                firstDepartureDiv.innerHTML = cardData.firstDeparture.map(h => `${h}`).join('<br>');
-            } else {
-                firstDepartureDiv.textContent = cardData.firstDeparture;
-            }
-            if (firstDepartureContainer) {
-                firstDepartureContainer.style.display = ''; 
-                console.log('First Departure: SHOWING');
-            }
-        } else {
-            if (firstDepartureContainer) {
-                firstDepartureContainer.style.display = 'none'; 
-                console.log('First Departure: HIDING');
-            }
-        }
+            let rows = cardData.itinerary.map((item, idx) => {
+                let row = `<td class="itinerary-activity">${item}</td>`;
+                if (hasFirstDep) row += `<td class="itinerary-departure">${firstDep[idx] || ''}</td>`;
+                if (hasSecondDep) row += `<td class="itinerary-departure">${secondDep[idx] || ''}</td>`;
+                return `<tr>${row}</tr>`;
+            }).join('');
 
-        if (secondDepartureDiv && cardData.secondDeparture &&
-            (Array.isArray(cardData.secondDeparture) ? cardData.secondDeparture.length > 0 : String(cardData.secondDeparture).trim() !== '')) {
-            if (Array.isArray(cardData.secondDeparture)) {
-                secondDepartureDiv.innerHTML = cardData.secondDeparture.map(h => `${h}`).join('<br>');
-            } else {
-                secondDepartureDiv.textContent = cardData.secondDeparture;
-            }
-            if (secondDepartureContainer) {
-                secondDepartureContainer.style.display = ''; 
-            }
-        } else {
-            if (secondDepartureContainer) {
-                secondDepartureContainer.style.display = 'none'; 
-            }
+            let headers = `<th>Itinerary</th>`;
+            if (hasFirstDep) headers += `<th>1st Departure</th>`;
+            if (hasSecondDep) headers += `<th>2nd Departure</th>`;
+
+            itineraryDiv.innerHTML = `
+                <table class="itinerary-table">
+                    <thead>
+                        <tr>
+                            ${headers}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+            `;
+        } else if (itineraryDiv) {
+            itineraryDiv.innerHTML = '';
         }
 
         const includesDiv = document.getElementById('popupCardIncludes');
@@ -127,15 +131,20 @@
             let includesArr = Array.isArray(cardData.includes) ? cardData.includes : String(cardData.includes).split(',');
             includesArr = includesArr.map(item => item.trim()).filter(item => item);
 
-            includesDiv.innerHTML = `<h1>Includes</h1><ul>${includesArr.map(item => `<li><img src="../../components/img/icons/check_circle.svg" alt="Check" class="check-icon">${item}</li>`).join('')}</ul>`;
+            includesDiv.innerHTML = `<h1>Includes</h1><ul>${includesArr.map(item => `<li><img src="/components/img/icons/check_circle.svg" alt="Check" class="check-icon">${item}</li>`).join('')}</ul>`;
         }
 
         // Duration
+        // Duration
         const durationDiv = document.getElementById('popupCardDuration');
         if (durationDiv && cardData.duration) {
-            durationDiv.innerHTML = `<h5>Duration:</h5>${cardData.duration}`;
+            durationDiv.style.display = ''; 
+            durationDiv.innerHTML = `<span class="duration-label">Duration:</span> <span class="duration-value">${cardData.duration}</span>`
+        } else if (durationDiv) {
+            durationDiv.style.display = 'none';
         }
 
+        // Recommendations
         // Recommendations
         const recommendationsDiv = document.getElementById('popupCardRecommendations');
         if (recommendationsDiv && cardData.recommendations) {
