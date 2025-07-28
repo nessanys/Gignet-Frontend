@@ -301,7 +301,6 @@ function createSearchableCountrySelect(containerId) {
         </div>
     `;
 
-    
     const searchInput = document.getElementById('countrySearch');
     const dropdown = document.getElementById('countryDropdown');
     const hiddenInput = document.getElementById('selectedCountry');

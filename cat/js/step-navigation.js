@@ -44,7 +44,6 @@ function goToConfirmationPage() {
 }
 
 /**
- * Función para ir a un step específico
  * @param {number} targetStep 
  */
 function goToStep(targetStep) {
@@ -55,7 +54,6 @@ function goToStep(targetStep) {
 }
 
 /**
- * Detecta el step actual desde múltiples fuentes
  * @returns {number} 
  */
 function getCurrentStep() {
@@ -93,7 +91,6 @@ function getCurrentStep() {
 }
 
 /**
- * Guarda los datos del step actual en localStorage
  * @param {number} currentStep
  */
 function saveCurrentStepData(currentStep) {
@@ -140,7 +137,6 @@ function saveCurrentStepData(currentStep) {
 }
 
 /**
- * Obtiene todos los datos de los steps guardados
  * @returns {object}
  */
 function getAllStepData() {
@@ -149,7 +145,6 @@ function getAllStepData() {
 }
 
 /**
- * Obtiene los datos de un step específico
  * @param {number} stepNumber 
  * @returns {object|null} 
  */
@@ -158,9 +153,7 @@ function getStepData(stepNumber) {
     return stepData ? JSON.parse(stepData) : null;
 }
 
-/**
- * Limpia todos los datos de los steps
- */
+
 function clearAllStepData() {
     for (let i = 1; i <= 10; i++) { 
         localStorage.removeItem(`step${i}Data`);
@@ -168,9 +161,6 @@ function clearAllStepData() {
     localStorage.removeItem('allStepData');
 }
 
-/**
- * Función para ir al step anterior
- */
 function goToPreviousStep() {
     const currentStep = getCurrentStep();
     const previousStep = currentStep - 1;

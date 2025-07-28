@@ -1,4 +1,4 @@
-/* Step Options Component */
+
 .step-options {
     display: flex;
     padding: 0.125rem;
@@ -75,7 +75,6 @@
     color: var(--Blue-800, color(display-p3 0.0431 0.2353 0.4902));
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .step-options {
         height: 2.3rem;
@@ -91,7 +90,6 @@
     }
 }
 
-/* Mobile optimizations */
 @media (max-width: 768px) {
     .step-options {
         height: 2.5rem;
@@ -107,7 +105,6 @@
     }
 }
 
-/* Extra small devices (phones) */
 @media (max-width: 480px) {
     .step-options {
         height: 1.8rem;
@@ -123,7 +120,6 @@
     }
 }
 
-/* Very small devices */
 @media (max-width: 375px) {
     .step-options {
         height: 1.8rem;

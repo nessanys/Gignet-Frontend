@@ -117,8 +117,6 @@
     backdrop-filter: blur(15px);
 }
 
-
-/* Mobile Responsive Design */
 @media (max-width: 1024px) {
     .content-section {
         height: calc(50vh - 1.5rem);
@@ -151,7 +149,6 @@
 }
 
 @media (max-width: 768px) {
-    /* Hide desktop terms, show mobile terms */
     .terms-desktop {
         display: none;
     }

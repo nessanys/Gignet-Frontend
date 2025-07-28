@@ -64,19 +64,19 @@
         if (firstDepartureDiv) firstDepartureDiv.textContent = '';
         if (secondDepartureDiv) secondDepartureDiv.textContent = '';
 
-        // Imagen
+        // Image
         const img = document.getElementById('popupCardImage');
         if (img && cardData.image) img.src = cardData.image;
 
-        // Título
+        // Tittle
         const titleDiv = document.getElementById('popupCardTitle');
         if (titleDiv && cardData.location) titleDiv.textContent = cardData.location;
 
-        // Info
+        // Information
         const infoDiv = document.getElementById('popupCardInformation');
         if (infoDiv && cardData.information) infoDiv.textContent = cardData.information;
 
-        // Descripción
+        // Description
         const descDiv = document.getElementById('popupCardDescription');
         if (descDiv && cardData.description) descDiv.textContent = cardData.description;
 
@@ -130,13 +130,13 @@
             includesDiv.innerHTML = `<h1>Includes</h1><ul>${includesArr.map(item => `<li><img src="../../components/img/icons/check_circle.svg" alt="Check" class="check-icon">${item}</li>`).join('')}</ul>`;
         }
 
-        // Duración
+        // Duration
         const durationDiv = document.getElementById('popupCardDuration');
         if (durationDiv && cardData.duration) {
             durationDiv.innerHTML = `<h5>Duration:</h5>${cardData.duration}`;
         }
 
-        // Recomendaciones
+        // Recommendations
         const recommendationsDiv = document.getElementById('popupCardRecommendations');
         if (recommendationsDiv && cardData.recommendations) {
             recommendationsDiv.innerHTML = `<h1>Recommendations</h1>${cardData.recommendations}`;

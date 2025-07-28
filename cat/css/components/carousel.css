@@ -31,7 +31,6 @@
     text-align: center;
 }
 
-/* Navigation Buttons - Completely separate layout */
 .carousel-navigation {
     position: fixed;
     display: flex;
@@ -86,7 +85,6 @@
     color: #ffffffff;
 }
 
-/* Mobile Navigation */
 .carousel-navigation-mobile {
     display: none;
 }
@@ -147,7 +145,7 @@
 }
 
 @media (max-width: 375px) {
-    /* Navigation Buttons - Completely separate layout */
+
     .carousel-navigation {
         position: fixed;
         display: flex;

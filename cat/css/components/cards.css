@@ -22,7 +22,6 @@
     text-overflow: ellipsis;
 }
 
-/* Cards Component */
 .card {
     display: flex;
     width: 18.75rem;
@@ -213,7 +212,6 @@
     border: 2px solid var(--White, #FFF);
 }
 
-/* Cards Responsive Design */
 @media (max-width: 768px) {
     .card {
         width: 16rem;

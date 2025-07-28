@@ -45,7 +45,6 @@
     line-height: normal;
 }
 
-/* Mobile optimizations */
 @media (max-width: 768px) {
     .terms-container {
         padding: 0.9rem;
@@ -61,7 +60,6 @@
     }
 }
 
-/* Extra small devices (phones) */
 @media (max-width: 480px) {
     .terms-container {
         padding: 0.6rem;
@@ -77,7 +75,6 @@
     }
 }
 
-/* Very small devices */
 @media (max-width: 360px) {
     .terms-container {
         padding: 0.3rem;

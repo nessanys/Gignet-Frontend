@@ -76,13 +76,13 @@
     color: var(--White, #FFF);
     color: var(--White, color(display-p3 1 1 1));
     font-family: "Montserrat Bold";
-    font-size: clamp(2rem, 4vw, 4rem); /* Responsive font size */
+    font-size: clamp(2rem, 4vw, 4rem); 
     font-style: normal;
     font-weight: 600;
-    line-height: 1.1; /* More flexible line height */
+    line-height: 1.1; 
     margin: 0;
     text-align: start;
-    word-wrap: break-word; /* Handle long text */
+    word-wrap: break-word;
 }
 
 .step-container-left-content p {
@@ -90,12 +90,12 @@
     color: var(--Teal-500, color(display-p3 0 1 0.9167));
     text-align: start;
     font-family: "Montserrat Regular";
-    font-size: clamp(1rem, 2vw, 1.75rem); /* Responsive font size */
+    font-size: clamp(1rem, 2vw, 1.75rem); 
     font-style: normal;
     font-weight: 500;
-    line-height: 1.2; /* More flexible line height */
+    line-height: 1.2; 
     margin: 0;
-    word-wrap: break-word; /* Handle long text */
+    word-wrap: break-word; 
 }
 
 .step-container-right {
@@ -120,8 +120,6 @@
     margin: 0;
 }
 
-
-/* Responsive Design */
 @media (max-width: 1024px) {
     .step-container {
         height: 85vh;
@@ -218,7 +216,7 @@
         gap: 1vh;
     }
 }
-/* Mobile optimizations */
+
 @media (max-width: 768px) {
     .step-container {
         height: 85vh;
@@ -316,7 +314,6 @@
     }
 }
 
-/* Extra small devices (phones) */
 @media (max-width: 480px) {
     .step-container {
         height: 88vh;
@@ -340,7 +337,6 @@
     }
 }
 
-/* Very small devices */
 @media (max-width: 360px) {
     .step-container {
         height: 90vh;

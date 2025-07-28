@@ -1,4 +1,4 @@
-// Lista completa de países del mundo
+
 const countries = [
     { code: 'AF', name: 'Afghanistan' },
     { code: 'AL', name: 'Albania' },

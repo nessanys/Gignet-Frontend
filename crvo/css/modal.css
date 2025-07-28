@@ -68,11 +68,8 @@
     transform: scale(1.1);
 }
 
-/* Hide mobile close button on desktop */
 
-/* Mobile optimizations */
 @media (max-width: 768px) {
-    /* Modal overlay ocupando toda la pantalla con fondo sólido */
     .modal-overlay {
         background: #000; /* Fondo negro sólido */
         align-items: flex-start;
@@ -81,7 +78,6 @@
         overflow-y: auto;
     }
     
-    /* Modal container ocupando completamente la pantalla */
     .modal-container {
         max-width: 100vw;
         max-height: 100vh;
@@ -101,12 +97,10 @@
         transform: none;
     }
     
-    /* Eliminar el espacio reservado para el background content */
     .modal-container::before {
         display: none;
     }
     
-    /* Step container ocupando toda la pantalla */
     .step-container {
         height: 100vh;
         max-height: 100vh;
@@ -118,16 +112,15 @@
     }
     
     .modal-close {
-        display: none; /* Ocultar el botón principal en móviles */
+        display: none; 
     }
     
     .modal-container > .modal-close {
-        display: none; /* Ocultar en móviles */
+        display: none;
     }
-    
-    /* Posicionar el botón de cerrar dentro del step-container en móviles */
+
     .step-container {
-        position: relative; /* Necesario para el posicionamiento absoluto */
+        position: relative; 
     }
     
     .mobile-close-btn {
@@ -154,8 +147,7 @@
         background: rgba(0, 0, 0, 0.8);
         transform: scale(1.05);
     }
-    
-    /* Ocultar completamente el video y contenido de fondo en móviles */
+
     body.modal-open .video-background,
     body.modal-open .gradient-overlay,
     body.modal-open .content-section {
@@ -163,19 +155,16 @@
     }
 }
 
-/* Ocultar botón móvil en desktop */
 .mobile-close-btn {
     display: none;
 }
 
-/* Mostrar botón móvil solo en móviles */
 @media (max-width: 768px) {
     .mobile-close-btn {
         display: flex;
     }
 }
 
-/* Extra small devices (phones) */
 @media (max-width: 480px) {
     .step-container {
         height: 100vh;
@@ -183,7 +172,6 @@
     }
 }
 
-/* Very small devices */
 @media (max-width: 375px) {
     .step-container {
         height: 100vh;
@@ -197,7 +185,6 @@
     }
 }
 
-/* Step Option Selection States */
 .step-option-1,
 .step-option-2 {
     cursor: pointer;
@@ -215,7 +202,6 @@
     opacity: 0.8;
 }
 
-/* Form validation styles */
 .step-form input:invalid {
     border-color: #ff4444;
 }
@@ -224,13 +210,11 @@
     border-color: #00C2D3;
 }
 
-/* Loading state */
 .step-container.loading {
     opacity: 0.7;
     pointer-events: none;
 }
 
-/* Button container for better positioning */
 .button-container {
     display: flex;
     justify-content: center;

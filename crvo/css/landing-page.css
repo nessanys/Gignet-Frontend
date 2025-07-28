@@ -213,9 +213,6 @@
     color: var(--White, color(display-p3 1 1 1));
 }
 
-/* Responsive Design */
-
-/* Tablet styles (768px and below) */
 @media screen and (max-width: 768px) {
     .header {
         padding: 0rem 1.5rem;
@@ -285,7 +282,6 @@
     }
 }
 
-/* Mobile styles (480px and below) */
 @media screen and (max-width: 480px) {
     .header {
         padding: 0rem 1rem;
@@ -347,7 +343,6 @@
     }
 }
 
-/* Very small devices (360px and below) */
 @media screen and (max-width: 360px) {
     .header {
         height: 1.5rem;

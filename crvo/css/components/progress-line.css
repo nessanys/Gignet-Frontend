@@ -31,7 +31,6 @@
     width: 100%;
 }
 
-/* Additional adaptive styles for progress line */
 .progress-line {
     flex-shrink: 0;
     margin-bottom: 1rem;
@@ -43,7 +42,6 @@
     transition: width 0.3s ease;
 }
 
-/* Ensure consistent positioning across different step content */
 @media (max-width: 768px) {
     .progress-line {
         margin-bottom: 0.8rem;
@@ -62,9 +60,6 @@
     }
 }
 
-/* Responsive Design */
-
-/* Mobile optimizations */
 @media (max-width: 768px) {
     .progress-line-section {
         gap: 0.8rem;
@@ -79,7 +74,6 @@
     }
 }
 
-/* Extra small devices (phones) */
 @media (max-width: 480px) {
     .progress-line-section {
         gap: 0.5rem;
@@ -94,7 +88,6 @@
     }
 }
 
-/* Very small devices */
 @media (max-width: 360px) {
     .progress-line-section {
         gap: 0.4rem;

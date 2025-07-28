@@ -2,8 +2,8 @@
     display: flex;
     width: 100%;
     max-width: 100%;
-    min-height: 2rem; /* Cambiado de height fijo a min-height */
-    padding: 0.5rem 1rem; /* Añadido padding para mejor contenido */
+    min-height: 2rem; 
+    padding: 0.5rem 1rem;
     justify-content: center;
     align-items: center;
     gap: 0.4rem;
@@ -16,7 +16,7 @@
     color: white;
     font-weight: 600;
     font-family: "Montserrat Regular";
-    transition: all 0.2s ease; /* Añadido para suavidad */
+    transition: all 0.2s ease; 
 }
 
 .step-button:hover {

@@ -1,5 +1,4 @@
 
-
 .overlay{
     background: linear-gradient(0deg, rgba(0, 15, 35, 0.60) 0%, rgba(0, 15, 35, 0.60) 100%);
     background: linear-gradient(0deg, color(display-p3 0 0.0558 0.1298 / 0.60) 0%, color(display-p3 0 0.0558 0.1298 / 0.60) 100%);
@@ -108,8 +107,6 @@
     z-index: -1;
 }
 
-
-/* Desktop - show desktop terms, hide mobile terms */
 @media (min-width: 769px) {
     .terms-mobile {
         display: none;
@@ -120,9 +117,7 @@
     }
 }
 
-/* Mobile Responsive Design */
 @media (max-width: 768px) {
-    /* Hide desktop terms, show mobile terms */
     .content {
         flex-direction: column;
         padding: 0;

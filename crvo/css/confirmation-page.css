@@ -163,7 +163,6 @@
     justify-content: center;
 }
 
-/* Desktop - show desktop terms, hide mobile terms */
 @media (min-width: 769px) {
     .terms-mobile {
         display: none;
@@ -174,9 +173,8 @@
     }
 }
 
-/* Mobile Responsive Design */
 @media (max-width: 768px) {
-    /* Hide desktop terms, show mobile terms */
+
     .terms-desktop {
         display: none;
     }
