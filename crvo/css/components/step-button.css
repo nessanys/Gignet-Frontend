@@ -4,6 +4,8 @@
     max-width: 100%;
     min-height: 2rem; 
     padding: 0.5rem 1rem;
+    min-height: 2rem; 
+    padding: 0.5rem 1rem;
     justify-content: center;
     align-items: center;
     gap: 0.4rem;
@@ -16,7 +18,6 @@
     font-weight: 600;
     font-family: "Montserrat Regular";
     transition: all 0.2s ease; 
-    cursor: pointer; 
 }
 
 .step-button:hover {

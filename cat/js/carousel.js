@@ -175,7 +175,7 @@ class DynamicCarousel {
 
         setTimeout(() => {
             this.isTransitioning = false;
-
+            // Reposition if needed
             if (this.actualPosition >= this.totalExtendedCards - this.totalSlides) {
                 this.actualPosition = this.totalSlides;
                 this.updateCarousel();
@@ -193,7 +193,7 @@ class DynamicCarousel {
 
         setTimeout(() => {
             this.isTransitioning = false;
-
+            
             if (this.actualPosition < 0) {
                 this.actualPosition = this.totalSlides - 1;
                 this.updateCarousel();

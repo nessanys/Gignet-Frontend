@@ -114,7 +114,6 @@
 }
 
 @media (max-width: 768px) {
-
     .content {
         flex-direction: column;
         padding: 0;

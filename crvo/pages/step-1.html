@@ -58,23 +58,21 @@
 </div>
 
 <script>
-    window.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('input[name="firstName"], input[name="lastName"]').forEach(input => {
-            input.addEventListener('input', function () {
-                this.value = this.value.replace(/[^A-Za-z]/g, '');
-            });
-        });
 
-        document.querySelector('input[name="phone"]').addEventListener('input', function () {
-            this.value = this.value.replace(/\D/g, '');
-        });
-    });
-
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
+    function checkPreSelected() {
+        let selectedOption = null;
+        
+        const preSelected = localStorage.getItem('preSelectedOption');
+        if (preSelected) {
+            const optionMap = {
+                'accommodations': 1,
+                'all-inclusive': 2
+            };
+            if (optionMap[preSelected]) {
+                selectOption(optionMap[preSelected]);
+            }
+            localStorage.removeItem('preSelectedOption');
+        }
     }
 
     function selectOption(optionNumber) {

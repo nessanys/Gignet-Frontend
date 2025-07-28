@@ -39,8 +39,6 @@ body{
     background-blend-mode: luminosity, normal;
     position: relative;
     overflow: hidden;
-
-    /* Pop up */
     box-shadow: 0px 10px 50px 0px rgba(0, 61, 130, 0.25);
     box-shadow: 0px 10px 50px 0px color(display-p3 0.0431 0.2353 0.4902 / 0.25);
 }

@@ -102,7 +102,6 @@ function goToConfirmationPage() {
 }
 
 /**
- * Funtion for navigating to a specific step
  * @param {number} targetStep 
  */
 function goToStep(targetStep) {
@@ -113,7 +112,6 @@ function goToStep(targetStep) {
 }
 
 /**
- * Detects the current step from multiple sources
  * @returns {number} 
  */
 function getCurrentStep() {
@@ -205,6 +203,7 @@ function getStepData(stepNumber) {
     const stepData = localStorage.getItem(`step${stepNumber}Data`);
     return stepData ? JSON.parse(stepData) : null;
 }
+
 
 function clearAllStepData() {
     for (let i = 1; i <= 10; i++) { 

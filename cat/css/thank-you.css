@@ -115,8 +115,6 @@
     backdrop-filter: blur(15px);
 }
 
-
-/* Mobile Responsive Design */
 @media (max-width: 1024px) {
     .content-section {
         height: calc(50vh - 1.5rem);

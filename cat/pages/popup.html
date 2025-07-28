@@ -65,12 +65,17 @@
         if (secondDepartureDiv) secondDepartureDiv.textContent = '';
 
         // Image
+        // Image
         const img = document.getElementById('popupCardImage');
         if (img && cardData.image) img.src = cardData.image;
 
-        // Title
+        // Tittle
         const titleDiv = document.getElementById('popupCardTitle');
         if (titleDiv && cardData.location) titleDiv.textContent = cardData.location;
+
+        // Information
+        const infoDiv = document.getElementById('popupCardInformation');
+        if (infoDiv && cardData.information) infoDiv.textContent = cardData.information;
 
         // Description
         const descDiv = document.getElementById('popupCardDescription');
@@ -130,6 +135,7 @@
         }
 
         // Duration
+        // Duration
         const durationDiv = document.getElementById('popupCardDuration');
         if (durationDiv && cardData.duration) {
             durationDiv.style.display = ''; 
@@ -138,6 +144,7 @@
             durationDiv.style.display = 'none';
         }
 
+        // Recommendations
         // Recommendations
         const recommendationsDiv = document.getElementById('popupCardRecommendations');
         if (recommendationsDiv && cardData.recommendations) {

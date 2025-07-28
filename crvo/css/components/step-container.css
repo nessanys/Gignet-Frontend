@@ -76,8 +76,9 @@
     color: #FFF;
     font-family: "Montserrat Bold";
     font-size: clamp(2rem, 4vw, 4rem); 
+    font-style: normal;
     font-weight: 600;
-    line-height: 1.1;
+    line-height: 1.1; 
     margin: 0;
     text-align: start;
     word-wrap: break-word;

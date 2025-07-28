@@ -13,31 +13,31 @@ window.navigateTo = function(pageUrl) {
 
             document.head.innerHTML = doc.head.innerHTML;
 
-            const stylePromises = Array.from(document.head.querySelectorAll('link[rel="stylesheet"]'))
-                .map(link => new Promise(resolve => {
-                    link.onload = resolve;
-                    link.onerror = resolve;
-                }));
+            const links = Array.from(document.head.querySelectorAll('link[rel="stylesheet"]'));
+            const promises = links.map(link => new Promise(resolve => {
+                link.onload = resolve;
+                link.onerror = resolve;
+            }));
 
-            Promise.all(stylePromises).then(() => {
-                const currentScripts = Array.from(document.body.querySelectorAll('script[data-spa-router-script="true"]'));
+            Promise.all(promises).then(() => {
+
+                const currentScripts = Array.from(document.body.querySelectorAll('script'));
                 currentScripts.forEach(script => {
-                    script.remove();
+
+                    if (!script.src.includes('spa-router.js') && !script.getAttribute('data-spa-router-persistent')) {
+                        script.remove();
+                    }
                 });
 
                 document.body.innerHTML = doc.body.innerHTML;
 
-                const scriptPromises = [];
                 doc.querySelectorAll('script').forEach(script => {
                     const newScript = document.createElement('script');
                     if (script.src) {
                         newScript.src = script.src;
                         newScript.async = false;
-                        newScript.setAttribute('data-spa-router-script', 'true');
-                        scriptPromises.push(new Promise(resolve => {
-                            newScript.onload = resolve;
-                            newScript.onerror = resolve; 
-                        }));
+
+                        newScript.setAttribute('data-spa-router-script', 'true'); 
                     } else if (script.textContent) {
                         newScript.textContent = script.textContent;
                         newScript.setAttribute('data-spa-router-script', 'true');
